@@ -1,0 +1,27 @@
+# Qleverfile for Kalliope - Subset of Letters collected by the Music Department at Staatsbibliothek Berlin
+
+[data]
+NAME              = kalliope_briefe_musik
+DESCRIPTION       = Kalliope - Briefsammlung der Musikabteilung
+TEXT_DESCRIPTION  = All literals, search with FILTER CONTAINS(?var, "...")
+
+[index]
+INPUT_FILES     = initial_dump.ttl
+CAT_INPUT_FILES = cat ${INPUT_FILES}
+SETTINGS_JSON   = { "ascii-prefixes-only": false, "num-triples-per-batch": 100000 }
+
+[server]
+PORT               = 7019
+HOST_NAME          = localhost
+ACCESS_TOKEN       = ${QLEVER_ACCESS_TOKEN}
+PERSIST_UPDATES    = true
+MEMORY_FOR_QUERIES = 5G
+CACHE_MAX_SIZE     = 2G
+TIMEOUT            = 30s
+
+[runtime]
+SYSTEM = native
+IMAGE  = docker.io/adfreiburg/qlever:latest
+
+[ui]
+UI_CONFIG = olympics

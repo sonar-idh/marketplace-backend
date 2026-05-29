@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languages>
+  <language xml:lang="de" xmllang="de" iso6391="de"><iso6392>ger</iso6392></language>
+  <language xml:lang="en" xmllang="en" iso6391="en"><iso6392>eng</iso6392></language>
+  <language xml:lang="fr" xmllang="fr" iso6391="fr"><iso6392>fre</iso6392></language>
+  <language xml:lang="it" xmllang="it" iso6391="it"><iso6392>ita</iso6392></language>
+  <language xml:lang="es" xmllang="es" iso6391="es"><iso6392>spa</iso6392></language>
+  <language xml:lang="la" xmllang="la" iso6391="la"><iso6392>lat</iso6392></language>
+  <language xml:lang="pl" xmllang="pl" iso6391="pl"><iso6392>pol</iso6392></language>
+  <language xml:lang="ru" xmllang="ru" iso6391="ru"><iso6392>rus</iso6392></language>
+  <language xml:lang="cs" xmllang="cs" iso6391="cs"><iso6392>cze</iso6392></language>
+  <language xml:lang="hu" xmllang="hu" iso6391="hu"><iso6392>hun</iso6392></language>
+  <language xml:lang="nl" xmllang="nl" iso6391="nl"><iso6392>dut</iso6392></language>
+</languages>
