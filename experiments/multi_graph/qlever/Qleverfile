@@ -1,0 +1,37 @@
+# Qleverfile for Olympics, use with https://github.com/ad-freiburg/qlever-control
+#
+# qlever get-data  # downloads .zip file of size 13 MB, uncompressed to 323 MB 
+# qlever index     # takes ~10 seconds and ~1 GB RAM (on an AMD Ryzen 9 5900X)
+# qlever start     # starts the server (instant)
+
+[data]
+NAME              = olympics
+BASE_URL          = 
+GET_DATA_CMD      = 
+DESCRIPTION       = Kalliope, GND, ZDB Data
+TEXT_DESCRIPTION  = All literals, search with FILTER CONTAINS(?var, "...")
+
+[index]
+INPUT_FILES     = *.ttl.gz *.nt.gz
+# Instruct QLever to compile a quad-capable index structure
+FILE_FORMAT = n-quads
+
+# DO NOT break this onto multiple lines. It must remain on a single line.
+MULTI_INPUT_JSON = [{"cmd": "gunzip -c authorities*.ttl.gz", "format": "ttl", "graph": "https://data.dnb.de/opendata"}, {"cmd": "gunzip -c kalliope*.nt.gz", "format": "nt", "graph": "https://kalliope-verbund.info"}, {"cmd": "gunzip -c ./zdb/zdb*.ttl.gz", "format": "ttl", "graph": "https://zdb-katalog.de"}]
+
+# CAT_INPUT_FILES = cat ${INPUT_FILES}
+SETTINGS_JSON   = { "ascii-prefixes-only": false, "num-triples-per-batch": 100000 }
+
+[server]
+PORT               = 7019
+ACCESS_TOKEN       = ${data:NAME}_7643543846jZtLiR7xT6tm
+MEMORY_FOR_QUERIES = 5G
+CACHE_MAX_SIZE     = 2G
+TIMEOUT            = 30s
+
+[runtime]
+SYSTEM = native
+IMAGE  = docker.io/adfreiburg/qlever:latest
+
+[ui]
+UI_CONFIG = olympics

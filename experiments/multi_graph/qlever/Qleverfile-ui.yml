@@ -1,0 +1,337 @@
+config:
+  backend:
+    name: Olympics
+    slug: olympics
+    sortKey: 1
+    baseUrl: http://play0066:7019
+    apiToken: aof4Ad
+    isDefault: true
+    isNoSlugMode: 'False'
+    maxDefault: '100'
+    filteredLanguage: en
+    dynamicSuggestions: '2'
+    defaultModeTimeout: '5.0'
+    mixedModeTimeout: '1.0'
+    suggestSubjects: |-
+      %PREFIXES%
+      # IF CURRENT_WORD_EMPTY #
+
+      %WARMUP_QUERY_1%
+
+      # ELSE #
+
+      SELECT ?qleverui_entity (SAMPLE(?name) AS ?qleverui_name) (SAMPLE(?alias) AS ?qleverui_alias) (SAMPLE(?count) AS ?qleverui_count) WHERE {
+        { %WARMUP_QUERY_2% }
+        # IF !CURRENT_WORD_EMPTY #
+        FILTER REGEX(STR(?alias), "^%CURRENT_WORD%")
+        # ENDIF #
+      } GROUP BY ?qleverui_entity ORDER BY DESC(?qleverui_count)
+
+      # ENDIF #
+    suggestPredicates: |-
+      %PREFIXES%
+      # IF !CURRENT_SUBJECT_VARIABLE #
+
+      SELECT ?qleverui_entity
+                    (MIN(?name) as ?qleverui_name)
+                    (MIN(?alias) as ?qleverui_alias)
+                    (SAMPLE(?count_2) as ?qleverui_count)
+                    ?qleverui_reversed WHERE {
+
+        { { SELECT ?qleverui_entity (COUNT(?qleverui_tmp) AS ?count_2)
+          WHERE { %CURRENT_SUBJECT% ?qleverui_entity ?qleverui_tmp  }
+          GROUP BY ?qleverui_entity }
+        BIND (0 AS ?qleverui_reversed) }
+        UNION
+        { { SELECT ?qleverui_entity (COUNT(?qleverui_tmp) AS ?count_2)
+          WHERE { ?qleverui_tmp ?qleverui_entity %CURRENT_SUBJECT%  }
+          GROUP BY ?qleverui_entity }
+          BIND (1 AS ?qleverui_reversed) }
+        { %WARMUP_QUERY_5% }
+        # IF !CURRENT_WORD_EMPTY #
+        FILTER REGEX(STR(?alias), "%CURRENT_WORD%", "i")
+        # ENDIF #
+      } GROUP BY ?qleverui_entity ?qleverui_reversed ORDER BY DESC(?qleverui_count)
+
+      # ENDIF #
+      # IF CONNECTED_TRIPLES_EMPTY AND CURRENT_SUBJECT_VARIABLE #
+
+      SELECT ?qleverui_entity
+                    (MIN(?name) as ?qleverui_name)
+                    (MIN(?alias) as ?qleverui_alias)
+                    (SAMPLE(?count_1) as ?qleverui_count) WHERE {
+        { %WARMUP_QUERY_4% }
+        # IF !CURRENT_WORD_EMPTY #
+        FILTER REGEX(STR(?alias), "%CURRENT_WORD%", "i")
+        # ENDIF #
+      } GROUP BY ?qleverui_entity ORDER BY DESC(?qleverui_count)
+
+      # ENDIF #
+
+      # IF !CONNECTED_TRIPLES_EMPTY AND CURRENT_SUBJECT_VARIABLE #
+
+      SELECT ?qleverui_entity
+                    (MIN(?name) as ?qleverui_name)
+                    (MIN(?alias) as ?qleverui_alias)
+                    (SAMPLE(?count_2) as ?qleverui_count) WHERE {
+        { SELECT ?qleverui_entity (COUNT(DISTINCT %CURRENT_SUBJECT%) AS ?count_2)
+          WHERE { %CONNECTED_TRIPLES% %CURRENT_SUBJECT% ?qleverui_entity ?object }
+          GROUP BY ?qleverui_entity }
+        { %WARMUP_QUERY_5% }
+        # IF !CURRENT_WORD_EMPTY #
+        FILTER REGEX(STR(?alias), "%CURRENT_WORD%", "i")
+        # ENDIF #
+      } GROUP BY ?qleverui_entity ORDER BY DESC(?qleverui_count)
+
+      # ENDIF #
+    suggestObjects: |-
+      %PREFIXES%
+      SELECT ?qleverui_entity
+                    (MIN(?name) AS ?qleverui_name)
+                    (MIN(?alias) AS ?qleverui_alias)
+                    (MAX(?count_1) AS ?qleverui_count) WHERE {
+        {
+
+          { SELECT ?qleverui_entity ?name ?alias ?count_1 WHERE {
+            { SELECT ?qleverui_entity (COUNT(?qleverui_entity) AS ?count_1) WHERE {
+              %CONNECTED_TRIPLES% %CURRENT_SUBJECT% %CURRENT_PREDICATE% ?qleverui_entity .
+            } GROUP BY ?qleverui_entity }
+            { %WARMUP_QUERY_3% }
+            # IF !CURRENT_WORD_EMPTY #
+            FILTER REGEX(STR(?alias), "^%CURRENT_WORD%")
+            # ENDIF #
+          } }
+
+        } UNION {
+
+          { SELECT ?qleverui_entity ?name ?alias ?count_1 WHERE {
+            { SELECT ?qleverui_entity (COUNT(?qleverui_entity) AS ?count_1) WHERE {
+              %CONNECTED_TRIPLES% %CURRENT_SUBJECT% %CURRENT_PREDICATE% ?qleverui_entity
+            } GROUP BY ?qleverui_entity }
+            %ENTITY_NAME_AND_ALIAS_PATTERN_DEFAULT%
+            # IF !CURRENT_WORD_EMPTY #
+            FILTER REGEX(STR(?alias), "^%CURRENT_WORD%")
+            # ENDIF #
+          } }
+
+        }
+      } GROUP BY ?qleverui_entity ORDER BY DESC(?qleverui_count)
+    subjectName: ''
+    alternativeSubjectName: ''
+    predicateName: ''
+    alternativePredicateName: ''
+    objectName: ''
+    alternativeObjectName: ''
+    replacePredicates: ''
+    supportedKeywords: as,ask,base,bind,by,construct,contains-entity,contains-word,data,delete,describe,distinct,filter,from,graph,group,has-predicate,having,insert,internal,keywords,limit,minus,named,not,offset,optional,optional,order,prefix,select,service,sort,textlimit,union,using,values,where,with
+    supportedFunctions: asc, desc, avg, values, score, text, count, sample, min, max,
+      average, concat, group_concat, langMatches, lang, regex, sum, dist, contains,
+      str, strlen, substr, strstarts, strends, strbefore, strafter, contains, year,
+      month, day, rand, abs, ceil, floor, round, log, exp, sqrt, sin, cos, tan, if,
+      coalesce, bound, concat, replace, encode_for_uri, isiri, isblank, isliteral,
+      isNumeric, bound
+    supportedPredicateSuggestions: ''
+    suggestPrefixnamesForPredicates: 'True'
+    fillPrefixes: 'True'
+    filterEntities: 'False'
+    suggestedPrefixes: |-
+      @prefix olympics: <http://wallscope.co.uk/ontology/olympics/> .
+      @prefix athlete: <http://wallscope.co.uk/resource/olympics/athlete/> .
+      @prefix medal: <http://wallscope.co.uk/resource/olympics/medal/> .
+      @prefix event: <http://wallscope.co.uk/resource/olympics/event/> .
+      @prefix games: <http://wallscope.co.uk/resource/olympics/games/> .
+      @prefix season: <http://wallscope.co.uk/resource/olympics/season/> .
+      @prefix dbo: <http://dbpedia.org/ontology/> .
+      @prefix dbp: <http://dbpedia.org/property/> .
+      @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+      @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+      @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+      @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+      @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+    suggestionEntityVariable: ?qleverui_entity
+    suggestionNameVariable: ?qleverui_name
+    suggestionAltNameVariable: ?qleverui_altname
+    suggestionReversedVariable: ?qleverui_reversed
+    frequentPredicates: ''
+    frequentPatternsWithoutOrder: ''
+    entityNameAndAliasPattern: ?qleverui_entity rdfs:label ?name . BIND(?name AS ?alias)
+    entityScorePattern: '{ SELECT ?qleverui_entity (COUNT(?predicate) AS ?count) WHERE
+      { ?qleverui_entity ?predicate ?object } GROUP BY ?qleverui_entity }'
+    predicateNameAndAliasPatternWithoutContext: BIND(?qleverui_entity AS ?name) BIND(?qleverui_entity
+      AS ?alias)
+    predicateNameAndAliasPatternWithContext: BIND(?qleverui_entity AS ?name) BIND(?qleverui_entity
+      AS ?alias)
+    entityNameAndAliasPatternDefault: BIND(?qleverui_entity AS ?name) BIND(?qleverui_entity
+      AS ?alias)
+    predicateNameAndAliasPatternWithoutContextDefault: BIND(?qleverui_entity AS ?name)
+      BIND(?qleverui_entity AS ?alias)
+    predicateNameAndAliasPatternWithContextDefault: BIND(?qleverui_entity AS ?name)
+      BIND(?qleverui_entity AS ?alias)
+    warmupQuery1: |-
+      SELECT ?qleverui_entity (SAMPLE(?name) AS ?qleverui_name) (SAMPLE(?alias) AS ?qleverui_alias) (SAMPLE(?count) AS ?qleverui_count) WHERE {
+        { SELECT ?qleverui_entity ?name ?alias ?count WHERE {
+          %ENTITY_SCORE_PATTERN%
+          %ENTITY_NAME_AND_ALIAS_PATTERN% }
+        ORDER BY ?qleverui_entity }
+      } GROUP BY ?qleverui_entity ORDER BY DESC(?qleverui_count)
+    warmupQuery2: |-
+      SELECT ?qleverui_entity ?name ?alias ?count WHERE {
+        %ENTITY_SCORE_PATTERN%
+        %ENTITY_NAME_AND_ALIAS_PATTERN%
+      } INTERNAL SORT BY ?alias
+    warmupQuery3: |-
+      SELECT ?qleverui_entity ?name ?alias ?count WHERE {
+        %ENTITY_SCORE_PATTERN%
+        %ENTITY_NAME_AND_ALIAS_PATTERN%
+      } INTERNAL SORT BY ?qleverui_entity
+    warmupQuery4: |-
+      SELECT ?qleverui_entity ?name ?alias ?count_1 WHERE {
+        { { SELECT ?qleverui_entity (COUNT(DISTINCT ?subject) AS ?count_1) WHERE { ?subject ?qleverui_entity ?object } GROUP BY ?qleverui_entity }
+          %PREDICATE_NAME_AND_ALIAS_PATTERN_WITHOUT_CONTEXT%
+        } UNION {
+        { { SELECT ?qleverui_entity (COUNT(DISTINCT ?subject) AS ?count_1) WHERE { ?subject ?qleverui_entity ?object } GROUP BY ?qleverui_entity }
+          %PREDICATE_NAME_AND_ALIAS_PATTERN_WITHOUT_CONTEXT_DEFAULT%
+        } } }
+    warmupQuery5: |-
+      SELECT ?qleverui_entity ?name ?alias ?count_1 WHERE {
+        { { SELECT ?qleverui_entity (COUNT(DISTINCT ?subject) AS ?count_1) WHERE { ?subject ?qleverui_entity ?object } GROUP BY ?qleverui_entity }
+          %PREDICATE_NAME_AND_ALIAS_PATTERN_WITH_CONTEXT%
+        } UNION {
+        { { SELECT ?qleverui_entity (COUNT(DISTINCT ?subject) AS ?count_1) WHERE { ?subject ?qleverui_entity ?object } GROUP BY ?qleverui_entity }
+          %PREDICATE_NAME_AND_ALIAS_PATTERN_WITH_CONTEXT_DEFAULT%
+        } } }
+    suggestSubjectsContextInsensitive: |-
+      %PREFIXES%
+      # IF CURRENT_WORD_EMPTY #
+
+      %WARMUP_QUERY_1%
+
+      # ELSE #
+
+      SELECT ?qleverui_entity (SAMPLE(?name) AS ?qleverui_name) (SAMPLE(?alias) AS ?qleverui_alias) (SAMPLE(?count) AS ?qleverui_count) WHERE {
+        { %WARMUP_QUERY_2% }
+        # IF !CURRENT_WORD_EMPTY #
+        FILTER REGEX(STR(?alias), "^%CURRENT_WORD%")
+        # ENDIF #
+      } GROUP BY ?qleverui_entity ORDER BY DESC(?qleverui_count)
+
+      # ENDIF #
+    suggestPredicatesContextInsensitive: |-
+      %PREFIXES%
+
+      SELECT ?qleverui_entity
+                    (MIN(?name) as ?qleverui_name)
+                    (MIN(?alias) as ?qleverui_alias)
+                    (SAMPLE(?count_1) as ?qleverui_count) WHERE {
+        { %WARMUP_QUERY_4% }
+        # IF !CURRENT_WORD_EMPTY #
+        FILTER REGEX(STR(?alias), "%CURRENT_WORD%", "i")
+        # ENDIF #
+      } GROUP BY ?qleverui_entity ORDER BY DESC(?qleverui_count)
+    suggestObjectsContextInsensitive: |-
+      %PREFIXES%
+      # IF CURRENT_WORD_EMPTY #
+
+      %WARMUP_QUERY_1%
+
+      # ELSE #
+
+      SELECT ?qleverui_entity (SAMPLE(?name) AS ?qleverui_name) (SAMPLE(?alias) AS ?qleverui_alias) (SAMPLE(?count) AS ?qleverui_count) WHERE {
+        { %WARMUP_QUERY_2% }
+        # IF !CURRENT_WORD_EMPTY #
+        FILTER REGEX(STR(?alias), "^%CURRENT_WORD%")
+        # ENDIF #
+      } GROUP BY ?qleverui_entity ORDER BY DESC(?qleverui_count)
+
+      # ENDIF #
+    mapViewBaseURL: ''
+  examples:
+  - name: All graphs with their number of triples
+    sort_key: '~'
+    query: |-
+      SELECT ?g (COUNT(?g) AS ?count) WHERE {
+        GRAPH ?g { ?s ?p ?o }
+      }
+      GROUP BY ?g
+      ORDER BY DESC(?count)
+  - name: Get Ontology by graph
+    sort_key: '~'
+    query: |-
+      PREFIX bf: <http://loc.gov>
+      PREFIX rdf: <http://w3.org>
+      SELECT DISTINCT ?graphIRI ?connector
+      WHERE {
+        GRAPH ?graphIRI {
+        ?subject ?connector ?object .
+         }
+      }
+      ORDER BY ?graphIRI ?connector
+  - name: Get Triples from GND-DNB
+    sort_key: '~'
+    query: |-
+      PREFIX bf: <http://loc.gov>
+      PREFIX rdf: <http://w3.org>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT DISTINCT ?subject ?connector ?object 
+      WHERE {
+       GRAPH <https://data.dnb.de/opendata>  {
+       ?subject ?connector ?object .
+        }
+      }
+  - name: Get Triples from Kalliope
+    sort_key: '~'
+    query: |-
+      PREFIX bf: <http://loc.gov>
+      PREFIX rdf: <http://w3.org>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT DISTINCT ?subject ?connector ?object 
+      WHERE {
+       GRAPH <https://kalliope-verbund.info>  {
+       ?subject ?connector ?object .
+        }
+      }
+  - name: Full Text Search
+    sort_key: '~'
+    query: |-
+        PREFIX rdfs: <http://w3.org>
+        PREFIX bf: <http://loc.gov>
+        PREFIX gnd: <https://d-nb.info/standards/elementset/gnd#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT DISTINCT ?entity ?relationship ?label
+        WHERE {
+          # Scan across all graphs with ?graphiri
+          GRAPH <https://kalliope-verbund.info> {
+            ?entity ?relationship ?label .
+
+            # Perform a case-insensitive full-text match
+            FILTER(REGEX(STR(?label), "Brief von Carlo Schmidl an Ferruccio Busoni, 27.06.1906", "i"))
+          }
+        }
+  - name: Multi Graph Search
+    sort_key: '~'
+    query: |-
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX bf: <http://loc.gov>
+      PREFIX gnd: <https://d-nb.info/standards/elementset/gnd#>
+
+      SELECT DISTINCT ?entity ?relationship ?gndURI ?gndProperty ?gndLabel
+      WHERE {
+
+        # Find a corporate body in kalliope
+        GRAPH <https://kalliope-verbund.info> {
+          ?entity ?relationship <https://d-nb.info/gnd/5036103-X> .
+
+          # Creating a shared var
+          BIND(<https://d-nb.info/gnd/5036103-X> AS ?gndURI)
+          #BIND(gnd:variantNameForTheCorporateBody AS ?gndProperty)
+        }
+
+        # Passing var to second graph
+        GRAPH <https://data.dnb.de/opendata> {
+          ?gndURI ?gndProperty ?gndLabel .
+        }
+
+      }
+      LIMIT 100
+
+
