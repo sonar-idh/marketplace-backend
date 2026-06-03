@@ -10,7 +10,7 @@ Data Access: https://kalliope-verbund.info/de/support/sru.html
 Dump Available: ?
 
 ## DNB, ZDB, GND
-All these data dumps are maintained by DNB. *Available here: https://data.dnb.de/opendata/* 
+All these data dumps are maintained by DNB. *Available here: https://data.dnb.de/opendata/*
 
 - DNB catalog titles data
 - ZDB catalog titles data
