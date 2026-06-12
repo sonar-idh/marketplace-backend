@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<srw:searchRetrieveResponse xmlns:cld="http://www.ukoln.ac.uk/metadata/rslp/schema/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:diag="http://www.loc.gov/zing/srw/diagnostic/" xmlns:eacNS="urn:isbn:1-931666-33-4" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:my="http://www.infolytics.com/kopac" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:srw_dc="info:srw/schema/1/dc-v1.1">
+   <srw:version>1.2</srw:version>
+   <srw:numberOfRecords>161</srw:numberOfRecords>
+   <srw:records>
+      <srw:record>
+         <srw:recordSchema>info:srw/schema/1/mods-v3.7</srw:recordSchema>
+         <srw:recordPacking>xml</srw:recordPacking>
+         <srw:recordData>
+            <mods xmlns="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 https://www.loc.gov/standards/mods/v3/mods-3-7.xsd">
+               <identifier type="uri">https://kalliope-verbund.info/DE-611-BF-39849</identifier>
+               <recordInfo>
+                  <recordIdentifier source="DE-611">DE-611-BF-39849</recordIdentifier>
+                  <recordCreationDate encoding="iso8601">20140422</recordCreationDate>
+                  <recordChangeDate encoding="iso8601">20200115</recordChangeDate>
+                  <recordChangeDate encoding="w3cdtf">2025-09-19T14:29:35+01:00</recordChangeDate>
+                  <recordContentSource authority="German ISIL- and Library Codes Agency" authorityURI="http://ld.zdb-services.de/resource/organisations/" valueURI="http://ld.zdb-services.de/resource/organisations/DE-77">Universitätsbibliothek (Mainz) [Handschriftenabteilung]</recordContentSource>
+                  <languageOfCataloging>
+                     <languageTerm authority="iso639-2b" type="code" authorityURI="http://id.loc.gov/vocabulary/iso639-2/" valueURI="http://id.loc.gov/vocabulary/iso639-2/ger">ger</languageTerm>
+                     <languageTerm type="text" lang="ger">Deutsch</languageTerm>
+                  </languageOfCataloging>
+               </recordInfo>
+               <relatedItem type="host">
+                  <recordInfo>
+                     <recordIdentifier source="DE-611">DE-611-BF-19944</recordIdentifier>
+                  </recordInfo>
+                  <identifier type="uri">https://kalliope-verbund.info/DE-611-BF-19944</identifier>
+                  <titleInfo>
+                     <title>Sammlung Familie Clemens Brentano</title>
+                  </titleInfo>
+               </relatedItem>
+               <relatedItem type="series">
+                  <recordInfo>
+                     <recordIdentifier source="DE-611">DE-611-BF-19944</recordIdentifier>
+                  </recordInfo>
+                  <identifier type="uri">https://kalliope-verbund.info/DE-611-BF-19944</identifier>
+                  <titleInfo>
+                     <title>Sammlung Familie Clemens Brentano</title>
+                  </titleInfo>
+               </relatedItem>
+               <typeOfResource collection="yes">mixed material</typeOfResource>
+               <name type="personal" authority="DE-588" authorityURI="https://d-nb.info/gnd/" valueURI="https://d-nb.info/gnd/118515055">
+                  <namePart>Brentano, Clemens (1778-1842)</namePart>
+                  <role>
+                     <roleTerm type="text" lang="ger">Bestandsbildner</roleTerm>
+                  </role>
+               </name>
+               <titleInfo>
+                  <title>1. Dokumente zu Clemens Brentano</title>
+               </titleInfo>
+               <location>
+                  <shelfLocator>1. Dokumente zu Clemens Brentano</shelfLocator>
+                  <physicalLocation authority="German ISIL- and Library Codes Agency" authorityURI="http://ld.zdb-services.de/resource/organisations/" valueURI="http://ld.zdb-services.de/resource/organisations/DE-77">Universitätsbibliothek (Mainz) [Handschriftenabteilung]</physicalLocation>
+               </location>
+               <physicalDescription>
+                  <extent>73 Einzeldokumente (10 Briefe von Clemens Brentano, 37 Briefe an Clemens Brentano, 17 Autographen und Manuskripte von Clemens Brentano, 9 sonstige Dokumente)</extent>
+               </physicalDescription>
+               <note type="systemDetails">Nicht in EAD Vorhanden</note>
+            </mods>
+         </srw:recordData>
+      </srw:record>
+   </srw:records>
+</srw:searchRetrieveResponse>

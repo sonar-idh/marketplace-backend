@@ -1,0 +1,10 @@
+# 1. Store the raw paths into temporary variables
+copy_field("recordData.mods.identifier.value", "k_uri")
+copy_field("recordData.mods.name.valueURI", "g_uri")
+
+# 2. Combine them into separate clear keys that 'template' can read at once
+copy_field("k_uri", "_id")
+copy_field("g_uri", "owl:sameAs") # metafacture expects a key value pair, key being predicate and value being object
+
+# 3. Wipe out all background XML data fields
+retain("_id", "owl:sameAs")
