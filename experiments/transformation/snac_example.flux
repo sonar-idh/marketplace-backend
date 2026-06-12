@@ -9,4 +9,5 @@
 | fix("create_links_snac.fix")
 | stream-to-triples(redirect="true")
 | template("<${s}> <${p}> <${o}> .")
-| write("stdout");
+//| write("stdout");
+| write("clemens_brentano_snac.nt");
