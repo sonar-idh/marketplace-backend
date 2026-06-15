@@ -429,4 +429,51 @@ Füge einen **InvokeHTTP**-Processor nach Schritt 10 ein.
 | `Retry`    | LogAttribute / Terminate |
 | `Original` | Terminate                |
 
+### Fehlerbehandlung
 
+Der Flow unterscheidet zwei Fehlerklassen und behandelt sie unterschiedlich:
+
+- **Transiente Fehler** (Netzwerk, temporäre HTTP-Fehler von Kalliope SRU bzw. QLever) werden über eine **Retry-Schleife** automatisch wiederholt.
+- **Permanente Fehler** (ungültiges XML, fehlgeschlagene Transformation, dauerhaft fehlschlagende HTTP-Aufrufe nach Ausschöpfung der Retries) werden in eine **Dead Letter Queue (DLQ)** gespeichert und protokolliert.
+
+Zentrale Bausteine sind die wiederverwendbare Process-Group `LogError` (DLQ + Logging) und der `RetryFlowFile`-Prozessor in den HTTP-Process-Groups.
+#### 1. Retry-Schleife für HTTP-Aufrufe
+
+Alle drei HTTP-Prozessoren (`FetchModifiedRecordsNumber`, `FetchModifiedRecordsPage`, `PostTurtle`) folgen demselben Muster innerhalb ihrer jeweiligen Process-Group:
+
+1. **`InvokeHTTP` → `Response` → `RouteOnAttribute`**: `RouteOnAttribute` prüft den Status-Code der HTTP-Antwort
+    
+2. **`InvokeHTTP` → `No Retry` / `Failure` → `RetryFlowFile`**: Verbindungsfehler (`Failure`) und 4xx (`No Retry`) gehen direkt in den Retry-Prozessor. Wichtig: Im `InvokeHTTP`-Prozessor ``Response Generation Required`` auf ``true`` setzen
+    
+3. **`RetryFlowFile`** steuert die Wiederholung:
+    - **`retry`** → zurück an `InvokeHTTP` (erneuter Aufruf).
+    - **`retries_exceeded`** → `UpdateAttribute` (Fehler-Metadaten anreichern, s.u.) → DLQ.
+
+So werden temporäre Aussetzer von Kalliope SRU bzw. QLever automatisch überbrückt, ohne dass ein einzelner Datensatz den gesamten Lauf abbricht.
+
+#### 2. Logging und Dead Letter Queue
+
+`LogError` ist eine wiederverwendbare Process-Group, an die alle nicht-wiederherstellbaren Fehler geleitet werden. Sie hat einen Input-Port `LogError` und zwei parallele Senken:
+
+- **`WriteToDLQ`** sichert die ursprüngliche FlowFile (z.B. das nicht transformierbare MODS-XML) zur späteren manuellen Analyse / Reprozessierung.
+    
+- **`AttributesToJSON` + `WriteLog`** schreiben einen lesbaren JSON-Logeintrag mit allen Attributen.
+    
+
+Die per `UpdateAttribute` gesetzten Fehler-Attribute (je nach Quellprozessor):
+
+| Attribut | Beispielwert |
+| --- | --- |
+| `error.source.processor` | `ExtractModsCollection` / `ModsCollectionToBibframe` / `FetchModifiedRecordsPage` … |
+| `error.message` | z.B. `Kein valides XML erhalten`, `Extraktion der Anzahl geänderter Records fehlgeschlagen` |
+| `error.timestamp` | `${now():format('yyyy-MM-dd HH:mm:ss')}` |
+| `error.http.status` | `${invokehttp.status.code}` (nur bei HTTP-Fehlern) |
+| `error.http.message` | `${invokehttp.status.message}` (nur bei HTTP-Fehlern) |
+| `error.sru.url` | `${sru.url}` (nur bei HTTP-Fehlern) |
+| `filename` | `${now():format('yyyy-MM-dd')}-${error.source.processor}-${uuid}.json` |
+
+Der Dateiname enthält Datum, Quellprozessor und FlowFile-UUID . 
+#### Offene Punkte
+
+- **Hartkodierte Pfade:** `/dlq` bzw. `/logs` sind fest verdrahtet. Besser über einen Parameter Context parametrisieren, damit der Flow ohne Anpassung zwischen Umgebungen (lokal / VM) portierbar ist.
+- **`Conflict Resolution Strategy = fail`** bei `WriteToDLQ`/`WriteLog`: bei (unwahrscheinlicher) Dateinamenkollision bleibt das FlowFile hängen. Ggf. auf `replace` oder einen eindeutigeren Dateinamen ausweichen.
