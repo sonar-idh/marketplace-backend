@@ -1,4 +1,4 @@
-# MVP: GBV MARC --> SoNAR HNA Graph
+# MVP: K10Plus MARC --> SoNAR HNA Graph
 *Updated: 06.07.2026*
 
 ## Data Transformation Pipeline
@@ -48,13 +48,13 @@ flowchart LR
 ## Results
 ### Input GBV Graph
 *For a single record*
-![sample GBV record](./gbv_example.svg)
+![sample GBV record](./data/gbv_example.svg)
 
 The above BIBFRAME graph contains library specific metadata which is not needed for SoNAR. 
 
 ### Output HNR Graph: Co-author + Honorary Network 
 *For a single record*
-![sample SONAR sub graph](./rdf_grapher_subgraph.svg)
+![sample SONAR sub graph](./data/rdf_grapher_subgraph.svg)
 
 Every person involved in this record has a different role in the creation of this work. Roles are encoded using the **official CIDOC CRM `.1` property pattern** (PC-class reification). A single `F28_Expression_Creation` event is created per work; each agent gets a reified `crm:PC14_carried_out_by` participation node that carries `crm:P14.1_in_the_role_of` for their specific role URI.
 

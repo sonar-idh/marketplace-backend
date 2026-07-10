@@ -1,0 +1,11 @@
+[project]
+name = "k10plus"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "lxml>=6.1.1",
+    "pymarc>=5.4.0",
+    "rdflib>=7.6.0",
+]
