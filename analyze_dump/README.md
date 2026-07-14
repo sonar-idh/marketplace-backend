@@ -2,8 +2,6 @@
 
 Kurz Einführung in EAD, seine Ausgestaltung im Kontext von Kalliope sowie Abwägungen zu resultierenden Modellierungsentscheidungen.
 
-Fragen bitte jederzeit stellen, meine eigenen Fragen würde ich am Ende nochmal gesammelt vorstellen. 
-
 Wichtige Ressourcen: 
 
 - [EAD-Anwenderprofil des Verbundkatalogs Kalliope](https://kalliope-verbund.info/files/480b012f45a0f002ec3095b6819ef8aea33078de.pdf)
@@ -131,7 +129,7 @@ Neben der Rollenangabe `@role` können Personen, Körperschaften und Geographika
 
 **Frage: Alle Quellen außer GND und ISIL sind nicht dereferenzierbar, da keine externen IDs angegeben wurden. Daraus folgt ein Modellierungsdilemma: Nicht-ISIL/GND-Agenten sind nur in begrenztem Umfang bzw. mit erheblichem Aufwand deduplizierbar (z.B, Rechtschreibfehler, verschiedene Schreibvarianten) → Konsequenz wäre, dass viele Agenten als zwei oder mehr Entitäten in die Datenbank eingehen würden, was die Enduser-Suche verkompliziert (und bei künftiger Einbindung der GND-Daten zu weiteren Problemen führen könnte). Alternativ könnte man pauschal alle Nicht-ISIL/GND-Agenten von der Transformation ausschließen, was mit einem erheblichen Datenverlust einhergehen würde.**   
 
-**Frage: Wie mit KPE-Werten 'Unbekannt' (191.301) und 'Verschiedene' (2.763) umgehen?** (siehe `kpe_persname_werte.tsv` und `kpe_corpname_werte.tsv` aus ``analyze_kpe_names.py``)
+**Frage: Wie mit KPE-Werten 'Unbekannt' (191.301) und 'Verschiedene' (2.763) umgehen?** (siehe `kpe_persname_werte.tsv` und `kpe_corpname_werte.tsv` aus `analyze_kpe_names.py`)
 
 ### `genreform` als Gattungsangabe 
 
@@ -152,7 +150,7 @@ Neben der Rollenangabe `@role` können Personen, Körperschaften und Geographika
 | `Prosa`         | 96.269    | 1,6 %  | 28.526        | 29,6 %
 
 
-**Frage: Wie mit der Existenz singulärer 'Brief'-Typen und Sammlungstypen wie 'Briefe', 'Korrespondenz' und 'Briefwechsel' umgehen? Entscheidet man sich dafür, Korrespondenzbeziehungen, die nur auf Sammlungsebene in Kalliope enthalten sind (also Sammlungen unabhängig von enthaltenen Einzelbriefen), auch abzubilden (und wenn ja, wie)?**
+**Frage: Wie mit unterschiedlicher Erschließungstiefe, also der Existenz singulärer 'Brief'-Typen und Sammlungstypen wie 'Briefe', 'Korrespondenz' und 'Briefwechsel' umgehen? Entscheidet man sich dafür, Korrespondenzbeziehungen, die nur auf Sammlungsebene in Kalliope enthalten sind (also Sammlungen unabhängig von enthaltenen Einzelbriefen), auch abzubilden (und wenn ja, wie)?**
 
 **Frage: `genreform`-Element-Werte haben oft auch GND-Referenzierung über `@source` und `@authfilenumber`. Allerdings wie oben in der Tabelle dargestellt nicht für alle Gattungstypen und nicht durchgehend. Nur Gattungs-String erfassen?**
 
@@ -160,7 +158,7 @@ Neben der Rollenangabe `@role` können Personen, Körperschaften und Geographika
 
 Kalliope enthält 5.886.612 Einheiten (`archdesc` und `c`), davon enthalten 4.348.337 (73,87%) eine Adressatenangabe (ermittelt mit `analyze_adressat.py`). (Davon enthalten 91% eine genreform-Angabe). Wie oben ersichtlich, existieren 2.782.161 Brief-Entitäten (von denen 96,4% eine Adressatenangabe beinhalten, siehe `analyze_genreform_values.py` und `analyze_brief_genreform_exact_match.py`). Daraus lässt sich folgern, dass es noch weitere `genreform`-Typen gibt, bei denen Adressaten angegeben wurden (z.B. 'Autograph', 'Kriegsbrief').
 
-Mein Vorschlag: Sämtliche Einheiten, die über eine Adressatenangabe über `@role` verfügen, für das Korrespondenznetzwerk nutzen.
+Vorschlag: Sämtliche Einheiten, die über eine Adressatenangabe über `@role` verfügen, für das Korrespondenznetzwerk nutzen.
 
 **Offene Fragen:**
 
@@ -168,7 +166,7 @@ Mein Vorschlag: Sämtliche Einheiten, die über eine Adressatenangabe über `@ro
 2. Wie mit nicht über ISIL oder GND referenzierten Agenten und Geographika umgehen? Mögliche Vielfachaufnahme (Varianten, Rechtschreibfehler) in Kauf nehmen oder exkludieren? - *Antwort: Laut Projektantrag können nur referenzierte Entitäten aufgenommen werden.*
 	1. Bei Präferenz für Aufnahme nicht-referenzierter Agenten: Ideen für Deduplikationstechniken? - *Antwort: Nicht notwendig, falls nur referenzierte Entitäten aufgenommen werden.*
 3. Wie sollen die Adressatenwerte 'Unbekannt' (19000) und 'Verschiedene' (2673) modelliert werden? (Zu einer Entität zusammenführen oder exkludieren?) - *Antwort: Nachrangig, falls nur referenzierte Entitäten aufgenommen werden.*
-4. Wie mit der Existenz singulärer 'Brief'-Typen und Sammlungstypen wie 'Briefe', 'Korrespondenz' und 'Briefwechsel' umgehen? Korrespondenzbeziehungen, die nur auf Sammlungsebene in Kalliope enthalten sind (also Sammlungen ohne enthaltene Einzelbriefe), abbilden, oder exkludieren (und wenn ja, wie)? - *Antwort: Nur referenzierte Gattungstypen aufnehmen, und davon vorrangig den singulären Brieftyp.*
+4. Erschließungstiefe: Wie mit der Existenz singulärer 'Brief'-Typen und Sammlungstypen wie 'Briefe', 'Korrespondenz' und 'Briefwechsel' umgehen? Korrespondenzbeziehungen, die nur auf Sammlungsebene in Kalliope enthalten sind (also Sammlungen ohne enthaltene Einzelbriefe), abbilden, oder exkludieren (und wenn ja, wie)? - *Antwort: Nur referenzierte Gattungstypen aufnehmen, und davon vorrangig den singulären Brieftyp.*
 5.  Nur `genreform`-Gattungs-Strings erfassen oder auch Normdateireferenzen? - *Antwort:*
 
 ## Analyse der Bestandshalter-Angabe
