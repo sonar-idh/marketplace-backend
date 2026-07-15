@@ -6,6 +6,7 @@
 # Sonar related
 experiments/transformation/metafacture
 experiments/gbv/gbv_env
+
 # User-specific files
 *.rsuser
 *.suo
@@ -311,6 +312,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+*.py[cod]
+.pytest_cache/
 
 # Cake - Uncomment if you are using it
 # tools/**
@@ -545,8 +548,9 @@ cython_debug/
 # Exclude .NET assemblies from source
 *.dll
 
-
-
+# Regression testing artifacts (Temporary artifacts)
+*.obtained.txt
+*.obtained.html
 
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#vs,Java,venv,Perl6,Python,PowerShell,shell,nifi,xml

@@ -7,5 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "lxml>=6.1.1",
     "pymarc>=5.4.0",
+    "pytest>=9.1.1",
+    "pytest-regressions>=2.11.0",
     "rdflib>=7.6.0",
 ]
