@@ -26,7 +26,9 @@ The metadata is always in RDF format. Example shows a container with 2 children,
 ![Sample Metadata](./metadata.png)
 
 Each child has its own metadata as well.
+
 ### Creating a container
+
 ```
 # Add a new rdf resource with a title
 sparql='<> <http://purl.org/dc/terms/title> "My container title" .'
