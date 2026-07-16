@@ -1,0 +1,50 @@
+PREFIX premis: <http://www.loc.gov/premis/rdf/v1#>  
+PREFIX premis3: <http://www.loc.gov/premis/rdf/v3/>  
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
+PREFIX fedora: <http://fedora.info/definitions/v4/repository#>  
+PREFIX ebucore: <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#>  
+PREFIX ldp: <http://www.w3.org/ns/ldp#>  
+  
+<http://play0068:8080/fedora-play/rest/test_k10plus>  
+       premis:hasSize           "1549"^^<http://www.w3.org/2001/XMLSchema#long>;  
+       rdf:type                 premis3:File;  
+       premis3:size             "1549"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger>;  
+       ebucore:filename         "";  
+       ebucore:hasMimeType      "application/gzip";  
+       premis:hasMessageDigest  <urn:sha-512:42e178110b8b5459ccd916cad59979f8d4661cf992f1f166ef7f316  
+23958420c7bfab14f5fb7bb7a9a9dbf4e705efcbee860d333cadd0df7798ee27fe50606d8>;  
+       fedora:created           "2026-07-13T14:13:03.296492385Z"^^<http://www.w3.org/2001/XMLSchema#  
+dateTime>;  
+       fedora:lastModified      "2026-07-13T14:13:03.296492385Z"^^<http://www.w3.org/2001/XMLSchema#  
+dateTime>;  
+       fedora:createdBy         "fadmin";  
+       fedora:lastModifiedBy    "fadmin";  
+       rdf:type                 ldp:NonRDFSource;  
+       rdf:type                 ldp:Resource;  
+       rdf:type                 fedora:Resource;  
+       rdf:type                 fedora:Binary;  
+       fedora:hasParent         <http://play0068:8080/fedora-play/rest/>;  
+       fedora:hasFixityService  <http://play0068:8080/fedora-play/rest/test_k10plus/fcr:fixity> .
+ 
+      
+<http://sonar-project.sbb.berlin#komal>  
+       rdf:type  <https://www.w3.org/ns/prov#Agent>;  
+       rdf:type  <https://www.w3.org/ns/prov#Person>;  
+       <http://purl.org/dc/elements/1.1#title>  "Komal";  
+       <http://purl.org/dc/terms#description>  "Developer who manually executed the terminal command  
+." .  
+  
+<http://play0068:8080/fedora-play/rest/test_k10plus>  
+       <https://www.w3.org/ns/prov#wasGeneratedBy>  <http://sonar-project.sbb.berlin#curl_upload_scr  
+ipt>;  
+       <http://purl.org/dc/terms#description>  "tar.gz package contains a sample data dump.";  
+       <http://purl.org/dc/elements/1.1#title>  "K10 Plus Database Test";  
+       rdf:type  <https://www.w3.org/ns/prov#Entity> .  
+  
+<http://sonar-project.sbb.berlin#curl_upload_script>  
+       rdf:type  <https://www.w3.org/ns/prov#Agent>;  
+       rdf:type  <https://www.w3.org/ns/prov#SoftwareAgent>;  
+       <http://purl.org/dc/elements/1.1#title>  "cURL Command Line Tool";  
+       <http://purl.org/dc/terms#description>  "cURL command executed in the terminal to upload the  
+file.";  
+       <https://www.w3.org/ns/prov#actedOnBehalfOf>  <http://sonar-project.sbb.berlin#komal> .
