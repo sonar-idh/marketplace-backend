@@ -1,13 +1,15 @@
-# Mapping Kalliope-EAD → Correspondence and Epistolary Research (CER) Ontology
+# Transformation Kalliope-EAD → Correspondence and Epistolary Research (CER) Ontology
 
 Basierend auf der [Definition of the Correspondence and Epistolary Research (CER) Ontology, Version 2.0](https://zenodo.org/records/17431730).
+
+Verarbeitet sämtliche `c`-Elemente des Kalliope-Dumps mit Typ 'Brief' (`controlaccess/genreform = 'Brief'`) und legt die jeweils entsprechenden Entitäten und Relationen aus CER und CRM an.
 
 ## 1_Letter
 
 | EAD             | CRM/CER                              |
 | --------------- | ------------------------------------ |
 | `@id`           | `kpe:<@id> a cer:1_Letter`           |
-| `did/unittitle` | `crm:P102_has_title <did/unittitle>` |
+| `did/unittitle` | `crm:P102_has_title "<did/unittitle>"` |
 
 ## 13_Sending
 
