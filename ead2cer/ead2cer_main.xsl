@@ -12,12 +12,8 @@
 <xsl:stylesheet version="3.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:e="urn:isbn:1-931666-22-9"
   xmlns:f="urn:local:funcs"
-  exclude-result-prefixes="xs e f">
-
-  <!-- Prüfen, ob xmlns:e wirklich so im gesamten Korpus vergeben ist, oder ob es eine besser
-  Workaround mit local-name gibt -->
+  exclude-result-prefixes="xs f">
 
   <xsl:output method="text" encoding="UTF-8" />
   <xsl:strip-space
@@ -42,7 +38,7 @@
     <xsl:text>&#10;# ===== Briefe =====&#10;</xsl:text>
 
     <xsl:apply-templates
-      select="//e:c" />
+      select="//*:c" />
     <!-- <xsl:call-template name="agenten" /> -->
 
   </xsl:template>
@@ -50,30 +46,30 @@
   <!-- ============ Verzeichnungseinheit  ============ -->
 
   <!-- sämtliche c-Elemente des Bestands finden -->
-  <xsl:template match="e:c">
+  <xsl:template match="*:c">
     <!-- Bedingung: c-Element hat genreform Brief -->
     <xsl:if
-      test="e:controlaccess/e:genreform = 'Brief'">
+      test="*:controlaccess/*:genreform = 'Brief'">
       <!-- Funktionsaufruf: Brief-URI aus KPE-Identifier konstruieren -->
       <xsl:variable name="record_id" select="@id" />
       <xsl:value-of
         select="concat('kpe:', $record_id, ' a cer:1_Letter')" />
       <!-- did/unittitle als rdfs:label oder crm:P102_has_title schreiben -->
       <xsl:value-of
-        select="concat(' ;&#10;    crm:P102_has_title ', f:lit(string(e:did/e:unittitle)))" />
+        select="concat(' ;&#10;    crm:P102_has_title ', f:lit(string(*:did/*:unittitle)))" />
       <xsl:text> .&#10;&#10;</xsl:text>
 
       <!-- Sending-Event: Sämtliche Verfasser auflisten -->
       <xsl:if
-        test="(e:controlaccess/e:persname | e:controlaccess/e:corpname)[@role = 'Verfasser' and @source = 'GND' and @authfilenumber]">
+        test="(*:controlaccess/*:persname | *:controlaccess/*:corpname)[@role = 'Verfasser' and @source = 'GND' and @authfilenumber]">
         <xsl:value-of
-          select="concat('sonar:Sending_', $record_id, 'a cer:13_Sending')" />
+          select="concat('sonar:Sending_', $record_id, ' a cer:13_Sending')" />
         <!-- Referenz auf Brief-Entität -->
         <xsl:value-of
           select="concat(' ;&#10;    cer:P9_was_intended_use_of ', 'kpe:', $record_id)" />
         <!-- Sämtliche Verfasserknoten auswerten -->
         <xsl:for-each
-          select="(e:controlaccess/e:persname | e:controlaccess/e:corpname)
+          select="(*:controlaccess/*:persname | *:controlaccess/*:corpname)
                       [@role = 'Verfasser' and @source = 'GND' and @authfilenumber]">
           <xsl:choose>
             <xsl:when test="position() = 1">
@@ -91,13 +87,13 @@
 
       <!-- Receiving-Event: Sämtliche Verfasser auflisten -->
       <xsl:if
-        test="(e:controlaccess/e:persname | e:controlaccess/e:corpname)[@role = 'Adressat' and @source = 'GND' and @authfilenumber]">
+        test="(*:controlaccess/*:persname | *:controlaccess/*:corpname)[@role = 'Adressat' and @source = 'GND' and @authfilenumber]">
         <xsl:value-of
-          select="concat('sonar:Receiving_', $record_id, 'a cer:14_Receiving')" />
+          select="concat('sonar:Receiving_', $record_id, ' a cer:14_Receiving')" />
         <xsl:value-of
           select="concat(' ;&#10;    cer:P9_was_intended_use_of ', 'kpe:', $record_id)" />
         <xsl:for-each
-          select="(e:controlaccess/e:persname | e:controlaccess/e:corpname)
+          select="(*:controlaccess/*:persname | *:controlaccess/*:corpname)
                       [@role = 'Adressat' and @source = 'GND' and @authfilenumber]">
           <xsl:choose>
             <xsl:when test="position() = 1">
