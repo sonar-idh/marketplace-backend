@@ -33,6 +33,15 @@
       else f:lit($d)" />
   </xsl:function>
 
+  <!-- Text in eine IRI-taugliche Kurzform ueberfuehren -->
+  <xsl:function
+    name="f:slug" as="xs:string">
+    <xsl:param name="t" as="xs:string?" />
+    <xsl:variable name="s" as="xs:string" select="lower-case(normalize-space(string($t)))" />
+    <xsl:sequence
+      select="replace(replace($s, '[^a-z0-9]+', '-'), '^-+|-+$', '')" />
+  </xsl:function>
+
   <!-- Literale Turtle-konform escapen -->
   <xsl:function
     name="f:esc" as="xs:string">

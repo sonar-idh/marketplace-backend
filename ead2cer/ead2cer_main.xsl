@@ -13,7 +13,8 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:f="urn:local:funcs"
-  exclude-result-prefixes="xs f">
+  xmlns:cer="http://sonar.staatsbibliothek-berlin.de/ns/templates"
+  exclude-result-prefixes="xs f cer">
 
   <xsl:output method="text" encoding="UTF-8" />
   <xsl:strip-space
@@ -21,6 +22,7 @@
 
   <!-- ============ Funktionen aus Helper-Stylesheet einbinden ============ -->
   <xsl:include href="ead2cer_helpers.xsl" />
+  <xsl:include href="cer_dates.xsl" />
 
   <!-- ============ Einstieg ============ -->
   <xsl:template
@@ -82,7 +84,17 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:for-each>
+        <!-- Entstehungsdatum als Time-Span an Sending-Entität anhängen  -->
+        <xsl:call-template name="cer:link-all-timespans">
+          <xsl:with-param name="unitdates" select="*:did/*:unitdate[@label = 'Entstehungsdatum']" />
+          <xsl:with-param name="record-id" select="$record_id" />
+        </xsl:call-template>
         <xsl:text> .&#10;&#10;</xsl:text>
+        <!-- Time-Span-Entitäten des Briefs instanziieren -->
+        <xsl:call-template name="cer:emit-all-timespans">
+          <xsl:with-param name="unitdates" select="*:did/*:unitdate[@label = 'Entstehungsdatum']" />
+          <xsl:with-param name="record-id" select="$record_id" />
+        </xsl:call-template>
       </xsl:if>
 
       <!-- Receiving-Event: Sämtliche Verfasser auflisten -->
