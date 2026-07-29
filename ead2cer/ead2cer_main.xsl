@@ -5,9 +5,7 @@
   XSLT 3.0 (Saxon-HE / SaxonC-HE).
 
   Aufruf (Beispiel):
-    saxonb-xslt -s:ead_DE-1_5364_test.xml -xsl:ead2cer_main.xsl -o:out.ttl
-  Parameter (per -base:... etc. überschreibbar):
-    base       Basis-IRI für lokal geprägte Ressourcen 
+    java -jar /path/to/Saxon-HE-9.9.1.5.jar  -s:ead_DE-1_5364_test.xml -xsl:ead2cer_main.xsl -o:out.ttl
 -->
 <xsl:stylesheet version="3.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -41,7 +39,6 @@
 
     <xsl:apply-templates
       select="//*:c" />
-    <!-- <xsl:call-template name="agenten" /> -->
 
   </xsl:template>
 

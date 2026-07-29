@@ -3,4 +3,5 @@ __pycache__/
 ead2rico
 .venv
 ead2cer/cer_data.ttl
+ead2cer/output.ttl
 ead2rico/
