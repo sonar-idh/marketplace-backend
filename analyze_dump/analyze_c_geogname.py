@@ -19,6 +19,7 @@ Aufruf:
 Beispiel:
     python3 analyze_c_geogname.py /home/p01776/ead2rico/ead20260217/ead 8 result_c_geogname.pkl
 """
+
 import sys
 import os
 import pickle
@@ -92,7 +93,9 @@ def main():
     nworkers = int(sys.argv[2]) if len(sys.argv) > 2 else 8
     out_pickle = sys.argv[3] if len(sys.argv) > 3 else None
 
-    files = [os.path.join(directory, f) for f in os.listdir(directory) if f.endswith(".xml")]
+    files = [
+        os.path.join(directory, f) for f in os.listdir(directory) if f.endswith(".xml")
+    ]
     files.sort()
     n_files = len(files)
     print(f"Verarbeite {n_files} Dateien mit {nworkers} Prozessen...", file=sys.stderr)
@@ -142,26 +145,40 @@ def main():
         return 100 * part / total if total else 0
 
     print("=" * 70)
-    print(f"Dateien gesamt:                                          {result['n_files']}")
-    print(f"Parse-Fehler:                                            {len(result['files_with_parse_errors'])}")
+    print(
+        f"Dateien gesamt:                                          {result['n_files']}"
+    )
+    print(
+        f"Parse-Fehler:                                            {len(result['files_with_parse_errors'])}"
+    )
     print()
     print(f"c-Elemente gesamt:                                       {n_c_total}")
-    print(f"  davon mit controlaccess/geogname:                      {n_c_geogname_total} "
-          f"({pct(n_c_geogname_total, n_c_total):.1f}%)")
-    print(f"    davon mit geogname[@role='Entstehungsort']:          {n_c_geogname_entstehungsort_total} "
-          f"({pct(n_c_geogname_entstehungsort_total, n_c_geogname_total):.1f}% der c mit geogname)")
+    print(
+        f"  davon mit controlaccess/geogname:                      {n_c_geogname_total} "
+        f"({pct(n_c_geogname_total, n_c_total):.1f}%)"
+    )
+    print(
+        f"    davon mit geogname[@role='Entstehungsort']:          {n_c_geogname_entstehungsort_total} "
+        f"({pct(n_c_geogname_entstehungsort_total, n_c_geogname_total):.1f}% der c mit geogname)"
+    )
     print()
 
     total_geognames = sum(role_counter.values())
-    print(f"-- @role-Werte der geogname-Elemente (gesamt {total_geognames} Elemente) --")
+    print(
+        f"-- @role-Werte der geogname-Elemente (gesamt {total_geognames} Elemente) --"
+    )
     for val, cnt in role_counter.most_common():
         print(f"  {cnt:9d}  ({pct(cnt, total_geognames):5.1f}%)  {val!r}")
     print()
 
     print("-- geogname[@role='Entstehungsort'] --")
-    print(f"  Elemente gesamt:                                       {n_entstehungsort_elements_total}")
-    print(f"    davon mit @source='GND':                             {n_entstehungsort_with_gnd_total} "
-          f"({pct(n_entstehungsort_with_gnd_total, n_entstehungsort_elements_total):.1f}%)")
+    print(
+        f"  Elemente gesamt:                                       {n_entstehungsort_elements_total}"
+    )
+    print(
+        f"    davon mit @source='GND':                             {n_entstehungsort_with_gnd_total} "
+        f"({pct(n_entstehungsort_with_gnd_total, n_entstehungsort_elements_total):.1f}%)"
+    )
     print()
 
     if result["files_with_parse_errors"]:
