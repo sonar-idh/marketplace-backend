@@ -1,0 +1,120 @@
+# Usage: uv run --with pyshacl pyshacl -s experiments/k10plus/data/mvp/shaclcopy.ttl -m -i rdfs -a -j -f human experiments/k10plus/data/mvp/schuhmann_example_cidoc.ttl
+
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix gnd: <https://d-nb.info/gnd/> .
+@prefix rel: <http://id.loc.gov/vocabulary/relators/> .
+
+# ==========================================
+# 1. SHAPE FOR THE INFORMATION OBJECT (WORK)
+# ==========================================
+crm:InformationObjectShape
+    a sh:NodeShape ;
+    sh:targetClass crm:E73_Information_Object ;
+    
+    # Enforce exactly 1 title
+    sh:property [
+        sh:path crm:P102_has_title ;
+        sh:node crm:TitleShape ;
+        sh:minCount 1 ;
+        sh:message "Each E73 Information Object must have exactly one title." ;
+    ] ;
+    
+    # Enforce exactly 1 identifier
+    sh:property [
+        sh:path crm:P1_is_identified_by ;
+        sh:node crm:IdentifierShape ;
+        sh:minCount 1 ;
+        sh:message "Each E73 Information Object must have exactly one identifier." ;
+    ] ;
+
+    # Enforce exactly 1 creation event pointing to this object (inverse path)
+    sh:property [
+        sh:path [ sh:inversePath crm:P94_has_created ] ;
+        sh:class crm:E65_Creation ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each E73 Information Object must have exactly one associated E65_Creation event." ;
+    ] .
+
+# ==========================================
+# 2. SHAPE FOR THE TITLE
+# ==========================================
+crm:TitleShape
+    a sh:NodeShape ;
+    sh:targetClass crm:E35_Title ;
+    
+    # Title text must be a literal string
+    sh:property [
+        sh:path crm:P190_has_symbolic_content ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each Title must have exactly one string value as symbolic content." ;
+    ] .
+
+# ==========================================
+# 3. SHAPE FOR THE IDENTIFIER
+# ==========================================
+crm:IdentifierShape
+    a sh:NodeShape ;
+    sh:targetClass crm:E42_Identifier ;
+    
+    # ID value must be a literal string
+    sh:property [
+        sh:path crm:P190_has_symbolic_content ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each Identifier must have exactly one string value as symbolic content." ;
+    ] .
+
+# ==========================================
+# 4. SHAPE FOR THE CREATION EVENT
+# ==========================================
+crm:CreationEventShape
+    a sh:NodeShape ;
+    sh:targetClass crm:E65_Creation ;
+    
+    # Event must point to exactly 1 Information Object
+    sh:property [
+        sh:path crm:P94_has_created ;
+        sh:class crm:E73_Information_Object ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each Creation Event must point to exactly one crm:E73_Information_Object." ;
+    ] .
+
+# ==========================================
+# 5. SHAPE FOR THE ROLE ASSIGNMENT (PC14)
+# ==========================================
+crm:RoleAssignmentShape
+    a sh:NodeShape ;
+    sh:targetClass crm:PC14_Carried_Out_By ;
+    
+    # Domain must be a Creation Event
+    sh:property [
+        sh:path crm:P01_has_domain ;
+        sh:class crm:E65_Creation ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "The domain (P01) of a role assignment must be a crm:E65_Creation event." ;
+    ] ;
+    
+    # Range must be a Person
+    sh:property [
+        sh:path crm:P02_has_range ;
+        sh:class crm:E21_Person ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "The range (P02) of a role assignment must point to a crm:E21_Person." ;
+    ] ;
+    
+    # Role type must be a Type
+    sh:property [
+        sh:path crm:P14.1_in_the_role_of ;
+        sh:class crm:E55_Type ;
+        sh:minCount 1 ;
+        sh:message "The role (P14.1) must point to a crm:E55_Type." ;
+    ] .

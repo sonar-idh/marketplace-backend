@@ -5,4 +5,3 @@ add_field("_id", "https://d-nb.info/gnd/118515055")
 
 copy_field("viaf_uri", "owl:sameAs") # metafacture expects a key value pair, key being predicate and value being object
 retain ("_id", "owl:sameAs")
-

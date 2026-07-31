@@ -1,0 +1,50 @@
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix gnd: <https://d-nb.info/gnd/> .
+@prefix k10plus: <https://opac.k10plus.de/DB=2.299/PPNSET?PPN=> .
+@prefix rel: <http://id.loc.gov/vocabulary/relators/> .
+
+<https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1693023482#RoleAssignment_28f3ce511f567f8b4c18559f3442fa922f7aec74> a crm:PC14_Carried_Out_By ;
+    crm:P01_has_domain <https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1693023482#CreationEvent> ;
+    crm:P02_has_range gnd:124111971 ;
+    crm:P14.1_in_the_role_of rel:aui .
+
+<https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1693023482#RoleAssignment_479269bedc0b3a4cefd6d2a925e19aaaa2ae283b> a crm:PC14_Carried_Out_By ;
+    crm:P01_has_domain <https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1693023482#CreationEvent> ;
+    crm:P02_has_range gnd:11861164X ;
+    crm:P14.1_in_the_role_of rel:cmp .
+
+<https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1693023482#RoleAssignment_7b1dfb470774f86385dbe6302d018418a3abe4e2> a crm:PC14_Carried_Out_By ;
+    crm:P01_has_domain <https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1693023482#CreationEvent> ;
+    crm:P02_has_range gnd:113358733 ;
+    crm:P14.1_in_the_role_of rel:edt .
+
+<https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1693023482#RoleAssignment_ee414e984984f610bb2e976e151be699acd6bf20> a crm:PC14_Carried_Out_By ;
+    crm:P01_has_domain <https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1693023482#CreationEvent> ;
+    crm:P02_has_range gnd:118603817 ;
+    crm:P14.1_in_the_role_of rel:aut .
+
+rel:aui a crm:E55_Type .
+
+rel:aut a crm:E55_Type .
+
+rel:cmp a crm:E55_Type .
+
+rel:edt a crm:E55_Type .
+
+gnd:113358733 a crm:E21_Person .
+
+gnd:118603817 a crm:E21_Person .
+
+gnd:11861164X a crm:E21_Person .
+
+gnd:124111971 a crm:E21_Person .
+
+k10plus:1693023482 a crm:E73_Information_Object ;
+    crm:P102_has_title [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Vier Gedichte von Rückert opus 12 und WoO 17" ] ;
+    crm:P1_is_identified_by [ a crm:E42_Identifier ;
+            crm:P190_has_symbolic_content "1693023482" ] .
+
+<https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1693023482#CreationEvent> a crm:E65_Creation ;
+    crm:P94_has_created k10plus:1693023482 .
+

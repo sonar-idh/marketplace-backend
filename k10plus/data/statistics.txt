@@ -1,0 +1,82 @@
+================================================================================
+                                 MARC ANALYSIS SUMMARY
+================================================================================
+Total Records Processed : 1,784
+Complete Records        : 818 (45.85%)
+Incomplete Records      : 966 (54.15%)
+
+================================================================================
+BIBLIOGRAPHIC LEVEL COUNTS (Sorted by Frequency)
+================================================================================
+- Monograph/Item                          : 1,662 (93.16%)
+- Monographic component part              : 122 (6.84%)
+
+================================================================================
+TYPE OF RECORD COUNTS (Sorted by Frequency)
+================================================================================
+- Language material                       : 1,097 (61.49%)
+- Notated music                           : 467 (26.18%)
+- Manuscript notated music                : 143 (8.02%)
+- Two-dimensional nonprojectable graphic  : 40 (2.24%)
+- Manuscript language material            : 36 (2.02%)
+- Three-dimensional artifact or naturally occurring object: 1 (0.06%)
+
+================================================================================
+TAG FREQUENCY
+================================================================================
+- Tag 100 (Person Main Entry   ): 1,717 instances across 1,717 records,    (96.24%) of total records
+- Tag 700 (Person Added Entry  ): 2,696 instances across 1,604 records,    (89.91%) of total records
+
+================================================================================
+RELATOR COVERAGE SUMMARY
+================================================================================
+Total Relators Found    : 4,247
+- Tag 100 ($4 codes defined)  : 1,749 defined relators across 1,717 instances (101.86%)
+- Tag 700 ($4 codes defined)  : 2,498 defined relators across 2,696 instances (92.66%)
+
+================================================================================
+RELATOR DETAIL BREAKDOWN (Sorted by Frequency)
+================================================================================
+
+Tag 100 Relators:
+----------------------------------------
+  - Author                        : 1,471 (84.11%)
+  - Composer                      : 225 (12.86%)
+  - Dedicator                     : 33 (1.89%)
+  - Artist                        : 15 (0.86%)
+  - Photographer                  : 4 (0.23%)
+  - Sculptor                      : 1 (0.06%)
+
+Tag 700 Relators:
+----------------------------------------
+  - Other                         : 1,549 (62.01%)
+  - Composer                      : 221 (8.85%)
+  - Lyricist                      : 162 (6.49%)
+  - Dedicatee                     : 139 (5.56%)
+  - Addressee                     : 118 (4.72%)
+  - Author                        : 107 (4.28%)
+  - Editor                        : 89 (3.56%)
+  - Publisher                     : 25 (1.00%)
+  - Dedicator                     : 16 (0.64%)
+  - Printer                       : 11 (0.44%)
+  - Writer Of Supplementary Textual Content: 10 (0.40%)
+  - Artist                        : 8 (0.32%)
+  - Photographer                  : 7 (0.28%)
+  - Honoree                       : 7 (0.28%)
+  - Translator                    : 7 (0.28%)
+  - Arranger                      : 6 (0.24%)
+  - Adapter                       : 4 (0.16%)
+  - Lithographer                  : 4 (0.16%)
+  - Creator                       : 2 (0.08%)
+  - Sculptor                      : 2 (0.08%)
+  - Author Of Introduction, Etc.  : 1 (0.04%)
+  - Binder                        : 1 (0.04%)
+  - Founder                       : 1 (0.04%)
+  - Performer                     : 1 (0.04%)
+
+================================================================================
+GND LINKING COVERAGE (Percentage of subfields mapped to a GND ID)
+================================================================================
+- Tag 100 Subfield $4             : 1,147 of 1,749 defined relators have GND IDs (65.58%)
+- Tag 700 Subfield $4             : 1,671 of 2,498 defined relators have GND IDs (66.89%)
+================================================================================

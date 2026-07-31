@@ -1,0 +1,27 @@
+[project]
+name = "k10plus"
+version = "0.1.0"
+description = "Transformation of K10Plus MARC records from BIBFRAME to CIDOC-CRM"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "lxml>=6.1.1",
+    "pre-commit>=4.6.1",
+    "pymarc>=5.4.0",
+    "pyshacl>=0.40.1",
+    "pytest>=9.1.1",
+    "pytest-regressions>=2.11.0",
+    "rdflib>=7.6.0",
+    "requests>=2.34.2",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [".", ".."]
+filterwarnings = [
+    "ignore:Dataset.default_context is deprecated, use Dataset.default_graph instead:DeprecationWarning",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.16.1",
+]

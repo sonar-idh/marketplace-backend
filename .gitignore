@@ -5,7 +5,9 @@
 
 # Sonar related
 experiments/transformation/metafacture
-experiments/gbv/gbv_env
+.ruff_cache/
+k10plus/data/kxp.mrcxml
+k10plus/data/schumann_example*
 
 # User-specific files
 *.rsuser
