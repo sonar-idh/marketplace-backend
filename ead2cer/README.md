@@ -15,18 +15,23 @@ Verarbeitet sämtliche `c`-Elemente des Kalliope-Dumps mit Typ 'Brief' (`control
 
 **Bedingung**: Record besitzt mindestens eine als Verfasser angegebene Person oder Körperschaft, die zugleich GND-referenziert ist. 
 
+Die Ortsangabe P7_took_place_at erfordert hier die EAD-Rollen "Entstehungsort", "PlaceOfOrigin" oder "Absendeort" sowie eine GND-Referenzierung des Ortes. 
+
 XPath: `test="(e:controlaccess/e:persname | e:controlaccess/e:corpname)[@role = 'Verfasser' and @source = 'GND' and @authfilenumber]"`
 
 | EAD               | CRM/CER                                                 |
 | ----------------- | ------------------------------------------------------- |
-| `@id`             | `sonar:Sending_<@id> a cer:13_Sending`                |
+| `@id`             | `sonar:Sending_<@id> a cer:13_Sending`                  |
 | `@id`             | `cer:P9_was_intended_use_of kpe:<@id>`                  |
 | `@authfilenumber` | `cer:P8_carried_out_by gnd:<@authfilenumber>`           |
-| `did/unitdate`    | `cer:P6_has_time-span sonar:Time-Span_<@id>_<$dm?key>` |
+| `did/unitdate`    | `cer:P6_has_time-span sonar:Time-Span_<@id>_<$dm?key>`  |
+| `controlaccess/geogname/@authfilenumber`    | `cer:P7_took_place_at gnd:<@authfilenumber>`  |
 
 ## 14_Receiving
 
 **Bedingung**: Record besitzt mindestens eine als Adressat angegebene Person oder Körperschaft, die zugleich GND-referenziert ist. 
+
+Die Ortsangabe P7_took_place_at erfordert hier die EAD-Rolle "Zielort" sowie eine GND-Referenzierung des Ortes. 
 
 XPath: `test="(e:controlaccess/e:persname | e:controlaccess/e:corpname)[@role = 'Adressat' and @source = 'GND' and @authfilenumber]"`
 
@@ -35,6 +40,7 @@ XPath: `test="(e:controlaccess/e:persname | e:controlaccess/e:corpname)[@role = 
 | `@id`             | `sonar:Receiving_<@id> a cer:14_Receiving`  |
 | `@id`             | `cer:P9_was_intended_use_of kpe:<@id>`        |
 | `@authfilenumber` | `cer:P8_carried_out_by gnd:<@authfilenumber>` |
+| `controlaccess/geogname/@authfilenumber`    | `cer:P7_took_place_at gnd:<@authfilenumber>`  |
 
 ## 18_Time-Span
 

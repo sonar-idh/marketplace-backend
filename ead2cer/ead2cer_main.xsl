@@ -21,6 +21,7 @@
   <!-- ============ Funktionen aus Helper-Stylesheet einbinden ============ -->
   <xsl:include href="ead2cer_helpers.xsl" />
   <xsl:include href="cer_dates.xsl" />
+  <xsl:include href="cer_places.xsl" />
 
   <!-- ============ Einstieg ============ -->
   <xsl:template
@@ -66,6 +67,7 @@
         <!-- Referenz auf Brief-Entität -->
         <xsl:value-of
           select="concat(' ;&#10;    cer:P9_was_intended_use_of ', 'kpe:', $record_id)" />
+
         <!-- Sämtliche Verfasserknoten auswerten -->
         <xsl:for-each
           select="(*:controlaccess/*:persname | *:controlaccess/*:corpname)
@@ -81,11 +83,19 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:for-each>
+
+        <!-- Sämtliche Entstehungsorte auswerten -->
+        <xsl:call-template name="cer:link-places">
+          <xsl:with-param name="geognames" select="*:controlaccess/*:geogname" />
+          <xsl:with-param name="roles" select="$origin-place-roles" />
+        </xsl:call-template>
+
         <!-- Entstehungsdatum als Time-Span an Sending-Entität anhängen  -->
         <xsl:call-template name="cer:link-all-timespans">
           <xsl:with-param name="unitdates" select="*:did/*:unitdate[@label = 'Entstehungsdatum']" />
           <xsl:with-param name="record-id" select="$record_id" />
         </xsl:call-template>
+
         <xsl:text> .&#10;&#10;</xsl:text>
         <!-- Time-Span-Entitäten des Briefs instanziieren -->
         <xsl:call-template name="cer:emit-all-timespans">
@@ -94,7 +104,7 @@
         </xsl:call-template>
       </xsl:if>
 
-      <!-- Receiving-Event: Sämtliche Verfasser auflisten -->
+      <!-- Receiving-Event: Sämtliche Adressaten auflisten -->
       <xsl:if
         test="(*:controlaccess/*:persname | *:controlaccess/*:corpname)[@role = 'Adressat' and @source = 'GND' and @authfilenumber]">
         <xsl:value-of
@@ -115,6 +125,13 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:for-each>
+
+        <!-- Sämtliche Zielorte auswerten -->
+        <xsl:call-template name="cer:link-places">
+          <xsl:with-param name="geognames" select="*:controlaccess/*:geogname" />
+          <xsl:with-param name="roles" select="$destination-place-roles" />
+        </xsl:call-template>
+
         <xsl:text> .&#10;&#10;</xsl:text>
       </xsl:if>
 
