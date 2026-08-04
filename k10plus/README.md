@@ -1,4 +1,7 @@
 # MVP: K10Plus MARC --> SoNAR HNA Graph
+
+![Coverage](https://img.shields.io/badge/coverage-79%25-brightgreen)
+
 ## Data Transformation Pipeline
 
   ```mermaid
@@ -46,7 +49,7 @@ python3 bibframe_to_cidoc.py -i data/schumann_bib.ttl -o data/schumann_cidoc.ttl
 ## Code Quality & Linting
 
 ### Running Ruff (Standalone)
-Ruff is used for quick code linting and formatting. 
+Ruff is used for quick code linting and formatting.
 Run from the repository root:
 ```bash
 # Lint checks
@@ -72,7 +75,7 @@ The repository includes a `pre-commit` configuration to validate styling and cod
    uv run --project k10plus pre-commit run --all-files
    ```
 
-## Running Tests
+## Running Tests & Coverage
 
 Tests are managed using `pytest` and virtual environment isolation is handled by `uv`.
 
@@ -90,6 +93,26 @@ Tests are managed using `pytest` and virtual environment isolation is handled by
    ```bash
    uv run pytest --log-level=WARNING
    ```
+
+### Running Test Coverage
+
+To run the test suite and view a detailed statement-by-statement coverage report:
+
+```bash
+# Terminal summary with missing line numbers
+uv run pytest --cov=. --cov-report=term-missing
+
+# Generate interactive HTML report (saved to htmlcov/index.html)
+uv run pytest --cov=. --cov-report=html
+```
+
+### Running Full/Slow Tests
+
+By default, slow full-dataset tests are deselected for performance. To execute all tests including slow ones:
+
+```bash
+uv run pytest -m slow
+```
 
 ### Running Tests from the Repository Root
 
