@@ -48,7 +48,7 @@ python3 bibframe_to_cidoc.py -i data/schumann_bib.ttl -o data/schumann_cidoc.ttl
 
 ## Code Quality & Linting
 
-### Running Ruff (Standalone)
+#### Ruff
 Ruff is used for quick code linting and formatting.
 Run from the repository root:
 ```bash
@@ -62,10 +62,10 @@ uvx ruff check --fix k10plus/
 uvx ruff format k10plus/
 ```
 
-### Running Pre-commit Hooks
+#### Pre-commit
 The repository includes a `pre-commit` configuration to validate styling and code quality before every git commit.
 
-1. **Register the pre-commit hooks** (one-time setup):
+1. **Register the pre-commit hooks**:
    ```bash
    uv run --project k10plus pre-commit install
    ```
@@ -75,11 +75,11 @@ The repository includes a `pre-commit` configuration to validate styling and cod
    uv run --project k10plus pre-commit run --all-files
    ```
 
-## Running Tests & Coverage
+## Tests & Coverage
 
 Tests are managed using `pytest` and virtual environment isolation is handled by `uv`.
 
-### Running Tests from inside the `k10plus/` folder (Recommended)
+#### Running Tests from inside the `k10plus/` folder (Recommended)
 
 1. Change directory to the project directory:
    ```bash
@@ -94,7 +94,7 @@ Tests are managed using `pytest` and virtual environment isolation is handled by
    uv run pytest --log-level=WARNING
    ```
 
-### Running Test Coverage
+#### Test Coverage
 
 To run the test suite and view a detailed statement-by-statement coverage report:
 
@@ -106,7 +106,7 @@ uv run pytest --cov=. --cov-report=term-missing
 uv run pytest --cov=. --cov-report=html
 ```
 
-### Running Full/Slow Tests
+#### Running Full/Slow Tests
 
 By default, slow full-dataset tests are deselected for performance. To execute all tests including slow ones:
 
@@ -114,14 +114,14 @@ By default, slow full-dataset tests are deselected for performance. To execute a
 uv run pytest -m slow
 ```
 
-### Running Tests from the Repository Root
+#### Running Tests from the Repository Root
 
 If you prefer to stay at the repository root (`marketplace-backend`), you can run:
 ```bash
 uv run --project k10plus pytest --log-level=WARNING
 ```
 
-### Regenerating Regression Test Data
+#### Regenerating Regression Test Data
 
 If data structure changes are intentional, you can regenerate the reference test outputs using the `--force-regen` flag:
 ```bash
