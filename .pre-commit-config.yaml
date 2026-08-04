@@ -11,5 +11,5 @@ repos:
     rev: v0.5.0
     hooks:
       - id: ruff                     # Runs the linter and auto-fixes
-        args: [ --fix ]
+        args: [ --fix, --extend-select, I ]
       - id: ruff-format              # Reformats the code style

@@ -17,6 +17,10 @@ dependencies = [
 
 [tool.pytest.ini_options]
 pythonpath = [".", ".."]
+addopts = "-m 'not slow'"
+markers = [
+    "slow: marks tests as slow (full dataset, deselected by default — run with -m slow)",
+]
 filterwarnings = [
     "ignore:Dataset.default_context is deprecated, use Dataset.default_graph instead:DeprecationWarning",
 ]

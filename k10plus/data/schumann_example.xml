@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<marc:collection xmlns:marc="http://www.loc.gov/MARC21/slim">
+  <marc:record>
+    <marc:leader>     ccm a22      c 4500</marc:leader>
+    <marc:controlfield tag="001">1693023482</marc:controlfield>
+    <marc:controlfield tag="003">DE-627</marc:controlfield>
+    <marc:controlfield tag="005">20230808192359.0</marc:controlfield>
+    <marc:controlfield tag="007">qu</marc:controlfield>
+    <marc:controlfield tag="008">200320r20201841gw ||||| ||||||n  | ger c</marc:controlfield>
+    <marc:datafield tag="020" ind1=" " ind2=" ">
+      <marc:subfield code="a">9783890079028</marc:subfield>
+      <marc:subfield code="9">978-3-89007-902-8</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="035" ind1=" " ind2=" ">
+      <marc:subfield code="a">(DE-627)1693023482</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="035" ind1=" " ind2=" ">
+      <marc:subfield code="a">(DE-599)KXP1693023482</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="035" ind1=" " ind2=" ">
+      <marc:subfield code="a">(OCoLC)1145337828</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="040" ind1=" " ind2=" ">
+      <marc:subfield code="a">DE-627</marc:subfield>
+      <marc:subfield code="b">ger</marc:subfield>
+      <marc:subfield code="c">DE-627</marc:subfield>
+      <marc:subfield code="e">rda</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="041" ind1=" " ind2=" ">
+      <marc:subfield code="a">ger</marc:subfield>
+      <marc:subfield code="a">eng</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="044" ind1=" " ind2=" ">
+      <marc:subfield code="c">XA-DE-NI</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="100" ind1="1" ind2=" ">
+      <marc:subfield code="a">Schumann, Clara</marc:subfield>
+      <marc:subfield code="d">1819-1896</marc:subfield>
+      <marc:subfield code="e">KomponistIn</marc:subfield>
+      <marc:subfield code="0">(DE-588)11861164X</marc:subfield>
+      <marc:subfield code="0">(DE-627)13458404X</marc:subfield>
+      <marc:subfield code="0">(DE-576)16299799X</marc:subfield>
+      <marc:subfield code="4">cmp</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="240" ind1="1" ind2="0">
+      <marc:subfield code="a">Gedichte aus F. Rückert's Liebesfrühling</marc:subfield>
+      <marc:subfield code="0">(DE-588)300144245</marc:subfield>
+      <marc:subfield code="0">(DE-627)701723564</marc:subfield>
+      <marc:subfield code="0">(DE-576)135510457</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="245" ind1="1" ind2="0">
+      <marc:subfield code="a">Vier Gedichte von Rückert</marc:subfield>
+      <marc:subfield code="b">opus 12 und WoO 17</marc:subfield>
+      <marc:subfield code="c">Clara Schumann ; mit einem Geleitwort von Manfred Jung ; herausgegeben und mit einer Einführung von Thomas Synofzik</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="250" ind1=" " ind2=" ">
+      <marc:subfield code="a">Faksimilie nach dem Autograph aus dem Robert-Schumann-Haus, Zwickau</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="264" ind1=" " ind2="1">
+      <marc:subfield code="a">Lilienthal (vormals Laaber)</marc:subfield>
+      <marc:subfield code="b">Laaber-Verlag</marc:subfield>
+      <marc:subfield code="c">[2020]</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="264" ind1=" " ind2="4">
+      <marc:subfield code="c">© 2020</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="300" ind1=" " ind2=" ">
+      <marc:subfield code="a">1 Partitur (20 Seiten, 2 ungezählte Seiten, 20 Seiten, 1 ungezähltes Blatt)</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="336" ind1=" " ind2=" ">
+      <marc:subfield code="a">Noten</marc:subfield>
+      <marc:subfield code="b">ntm</marc:subfield>
+      <marc:subfield code="2">rdacontent</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="336" ind1=" " ind2=" ">
+      <marc:subfield code="a">Text</marc:subfield>
+      <marc:subfield code="b">txt</marc:subfield>
+      <marc:subfield code="2">rdacontent</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="337" ind1=" " ind2=" ">
+      <marc:subfield code="a">ohne Hilfsmittel zu benutzen</marc:subfield>
+      <marc:subfield code="b">n</marc:subfield>
+      <marc:subfield code="2">rdamedia</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="338" ind1=" " ind2=" ">
+      <marc:subfield code="a">Band</marc:subfield>
+      <marc:subfield code="b">nc</marc:subfield>
+      <marc:subfield code="2">rdacarrier</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="348" ind1=" " ind2=" ">
+      <marc:subfield code="a">Partitur</marc:subfield>
+      <marc:subfield code="0">(DE-588)4173447-6</marc:subfield>
+      <marc:subfield code="0">(DE-627)105379875</marc:subfield>
+      <marc:subfield code="0">(DE-576)209950323</marc:subfield>
+      <marc:subfield code="2">gnd-music</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="490" ind1="1" ind2=" ">
+      <marc:subfield code="a">Meisterwerke der Musik im Faksimile</marc:subfield>
+      <marc:subfield code="v">Band 42</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="500" ind1=" " ind2=" ">
+      <marc:subfield code="a">Autograph Clara Schumanns mit der Signatur 5985-A1</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="534" ind1=" " ind2=" ">
+      <marc:subfield code="c">1841</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="546" ind1=" " ind2=" ">
+      <marc:subfield code="a">Einführender Text deutsch und englisch</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="583" ind1="1" ind2=" ">
+      <marc:subfield code="a">Archivierung/Langzeitarchivierung gewährleistet</marc:subfield>
+      <marc:subfield code="f">PENI</marc:subfield>
+      <marc:subfield code="2">pdager</marc:subfield>
+      <marc:subfield code="5">DE-35</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="655" ind1=" " ind2="7">
+      <marc:subfield code="a">Faksimile</marc:subfield>
+      <marc:subfield code="0">(DE-588)4153591-1</marc:subfield>
+      <marc:subfield code="0">(DE-627)104339624</marc:subfield>
+      <marc:subfield code="0">(DE-576)209804548</marc:subfield>
+      <marc:subfield code="2">gnd-content</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="700" ind1="1" ind2=" ">
+      <marc:subfield code="a">Rückert, Friedrich</marc:subfield>
+      <marc:subfield code="d">1788-1866</marc:subfield>
+      <marc:subfield code="e">VerfasserIn</marc:subfield>
+      <marc:subfield code="0">(DE-588)118603817</marc:subfield>
+      <marc:subfield code="0">(DE-627)133443876</marc:subfield>
+      <marc:subfield code="0">(DE-576)162812493</marc:subfield>
+      <marc:subfield code="4">aut</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="700" ind1="1" ind2=" ">
+      <marc:subfield code="a">Jung, Manfred</marc:subfield>
+      <marc:subfield code="d">1940-2017</marc:subfield>
+      <marc:subfield code="e">VerfasserIn eines Geleitwortes</marc:subfield>
+      <marc:subfield code="0">(DE-588)124111971</marc:subfield>
+      <marc:subfield code="0">(DE-627)085645060</marc:subfield>
+      <marc:subfield code="0">(DE-576)294024816</marc:subfield>
+      <marc:subfield code="4">aui</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="700" ind1="1" ind2=" ">
+      <marc:subfield code="a">Synofzik, Thomas</marc:subfield>
+      <marc:subfield code="d">1966-</marc:subfield>
+      <marc:subfield code="e">HerausgeberIn</marc:subfield>
+      <marc:subfield code="0">(DE-588)113358733</marc:subfield>
+      <marc:subfield code="0">(DE-627)508764653</marc:subfield>
+      <marc:subfield code="0">(DE-576)171806379</marc:subfield>
+      <marc:subfield code="4">edt</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="700" ind1="1" ind2="2">
+      <marc:subfield code="a">Schumann, Clara</marc:subfield>
+      <marc:subfield code="d">1819-1896</marc:subfield>
+      <marc:subfield code="t">Die gute Nacht</marc:subfield>
+      <marc:subfield code="0">(DE-588)1186151625</marc:subfield>
+      <marc:subfield code="0">(DE-627)1665669098</marc:subfield>
+      <marc:subfield code="0">(DE-576)16299799X</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="830" ind1=" " ind2="0">
+      <marc:subfield code="a">Meisterwerke der Musik im Faksimile</marc:subfield>
+      <marc:subfield code="v">Band 42</marc:subfield>
+      <marc:subfield code="9">42</marc:subfield>
+      <marc:subfield code="w">(DE-627)320633403</marc:subfield>
+      <marc:subfield code="w">(DE-576)073439886</marc:subfield>
+      <marc:subfield code="w">(DE-600)2024205-0</marc:subfield>
+      <marc:subfield code="7">cm</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="924" ind1="0" ind2=" ">
+      <marc:subfield code="a">3736198671</marc:subfield>
+      <marc:subfield code="b">DE-1a</marc:subfield>
+      <marc:subfield code="9">1a</marc:subfield>
+      <marc:subfield code="c">GBV</marc:subfield>
+      <marc:subfield code="d">d</marc:subfield>
+      <marc:subfield code="g">55 NA 4966</marc:subfield>
+      <marc:subfield code="h">1:MUSMAG</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="924" ind1="0" ind2=" ">
+      <marc:subfield code="a">422189735X</marc:subfield>
+      <marc:subfield code="b">DE-18</marc:subfield>
+      <marc:subfield code="9">18</marc:subfield>
+      <marc:subfield code="c">GBV</marc:subfield>
+      <marc:subfield code="d">d</marc:subfield>
+      <marc:subfield code="g">II Schum-5 FC 3.1</marc:subfield>
+      <marc:subfield code="h">18/114</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="924" ind1="0" ind2=" ">
+      <marc:subfield code="a">3780659921</marc:subfield>
+      <marc:subfield code="b">DE-35</marc:subfield>
+      <marc:subfield code="9">35</marc:subfield>
+      <marc:subfield code="c">GBV</marc:subfield>
+      <marc:subfield code="d">c</marc:subfield>
+      <marc:subfield code="g">2020/7264</marc:subfield>
+      <marc:subfield code="g">2020/7264</marc:subfield>
+      <marc:subfield code="h">ZEN</marc:subfield>
+      <marc:subfield code="h">ZEN</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="924" ind1="0" ind2=" ">
+      <marc:subfield code="a">3779442973</marc:subfield>
+      <marc:subfield code="b">DE-Lue12</marc:subfield>
+      <marc:subfield code="9">Lü 12</marc:subfield>
+      <marc:subfield code="c">GBV</marc:subfield>
+      <marc:subfield code="d">d</marc:subfield>
+      <marc:subfield code="g">Noten Y 31 Schum-10 1.1</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="924" ind1="0" ind2=" ">
+      <marc:subfield code="a">3611196150</marc:subfield>
+      <marc:subfield code="b">DE-14</marc:subfield>
+      <marc:subfield code="9">14</marc:subfield>
+      <marc:subfield code="c">BSZ</marc:subfield>
+      <marc:subfield code="d">c</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="924" ind1="0" ind2=" ">
+      <marc:subfield code="a">3784616720</marc:subfield>
+      <marc:subfield code="b">DE-31</marc:subfield>
+      <marc:subfield code="9">31</marc:subfield>
+      <marc:subfield code="c">BSZ</marc:subfield>
+      <marc:subfield code="d">c</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="935" ind1=" " ind2=" ">
+      <marc:subfield code="c">muno</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="937" ind1=" " ind2=" ">
+      <marc:subfield code="d">Zwei</marc:subfield>
+      <marc:subfield code="e">Singstimme, Klavier</marc:subfield>
+      <marc:subfield code="f">Solo, Lied</marc:subfield>
+    </marc:datafield>
+    <marc:datafield tag="951" ind1=" " ind2=" ">
+      <marc:subfield code="a">BO</marc:subfield>
+    </marc:datafield>
+  </marc:record>
+</marc:collection>

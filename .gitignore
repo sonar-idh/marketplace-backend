@@ -7,7 +7,7 @@
 experiments/transformation/metafacture
 .ruff_cache/
 k10plus/data/kxp.mrcxml
-k10plus/data/schumann_example*
+
 
 # User-specific files
 *.rsuser

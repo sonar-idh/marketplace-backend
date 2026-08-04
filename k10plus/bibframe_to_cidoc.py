@@ -10,7 +10,7 @@ Input:
 Output:
 - RDF file in CIDOC CRM format (ttl)
 
-Check the documentation at: experiments/k10plus/marc_dump_analysis.md
+Check the documentation at: MVP_K10PLUS.md
 """
 # TODO: including name title entries of 700
 
@@ -27,7 +27,9 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(SCRIPT_DIR / "data/bibframe_to_cidoc.log", encoding="utf-8"),
+        logging.FileHandler(
+            SCRIPT_DIR / "data/bibframe_to_cidoc.log", encoding="utf-8"
+        ),
         logging.StreamHandler(),
     ],
 )
@@ -163,13 +165,13 @@ def main():
     argp.add_argument(
         "-i",
         "--input",
-        default=str(SCRIPT_DIR / "data/schumann_example_bib.ttl"),
+        default=str(SCRIPT_DIR / "data/schumann_bib.ttl"),
         help="BIBFRAME Turtle input",
     )
     argp.add_argument(
         "-o",
         "--output",
-        default=str(SCRIPT_DIR / "data/schumann_example_cidoc.ttl"),
+        default=str(SCRIPT_DIR / "data/schumann_cidoc.ttl"),
         help="CIDOC CRM Turtle output",
     )
     args = argp.parse_args()

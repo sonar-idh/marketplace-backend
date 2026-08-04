@@ -3,19 +3,24 @@ Regression Test for the k10 plus data pipeline.
 
 Run this test file with:
     uv run pytest tests/test_bibframe_to_cidoc.py
+
+For the full (slow) dataset tests:
+    uv run pytest tests/test_bibframe_to_cidoc.py -m slow
 """
 
 from pathlib import Path
 
-from k10plus.bibframe_to_cidoc import bibframe_to_cidoc
+import pytest
 from pyshacl import validate
+
+from k10plus.bibframe_to_cidoc import bibframe_to_cidoc
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 
 def test_schema_validation():
-    """test for schema validation."""
-    input_path = DATA_DIR / "schumann_cidoc.ttl"
+    """test for schema validation against schumann_example_cidoc.ttl (fast)."""
+    input_path = DATA_DIR / "schumann_example_cidoc.ttl"
     shape_graph = DATA_DIR / "shacl.ttl"
     result = validate(data_graph=str(input_path), shape_graph=str(shape_graph))
     conforms, _, messages = result
@@ -23,7 +28,23 @@ def test_schema_validation():
 
 
 def test_bibframe_to_cidoc(file_regression):
-    """test for pipeline with sample data for regression."""
+    """Fast regression test using the small example dataset (~18KB vs 14MB)."""
+    input_path = DATA_DIR / "schumann_example_bib.ttl"
+    output_path = DATA_DIR / "schumann_example_cidoc.ttl"
+    bibframe_to_cidoc(input_path=input_path, output_path=output_path)
+    with open(output_path, "r", encoding="utf-8") as f:
+        actual_output = f.read()
+
+    file_regression.check(actual_output, extension=".ttl")
+
+
+@pytest.mark.slow
+def test_bibframe_to_cidoc_full(file_regression):
+    """Slow regression test using the full Schumann dataset (14MB, ~25s).
+
+    Run explicitly with:
+        uv run pytest -m slow
+    """
     input_path = DATA_DIR / "schumann_bib.ttl"
     output_path = DATA_DIR / "schumann_cidoc.ttl"
     bibframe_to_cidoc(input_path=input_path, output_path=output_path)
@@ -31,6 +52,16 @@ def test_bibframe_to_cidoc(file_regression):
         actual_output = f.read()
 
     file_regression.check(actual_output, extension=".ttl")
+
+
+@pytest.mark.slow
+def test_schema_validation_full():
+    """SHACL validation against the full schumann_cidoc.ttl output."""
+    input_path = DATA_DIR / "schumann_cidoc.ttl"
+    shape_graph = DATA_DIR / "shacl.ttl"
+    result = validate(data_graph=str(input_path), shape_graph=str(shape_graph))
+    conforms, _, messages = result
+    assert conforms, f"SHACL validation failed:\n{messages}"
 
 
 def test_input_data(file_regression):

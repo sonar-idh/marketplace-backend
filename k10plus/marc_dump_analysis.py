@@ -4,7 +4,7 @@ It counts the occurrences of specific MARC tags and subfields, calculates GND li
 and validates records for completeness.
 
 Usage:
-    PYTHONPATH=. uv run --project k10plus python k10plus/marc_dump_analysis.py
+    uv run python k10plus/marc_dump_analysis.py
 
 Input:
     schumann.xml - MARCXML file containing bibliographic records.
