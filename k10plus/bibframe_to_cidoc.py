@@ -81,7 +81,7 @@ queries = {
             FILTER NOT EXISTS { ?anyContrib bf:role ?anyRole . }
         }
 
-        BIND(URI(CONCAT("https://opac.k10plus.de/DB=2.299/PPNSET?PPN=", ?titleId)) AS ?objectURI)
+        BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId)) AS ?objectURI)
     }
 
     """,
@@ -120,9 +120,9 @@ queries = {
                 FILTER NOT EXISTS { ?anyContrib bf:role ?anyRole . }
             }
 
-            BIND(URI(CONCAT("https://opac.k10plus.de/DB=2.299/PPNSET?PPN=", ?titleId)) AS ?objectURI)
-            BIND(URI(CONCAT("https://opac.k10plus.de/DB=2.299/PPNSET?PPN=", ?titleId, "#CreationEvent")) AS ?creationEventURI)
-            BIND(URI(CONCAT("https://opac.k10plus.de/DB=2.299/PPNSET?PPN=", ?titleId, "#RoleAssignment_", SHA1(STR(?agentURI)))) AS ?agentAssignmentURI)
+            BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId)) AS ?objectURI)
+            BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#CreationEvent")) AS ?creationEventURI)
+            BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#RoleAssignment_", SHA1(STR(?agentURI)))) AS ?agentAssignmentURI)
         }
     """,
 }
@@ -144,7 +144,7 @@ def bibframe_to_cidoc(input_path: Path, output_path: Path) -> None:
     target.bind("crm", "http://www.cidoc-crm.org/cidoc-crm/")
     target.bind("gnd", "https://d-nb.info/gnd/")
     target.bind("rel", "http://id.loc.gov/vocabulary/relators/")
-    target.bind("k10plus", "https://opac.k10plus.de/DB=2.299/PPNSET?PPN=")
+    target.bind("k10plus", "https://opac.k10plus.de/PPNSET?PPN=")
 
     # Iterating on queries
     logger.info("======Executing SPARQL CONSTRUCT queries======")
