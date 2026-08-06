@@ -13,12 +13,12 @@ Output:
     - k10plus/data/statistics.txt - Detailed analysis report (tags, record types, levels, relators, and GND linking coverage).
 """
 
-import io
 import json
 import logging
 from collections import Counter
 from pathlib import Path
 
+from marcxml_utils import FilteredXMLStream
 from pymarc import map_xml
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -65,38 +65,6 @@ with open(SCRIPT_DIR / "data/relators.json", "r", encoding="utf-8") as f:
     MARC_RELATORS_CODE = json.load(f)
 
 
-class FilteredXMLStream(io.RawIOBase):
-    def __init__(self, fileobj):
-        self.fileobj = fileobj
-        self.buffer = bytearray()
-        self.target = b'</marc:collection><?xml version="1.0" encoding="UTF-8"?>\n<marc:collection xmlns:marc="http://www.loc.gov/MARC21/slim">'
-        self.replacement = b" " * len(self.target)
-
-    def readable(self):
-        return True
-
-    def read(self, size=-1):
-        if size is None or size < 0:
-            size = 65536
-
-        if len(self.buffer) < size + len(self.target):
-            chunk = self.fileobj.read(size + len(self.target))
-            if chunk:
-                self.buffer.extend(chunk)
-
-        pos = self.buffer.find(self.target)
-        while pos != -1:
-            self.buffer[pos : pos + len(self.target)] = self.replacement
-            pos = self.buffer.find(self.target, pos + len(self.replacement))
-
-        is_eof = len(self.buffer) < size + len(self.target)
-        bytes_to_read = len(self.buffer) if is_eof else size
-
-        res = bytes(self.buffer[:bytes_to_read])
-        del self.buffer[:bytes_to_read]
-        return res
-
-
 def marc_analyser(file_path: str, tags: list, subfields: list):
     tag_counts = Counter()
     record_counts = Counter()
@@ -110,7 +78,7 @@ def marc_analyser(file_path: str, tags: list, subfields: list):
 
     def complete_record(record):
         """
-        A record is complete, if all the contributors (100 or 700) have a GND ID.
+        A record is complete, if it atleast has one contrbution and all the contributors (100 or 700) have a GND ID.
         - Person entries (no subfield $t) require a role code ($4) and a GND ID ($0).
         - Name-Title entries (has subfield $t) only require a GND ID ($0) and do not need a role code ($4), as the role is taken from the tag (100 or 700).
         """
@@ -372,4 +340,4 @@ def marc_analyser(file_path: str, tags: list, subfields: list):
 if __name__ == "__main__":
     tags = ["100", "110", "700"]
     subfields = ["4"]
-    marc_analyser("data/schumann.xml", tags, subfields)
+    marc_analyser("data/kxp.mrcxml", tags, subfields)

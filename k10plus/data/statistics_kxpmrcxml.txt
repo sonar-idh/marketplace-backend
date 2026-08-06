@@ -1,0 +1,148 @@
+================================================================================
+                                 MARC ANALYSIS SUMMARY
+================================================================================
+Total Records Processed : 58,308
+Complete Records        : 36,059 (61.84%)
+Incomplete Records      : 22,249 (38.16%)
+
+================================================================================
+BIBLIOGRAPHIC LEVEL COUNTS (Sorted by Frequency)
+================================================================================
+- Monograph/Item                          : 54,226 (93.00%)
+- Monographic component part              : 3,302 (5.66%)
+- Serial                                  : 779 (1.34%)
+- Integrating resource                    : 1 (0.00%)
+
+================================================================================
+TYPE OF RECORD COUNTS (Sorted by Frequency)
+================================================================================
+- Language material                       : 35,835 (61.46%)
+- Notated music                           : 20,447 (35.07%)
+- Manuscript notated music                : 1,371 (2.35%)
+- Manuscript language material            : 451 (0.77%)
+- Two-dimensional nonprojectable graphic  : 183 (0.31%)
+- Cartographic material                   : 12 (0.02%)
+- Musical sound recording                 : 5 (0.01%)
+- Kit                                     : 2 (0.00%)
+- Computer file                           : 1 (0.00%)
+- Three-dimensional artifact or naturally occurring object: 1 (0.00%)
+
+================================================================================
+TAG FREQUENCY
+================================================================================
+- Tag 100 (Person Main Entry   ): 46,390 instances across 46,389 records,    (79.56%) of total records
+- Tag 110 (Corporate Main Entry): 3,262 instances across 3,262 records,    (5.59%) of total records
+- Tag 700 (Person Added Entry  ): 100,104 instances across 35,915 records,    (61.60%) of total records
+
+================================================================================
+RELATOR COVERAGE SUMMARY
+================================================================================
+Total Relators Found    : 140,953
+- Tag 100 ($4 codes defined)  : 46,738 defined relators across 46,390 instances (100.75%)
+- Tag 110 ($4 codes defined)  : 3,262 defined relators across 3,262 instances (100.00%)
+- Tag 700 ($4 codes defined)  : 90,953 defined relators across 100,104 instances (90.86%)
+
+================================================================================
+RELATOR DETAIL BREAKDOWN (Sorted by Frequency)
+================================================================================
+
+Tag 100 Relators:
+----------------------------------------
+  - Author                        : 35,782 (76.56%)
+  - Composer                      : 10,111 (21.63%)
+  - Librettist                    : 373 (0.80%)
+  - Dedicator                     : 159 (0.34%)
+  - Lyricist                      : 93 (0.20%)
+  - Artist                        : 89 (0.19%)
+  - Compiler                      : 46 (0.10%)
+  - Editor                        : 24 (0.05%)
+  - Publisher                     : 23 (0.05%)
+  - Arranger                      : 10 (0.02%)
+  - Choreographer                 : 8 (0.02%)
+  - Sculptor                      : 4 (0.01%)
+  - Photographer                  : 4 (0.01%)
+  - Cartographer                  : 3 (0.01%)
+  - Adapter                       : 3 (0.01%)
+  - Creator                       : 2 (0.00%)
+  - Architect                     : 1 (0.00%)
+  - Other                         : 1 (0.00%)
+  - Collector                     : 1 (0.00%)
+  - Printer                       : 1 (0.00%)
+
+Tag 110 Relators:
+----------------------------------------
+  - Author                        : 3,258 (99.88%)
+  - Enacting Jurisdiction         : 2 (0.06%)
+  - Creator                       : 1 (0.03%)
+  - Compiler                      : 1 (0.03%)
+
+Tag 700 Relators:
+----------------------------------------
+  - Other                         : 57,994 (63.76%)
+  - Author                        : 7,166 (7.88%)
+  - Performer                     : 5,492 (6.04%)
+  - Composer                      : 3,051 (3.35%)
+  - Honoree                       : 2,217 (2.44%)
+  - Printer                       : 2,180 (2.40%)
+  - Librettist                    : 1,687 (1.85%)
+  - Lyricist                      : 1,634 (1.80%)
+  - Editor                        : 1,579 (1.74%)
+  - Adapter                       : 1,066 (1.17%)
+  - Dedicatee                     : 943 (1.04%)
+  - Singer                        : 845 (0.93%)
+  - Translator                    : 727 (0.80%)
+  - Actor                         : 676 (0.74%)
+  - Dancer                        : 676 (0.74%)
+  - Arranger                      : 636 (0.70%)
+  - Publisher                     : 614 (0.68%)
+  - Addressee                     : 527 (0.58%)
+  - Contributor                   : 318 (0.35%)
+  - Choreographer                 : 105 (0.12%)
+  - Illustrator                   : 82 (0.09%)
+  - Writer Of Preface             : 73 (0.08%)
+  - Bibliographic Antecedent      : 63 (0.07%)
+  - Engraver                      : 55 (0.06%)
+  - Writer Of Supplementary Textual Content: 50 (0.05%)
+  - Founder                       : 48 (0.05%)
+  - Artist                        : 48 (0.05%)
+  - Author Of Introduction, Etc.  : 44 (0.05%)
+  - Dedicator                     : 43 (0.05%)
+  - Lithographer                  : 39 (0.04%)
+  - Distributor                   : 34 (0.04%)
+  - Stage Director                : 29 (0.03%)
+  - Conductor                     : 28 (0.03%)
+  - Compiler                      : 27 (0.03%)
+  - Collector                     : 21 (0.02%)
+  - Binder                        : 19 (0.02%)
+  - Writer Of Added Text          : 16 (0.02%)
+  - Writer Of Introduction        : 12 (0.01%)
+  - Creator                       : 11 (0.01%)
+  - Instrumentalist               : 11 (0.01%)
+  - Photographer                  : 11 (0.01%)
+  - Editorial Director            : 8 (0.01%)
+  - Cartographer                  : 7 (0.01%)
+  - Writer Of Afterword           : 6 (0.01%)
+  - Director                      : 6 (0.01%)
+  - Musical Director              : 5 (0.01%)
+  - Sculptor                      : 5 (0.01%)
+  - Production Designer           : 4 (0.00%)
+  - Manufacturer                  : 2 (0.00%)
+  - Organizer                     : 2 (0.00%)
+  - Censor                        : 2 (0.00%)
+  - Writer Of Added Lyrics        : 1 (0.00%)
+  - Contractor                    : 1 (0.00%)
+  - Architect                     : 1 (0.00%)
+  - Speaker                       : 1 (0.00%)
+  - Issuing Body                  : 1 (0.00%)
+  - Surveyor                      : 1 (0.00%)
+  - Scribe                        : 1 (0.00%)
+  - Printmaker                    : 1 (0.00%)
+  - Commentator                   : 1 (0.00%)
+
+================================================================================
+GND LINKING COVERAGE (Percentage of subfields mapped to a GND ID)
+================================================================================
+- Tag 100 Subfield $4             : 40,318 of 46,738 defined relators have GND IDs (86.26%)
+- Tag 110 Subfield $4             : 3,221 of 3,262 defined relators have GND IDs (98.74%)
+- Tag 700 Subfield $4             : 81,431 of 90,953 defined relators have GND IDs (89.53%)
+================================================================================

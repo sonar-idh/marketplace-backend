@@ -1,6 +1,6 @@
 # MVP: K10Plus MARC --> SoNAR HNA Graph
 
-![Coverage](https://img.shields.io/badge/coverage-79%25-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-82%25-brightgreen)
 
 ## Data Transformation Pipeline
 
@@ -28,7 +28,20 @@ flowchart LR
 ## Setup
 - Clone the `marc2bibframe2` converter: `git clone https://github.com/lcnetdev/marc2bibframe2`
 
-Run the transformation commands (example using `schumann.xml` inside the `k10plus/` folder):
+### Transformation pipeline for bigger dataset.
+- The data is converted to smaller chunks.
+- This bash script is used to convert from MARC to CIDOC.
+- Validating the graph using shacl.
+```bash
+# Run bash script to directly convert to CIDOC-CRM : ~30 mins for 60k records
+# pipes xslt, rapper and bibframe2cidoc python script
+bash marc2cidoc.sh
+```
+```bash
+# Graph Validation ~ 5mins for 60k records
+uv run pyshacl -s data/shacl.ttl -m -i rdfs -a -j -f human data/cidoc/kxp_chunk_*.ttl > shacl_errors.txt
+```
+### Run the transformation pipeline (example using `schumann.xml` inside the `k10plus/` folder):
 ```bash
 # Format the xml file (OPTIONAL: easy for visual debugging)
 xmllint --format data/schumann.xml > data/formatted.xml

@@ -12,7 +12,9 @@ Output:
 
 Check the documentation at: MVP_K10PLUS.md
 """
-# TODO: including name title entries of 700
+# Modeling: TODO:
+# 1. including name title entries of 700
+# 2. including 773 to integrate parts with host, because titles might me missing in parts of the host.(EX:https://opac.k10plus.de/PPNSET?PPN=1003381596)
 
 import argparse
 import logging
@@ -69,6 +71,9 @@ queries = {
         ?work a bf:Work ;
             bf:adminMetadata/bf:identifiedBy/rdf:value ?titleId ;
             bf:title/bf:mainTitle ?titleName .
+
+        # Enforce that the work has at least one contribution
+        FILTER EXISTS { ?work bf:contribution [] }
 
         # Only select works that have all contributions with a GND ID
         FILTER NOT EXISTS {
@@ -132,7 +137,14 @@ def bibframe_to_cidoc(input_path: Path, output_path: Path) -> None:
     logger.info(f"Loading Input BIBFRAME graph from: {input_path}")
     source = Graph()
     try:
-        source.parse(str(input_path), format="turtle")
+        if str(input_path) == "-":
+            import sys
+
+            source.parse(
+                source=sys.stdin.buffer, format="turtle", publicID="http://example.org/"
+            )
+        else:
+            source.parse(str(input_path), format="turtle")
         logger.info(f"{len(source)} triples loaded.")
     except Exception as e:  # noqa: BLE001
         logger.error(f"Error loading BIBFRAME graph: {e}")
@@ -155,7 +167,12 @@ def bibframe_to_cidoc(input_path: Path, output_path: Path) -> None:
             target.add(triple)
 
     logger.info(f"Serializing to Turtle: {output_path}")
-    target.serialize(destination=str(output_path), format="turtle")
+    if str(output_path) == "-":
+        import sys
+
+        target.serialize(destination=sys.stdout.buffer, format="turtle")
+    else:
+        target.serialize(destination=str(output_path), format="turtle")
 
     logger.info(f"Done. {len(target)} CRM triples → {output_path}")
 
