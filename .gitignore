@@ -1,0 +1,4 @@
+.venv/
+ead2cer/
+.pytest_cache/
+__pycache__

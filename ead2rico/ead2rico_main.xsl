@@ -26,7 +26,6 @@
   <xsl:param name="lang-base"
     select="'http://id.loc.gov/vocabulary/iso639-2/'" />
 
-  <!-- DELETE: <xsl:variable name="RICO" select="'https://www.ica.org/standards/RiC/ontology#'"/> -->
 
   <!-- ============ Funktionen aus Helper-Stylesheet einbinden ============ -->
   <xsl:include href="ead2rico_helpers.xsl" />
