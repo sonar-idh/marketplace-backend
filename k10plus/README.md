@@ -141,3 +141,7 @@ If data structure changes are intentional, you can regenerate the reference test
 # From inside the k10plus directory
 uv run pytest --force-regen
 ```
+```bash
+# Running specific test file
+uv run pytest tests/test_marc_dump_analysis.py --force-regen
+```
