@@ -88,8 +88,10 @@ DATE STATISTICS
 ----------------------------------------
 Time span: 1817 - 1898
 Total date entries: 1784
-Numeric dates: 74 (97.98%)
-Non-numeric dates: 9 (2.02%)
+Total numeric dates instances: 1748
+Total non-numeric dates instances: 36
+Unique numeric dates: 74 (97.98%)
+Unique non-numeric dates: 1 (2.02%)
 
 
 Date Breakdown (Sorted by Frequency):
@@ -111,6 +113,7 @@ Date Breakdown (Sorted by Frequency):
 - 1841: 36 (2.02%)
 - 1895: 36 (2.02%)
 - 1878: 36 (2.02%)
+- 18XX: 36 (2.02%)
 - 1877: 35 (1.96%)
 - 1894: 33 (1.85%)
 - 1839: 32 (1.79%)
@@ -146,7 +149,6 @@ Date Breakdown (Sorted by Frequency):
 - 1845: 13 (0.73%)
 - 1832: 13 (0.73%)
 - 1836: 12 (0.67%)
-- [19.Jh.]: 12 (0.67%)
 - 1896: 11 (0.62%)
 - 1869: 11 (0.62%)
 - 1857: 11 (0.62%)
@@ -156,10 +158,8 @@ Date Breakdown (Sorted by Frequency):
 - 1866: 10 (0.56%)
 - 1864: 10 (0.56%)
 - 1849: 10 (0.56%)
-- 18XX-: 10 (0.56%)
 - 1833: 9 (0.50%)
 - 1852: 8 (0.45%)
-- 18XX: 8 (0.45%)
 - 1874: 7 (0.39%)
 - 1834: 5 (0.28%)
 - 1862: 4 (0.22%)
@@ -171,9 +171,3 @@ Date Breakdown (Sorted by Frequency):
 - 1897: 1 (0.06%)
 - 1828: 1 (0.06%)
 - 1826: 1 (0.06%)
-- [18XX]: 1 (0.06%)
-- [vermutlich zwischen 1840 u. 1850]: 1 (0.06%)
-- o.D.: 1 (0.06%)
-- o.D. ["20. Dec."]: 1 (0.06%)
-- [19.h.]: 1 (0.06%)
-- [19. Jh.]: 1 (0.06%)

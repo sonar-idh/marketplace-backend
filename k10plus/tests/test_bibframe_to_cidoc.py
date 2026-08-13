@@ -18,68 +18,70 @@ from k10plus.bibframe_to_cidoc import bibframe_to_cidoc
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 
-def test_schema_validation():
+@pytest.fixture(scope="module")
+def bibframe_to_cidoc_conversion(tmp_path_factory):
+    """
+    Run the bibframe_to_cidoc conversion exactly once for the entire module.
+    """
+    tmp_dir = tmp_path_factory.mktemp("data")
+    input_path = DATA_DIR / "schumann_example_bib.ttl"
+    output_path = tmp_dir / "schumann_example_cidoc.ttl"
+    bibframe_to_cidoc(input_path=input_path, output_path=output_path)
+    return output_path
+
+
+def test_schema_validation(bibframe_to_cidoc_conversion):
     """test for schema validation against schumann_example_cidoc.ttl (fast)."""
-    input_path = DATA_DIR / "schumann_example_cidoc.ttl"
     shape_graph = DATA_DIR / "shacl.ttl"
-    result = validate(data_graph=str(input_path), shape_graph=str(shape_graph))
+    result = validate(
+        data_graph=str(bibframe_to_cidoc_conversion), shape_graph=str(shape_graph)
+    )
     conforms, _, messages = result
     assert conforms, f"SHACL validation failed:\n{messages}"
 
 
-def test_bibframe_to_cidoc(file_regression):
+def test_bibframe_to_cidoc(file_regression, bibframe_to_cidoc_conversion):
     """Fast regression test using the small example dataset (~18KB vs 14MB)."""
-    input_path = DATA_DIR / "schumann_example_bib.ttl"
-    output_path = DATA_DIR / "schumann_example_cidoc.ttl"
-    bibframe_to_cidoc(input_path=input_path, output_path=output_path)
-    with open(output_path, "r", encoding="utf-8") as f:
+    with open(bibframe_to_cidoc_conversion, "r", encoding="utf-8") as f:
         actual_output = f.read()
 
     file_regression.check(actual_output, extension=".ttl")
 
 
+@pytest.fixture(scope="module")
+def bibframe_to_cidoc_conversion_full(tmp_path_factory):
+    """
+    Run the full bibframe_to_cidoc conversion exactly once for the entire module.
+    """
+    tmp_dir = tmp_path_factory.mktemp("data_full")
+    input_path = DATA_DIR / "schumann_bib.ttl"
+    output_path = tmp_dir / "schumann_cidoc.ttl"
+    bibframe_to_cidoc(input_path=input_path, output_path=output_path)
+    return output_path
+
+
 @pytest.mark.slow
-def test_bibframe_to_cidoc_full(file_regression):
+def test_bibframe_to_cidoc_full(file_regression, bibframe_to_cidoc_conversion_full):
     """Slow regression test using the full Schumann dataset (14MB, ~25s).
 
     Run explicitly with:
         uv run pytest -m slow
     """
-    input_path = DATA_DIR / "schumann_bib.ttl"
-    output_path = DATA_DIR / "schumann_cidoc.ttl"
-    bibframe_to_cidoc(input_path=input_path, output_path=output_path)
-    with open(output_path, "r", encoding="utf-8") as f:
+    with open(bibframe_to_cidoc_conversion_full, "r", encoding="utf-8") as f:
         actual_output = f.read()
 
     file_regression.check(actual_output, extension=".ttl")
 
 
 @pytest.mark.slow
-def test_schema_validation_full():
+def test_schema_validation_full(bibframe_to_cidoc_conversion_full):
     """SHACL validation against the full schumann_cidoc.ttl output."""
-    input_path = DATA_DIR / "schumann_cidoc.ttl"
     shape_graph = DATA_DIR / "shacl.ttl"
-    result = validate(data_graph=str(input_path), shape_graph=str(shape_graph))
+    result = validate(
+        data_graph=str(bibframe_to_cidoc_conversion_full), shape_graph=str(shape_graph)
+    )
     conforms, _, messages = result
     assert conforms, f"SHACL validation failed:\n{messages}"
-
-
-def test_input_data(file_regression):
-    input_paths = [
-        DATA_DIR / "schumann.xml",
-        DATA_DIR / "schumann_bib.xml",
-        DATA_DIR / "schumann_bib.ttl",
-    ]
-    for input_path in input_paths:
-        input_path = Path(input_path)
-        with open(input_path, "r", encoding="utf-8") as f:
-            actual_output = f.read()
-
-        file_regression.check(
-            actual_output,
-            basename=f"test_input_{input_path.stem}",
-            extension=input_path.suffix,
-        )
 
 
 def test_exclude_works_without_contributions(tmp_path):

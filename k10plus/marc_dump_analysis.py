@@ -74,6 +74,7 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
     gnd_stats = Counter()
     complete_records_count = 0
     date_counts = Counter()
+    record_dates = {}
 
     record_idx = 0
 
@@ -139,26 +140,11 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
             date = field_534[0].get_subfields("c")[0]
         else:
             field_008 = record.get_fields("008")[0].value()
-            if "u" in field_008[7:11]:
-                logger.info("008 field contains 'u' in date position")
-                field_264 = record.get_fields("264")
-                if field_264:
-                    logger.info(
-                        f"Using 264$C to get the record date: {field_264[0].get_subfields('c')[0]}"
-                    )
-                    date = field_264[0].get_subfields("c")[0]
-                else:
-                    field_260 = record.get_fields("260")
-                    logger.info(
-                        f"Using 260$c to get the record date: {field_260[0].get_subfields('c')[0]}"
-                    )
-                    if field_260:
-                        date = field_260[0].get_subfields("c")[0]
-            else:
-                logger.info(
-                    f"Using 008 field to get the record date: {field_008[7:11]}"
-                )
-                date = field_008[7:11]
+            raw_date = field_008[7:11]
+            date = raw_date.replace("u", "X")
+            logger.info(
+                f"Using 008 field (with 'u' replaced by 'X') to get the record date: {date}"
+            )
         if date is None:
             logger.error(f"Could not find the record date for record {record_id}")
         return date
@@ -199,6 +185,7 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
         record_date = get_record_date(record)
         if record_date:
             date_counts[record_date] += 1
+            record_dates[record_id] = record_date
 
         # iterating over required tags
         for tag in tags:
@@ -417,10 +404,19 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
         f.write("-" * 40 + "\n")
         f.write("Time span: " + min_date + " - " + max_date + "\n")
         f.write(f"Total date entries: {sum(date_counts.values())}\n")
-        f.write(f"Numeric dates: {len(numeric_dates)} ({numeric_dates_pct:.2f}%)\n")
         f.write(
-            f"Non-numeric dates: {len(non_numeric_dates)} ({non_numeric_dates_pct:.2f}%)\n"
+            f"Total numeric dates instances: {sum([date_counts[d] for d in numeric_dates])}\n"
         )
+        f.write(
+            f"Total non-numeric dates instances: {sum([date_counts[d] for d in non_numeric_dates])}\n"
+        )
+        f.write(
+            f"Unique numeric dates: {len(numeric_dates)} ({numeric_dates_pct:.2f}%)\n"
+        )
+        f.write(
+            f"Unique non-numeric dates: {len(non_numeric_dates)} ({non_numeric_dates_pct:.2f}%)\n"
+        )
+
         f.write("\n")
         f.write("\nDate Breakdown (Sorted by Frequency):\n")
         f.write("-" * 40 + "\n")
@@ -428,9 +424,14 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
             count = date_counts[date]
             pct = count / sum(date_counts.values()) * 100
             f.write(f"- {date}: {count:,} ({pct:.2f}%)\n")
+        # write date counts to json file
+        with open("data/date_counts_marc.json", "w", encoding="utf-8") as f:
+            json.dump(date_counts, f, indent=4)
+        with open("data/dates_with_recordID_marc.json", "w", encoding="utf-8") as f:
+            json.dump(record_dates, f, indent=4)
 
 
 if __name__ == "__main__":
     tags = ["100", "700"]
     subfields = ["4"]
-    marc_analyser("data/kxp.mrcxml", tags, subfields)
+    marc_analyser("data/schumann.xml", tags, subfields)
