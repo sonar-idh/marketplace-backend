@@ -2,3 +2,4 @@
 ead2cer/
 .pytest_cache/
 __pycache__
+ead2rico/out.ttl
