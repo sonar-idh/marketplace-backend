@@ -130,6 +130,53 @@ queries = {
             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#RoleAssignment_", SHA1(STR(?agentURI)))) AS ?agentAssignmentURI)
         }
     """,
+    "Q3_Timestamp": PREFIX_BLOCK
+    + """
+        CONSTRUCT {
+            ?creationEventURI crm:P4_has_time-span ?timeSpanURI .
+
+            ?timeSpanURI a crm:E52_Time-Span ;
+                crm:P170i_time_is_defined_by ?correctDatePrimitive .
+        }
+        WHERE {
+            ?work a bf:Work ;
+                    bf:adminMetadata/bf:identifiedBy/rdf:value ?titleId ;
+                    bf:hasInstance ?instance .
+
+            # 1. Attempt to get original date note (e.g. tag 534)
+            OPTIONAL {
+                ?instance bf:note ?note .
+                ?note a <http://id.loc.gov/vocabulary/mnotetype/orig> ;
+                    rdfs:label ?origDate .
+            }
+
+            # 2. Attempt to get publication date (e.g. tag 264/260/008)
+            OPTIONAL {
+                ?instance bf:provisionActivity/bf:date ?pubDate .
+            }
+
+            # 3. Prioritize original date, fallback to publication date
+            BIND(COALESCE(?origDate, ?pubDate) AS ?correctDate)
+
+            # Only select works that have all contributions with a GND ID
+            FILTER NOT EXISTS {
+                ?work bf:contribution/bf:agent ?anyAgentURI .
+                FILTER(!STRSTARTS(STR(?anyAgentURI), "https://d-nb.info/gnd/"))
+            }
+            # Only select works that have all contributions with a role definition
+            FILTER NOT EXISTS {
+                ?work bf:contribution ?anyContrib .
+                FILTER NOT EXISTS { ?anyContrib bf:role ?anyRole . }
+            }
+
+            FILTER(BOUND(?correctDate))
+
+            BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId)) AS ?objectURI)
+            BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#CreationEvent")) AS ?creationEventURI)
+            BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#TimeSpan")) AS ?timeSpanURI)
+            BIND(STRDT(SUBSTR(STR(?correctDate), 1, 4), crm:E61_Time_Primitive) AS ?correctDatePrimitive)
+        }
+    """,
 }
 
 
@@ -141,7 +188,9 @@ def bibframe_to_cidoc(input_path: Path, output_path: Path) -> None:
             import sys
 
             source.parse(
-                source=sys.stdin.buffer, format="turtle", publicID="http://example.org/"
+                source=sys.stdin.buffer,
+                format="turtle",
+                publicID="https://opac.k10plus.de/PPNSET/PPN/",
             )
         else:
             source.parse(str(input_path), format="turtle")

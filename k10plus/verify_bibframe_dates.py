@@ -66,6 +66,7 @@ def generate_bibframe_statistics(rdf_path, output_path):
         cleaned_date = raw_date[:4] if len(raw_date) >= 4 else raw_date
         date_counts[cleaned_date] = date_counts.get(cleaned_date, 0) + 1
         # tracking date for every records for tests
+        # TODO: Edgecase if a record has more than on date, the latest would be used
         record_dates[record_id] = cleaned_date
         total_entries += 1
 

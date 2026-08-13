@@ -12,6 +12,7 @@ from pathlib import Path
 
 import pytest
 from pyshacl import validate
+from rdflib import Graph
 
 from k10plus.bibframe_to_cidoc import bibframe_to_cidoc
 
@@ -61,16 +62,17 @@ def bibframe_to_cidoc_conversion_full(tmp_path_factory):
 
 
 @pytest.mark.slow
-def test_bibframe_to_cidoc_full(file_regression, bibframe_to_cidoc_conversion_full):
+def test_bibframe_to_cidoc_full(bibframe_to_cidoc_conversion_full):
     """Slow regression test using the full Schumann dataset (14MB, ~25s).
 
     Run explicitly with:
         uv run pytest -m slow
     """
-    with open(bibframe_to_cidoc_conversion_full, "r", encoding="utf-8") as f:
-        actual_output = f.read()
-
-    file_regression.check(actual_output, extension=".ttl")
+    g_obtained = Graph()
+    g_expected = Graph()
+    g_obtained.parse(bibframe_to_cidoc_conversion_full, format="turtle")
+    g_expected.parse(DATA_DIR / "schumann_cidoc.ttl", format="turtle")
+    assert g_obtained.isomorphic(g_expected), "Graphs are not isomorphic"
 
 
 @pytest.mark.slow

@@ -7,7 +7,10 @@
 experiments/transformation/metafacture
 .ruff_cache/
 k10plus/data/kxp.mrcxml
-
+k10plus/data/chunks/
+k10plus/marc2bibframe2
+k10plus/data/bibframe
+k10plus/data/cidoc
 
 # User-specific files
 *.rsuser
