@@ -45,7 +45,7 @@ k10plus:1693023482 a crm:E73_Information_Object ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1693023482" ] .
 
-<https://opac.k10plus.de/PPNSET?PPN=1693023482#TimeSpan> a crm:E52_Time-Span ;
+<https://opac.k10plus.de/PPNSET?PPN=1693023482#TimeSpan> a crm:E52_Time_Span ;
     crm:P170i_time_is_defined_by "1841"^^crm:E61_Time_Primitive .
 
 <https://opac.k10plus.de/PPNSET?PPN=1693023482#CreationEvent> a crm:E65_Creation ;

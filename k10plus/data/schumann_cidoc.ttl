@@ -11096,9 +11096,9 @@ k10plus:012046337 a crm:E73_Information_Object ;
 
 k10plus:030228441 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Symphonien für Orchester" ],
+            crm:P190_has_symbolic_content "Symphonies" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Symphonies" ] ;
+            crm:P190_has_symbolic_content "Symphonien für Orchester" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "030228441" ],
         [ a crm:E42_Identifier ;
@@ -11423,9 +11423,9 @@ k10plus:1087226953 a crm:E73_Information_Object ;
 
 k10plus:1129267938 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "1850-09-07 geborne geborene" ],
+            crm:P190_has_symbolic_content "Programm der Empfangs-Feierlichkeiten zu Ehren des Herrn Robert Schumann und der Frau Clara Schumann, geb. Wieck Düsseldorf, den 7. September 1850" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Programm der Empfangs-Feierlichkeiten zu Ehren des Herrn Robert Schumann und der Frau Clara Schumann, geb. Wieck Düsseldorf, den 7. September 1850" ] ;
+            crm:P190_has_symbolic_content "1850-09-07 geborne geborene" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1129267938" ],
         [ a crm:E42_Identifier ;
@@ -11706,9 +11706,9 @@ k10plus:1140353829 a crm:E73_Information_Object ;
 
 k10plus:1142175375 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Liebeszauber" ],
+            crm:P190_has_symbolic_content "Liebeszauber aus op. 13, No. 3" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Liebeszauber aus op. 13, No. 3" ] ;
+            crm:P190_has_symbolic_content "Liebeszauber" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1142175375" ],
         [ a crm:E42_Identifier ;
@@ -11732,9 +11732,9 @@ k10plus:1142175871 a crm:E73_Information_Object ;
 
 k10plus:1142178706 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Ich stand in dunklen Träumen" ],
+            crm:P190_has_symbolic_content "Ich stand in dunklen Träumen aus op. 13, No. 1" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Ich stand in dunklen Träumen aus op. 13, No. 1" ] ;
+            crm:P190_has_symbolic_content "Ich stand in dunklen Träumen" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1142178706" ],
         [ a crm:E42_Identifier ;
@@ -11767,9 +11767,9 @@ k10plus:1142179826 a crm:E73_Information_Object ;
 
 k10plus:1143543289 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Sammlung" ],
+            crm:P190_has_symbolic_content "Jugendbriefe" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Jugendbriefe" ] ;
+            crm:P190_has_symbolic_content "Sammlung" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1143543289" ],
         [ a crm:E42_Identifier ;
@@ -11801,9 +11801,9 @@ k10plus:1154236595 a crm:E73_Information_Object ;
 
 k10plus:1159653976 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Complete works" ],
+            crm:P190_has_symbolic_content "Robert Schumann's Werke" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke" ] ;
+            crm:P190_has_symbolic_content "Complete works" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1159653976" ],
         [ a crm:E42_Identifier ;
@@ -11853,9 +11853,9 @@ k10plus:1173811214 a crm:E73_Information_Object ;
 
 k10plus:1173883207 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Cadenzen zu Beethoven's Clavier-Concerten 1 Cadenz zum C-Moll Concert, Op.37" ],
+            crm:P190_has_symbolic_content "Kadenzen Klavierkonzerten" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Kadenzen Klavierkonzerten" ] ;
+            crm:P190_has_symbolic_content "Cadenzen zu Beethoven's Clavier-Concerten 1 Cadenz zum C-Moll Concert, Op.37" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1173883207" ],
         [ a crm:E42_Identifier ;
@@ -11945,9 +11945,9 @@ k10plus:1335676228 a crm:E73_Information_Object ;
 
 k10plus:1335676422 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Ouverture zu der Oper Genoveva" ],
+            crm:P190_has_symbolic_content "op. 81" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "op. 81" ] ;
+            crm:P190_has_symbolic_content "Ouverture zu der Oper Genoveva" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1335676422" ],
         [ a crm:E42_Identifier ;
@@ -13113,11 +13113,11 @@ k10plus:1383998817 a crm:E73_Information_Object ;
 
 k10plus:1384785329 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "s' Wiederfinden" ],
-        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Von der Wanderschaft a Bua" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "ein Bursche es ist s'Wiederfinden" ] ;
+            crm:P190_has_symbolic_content "ein Bursche es ist s'Wiederfinden" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "s' Wiederfinden" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1384785329" ],
         [ a crm:E42_Identifier ;
@@ -13236,9 +13236,9 @@ k10plus:1392857376 a crm:E73_Information_Object ;
 
 k10plus:1392999758 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Preludio - Mus.Schu.224" ],
+            crm:P190_has_symbolic_content "Album Robert und Clara Schumann 224 Pieces - Mus.Schu.224 : vl - C; MorP 3.3 / Nicolò Paganini" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Album Robert und Clara Schumann 224 Pieces - Mus.Schu.224 : vl - C; MorP 3.3 / Nicolò Paganini" ] ;
+            crm:P190_has_symbolic_content "Preludio - Mus.Schu.224" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1392999758" ],
         [ a crm:E42_Identifier ;
@@ -13293,9 +13293,9 @@ k10plus:1393668445 a crm:E73_Information_Object ;
 
 k10plus:1399555502 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Schumann-Album" ],
+            crm:P190_has_symbolic_content "Album Robert und Clara Schumann" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Album Robert und Clara Schumann" ] ;
+            crm:P190_has_symbolic_content "Schumann-Album" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1399555502" ],
         [ a crm:E42_Identifier ;
@@ -13386,11 +13386,11 @@ k10plus:1408881594 a crm:E73_Information_Object ;
 
 k10plus:142287785X a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Klavier-Werke Robert Schumann" ],
+        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Klavier-Werke" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Klavierwerke" ],
-        [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Klavier-Werke Robert Schumann" ] ;
+            crm:P190_has_symbolic_content "Klavierwerke" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "142287785X" ],
         [ a crm:E42_Identifier ;
@@ -13674,9 +13674,9 @@ k10plus:1558582436 a crm:E73_Information_Object ;
 
 k10plus:1558710558 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "sämtliche" ],
+            crm:P190_has_symbolic_content "Sämmtliche Lieder und Gesänge 4. Band" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Sämmtliche Lieder und Gesänge 4. Band" ] ;
+            crm:P190_has_symbolic_content "sämtliche" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1558710558" ],
         [ a crm:E42_Identifier ;
@@ -13696,9 +13696,9 @@ k10plus:155873807X a crm:E73_Information_Object ;
 
 k10plus:1567299938 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Genoveva Oper in vier Acten nach Tieck und Hebbel : 81s. Werk" ],
+            crm:P190_has_symbolic_content "op. 81" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "op. 81" ] ;
+            crm:P190_has_symbolic_content "Genoveva Oper in vier Acten nach Tieck und Hebbel : 81s. Werk" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1567299938" ],
         [ a crm:E42_Identifier ;
@@ -13722,9 +13722,9 @@ k10plus:1577080777 a crm:E73_Information_Object ;
 
 k10plus:1577370600 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Lieder und Gesänge sämmtliche berühmteste Lieder-Cyklen für eine Singstimme mit Begleitung des Pianoforte" ],
+            crm:P190_has_symbolic_content "sämtliche liederzyklen" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "sämtliche liederzyklen" ] ;
+            crm:P190_has_symbolic_content "Lieder und Gesänge sämmtliche berühmteste Lieder-Cyklen für eine Singstimme mit Begleitung des Pianoforte" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1577370600" ],
         [ a crm:E42_Identifier ;
@@ -14420,9 +14420,9 @@ k10plus:1663726027 a crm:E73_Information_Object ;
 
 k10plus:1663821755 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Warum willst du andre fragen" ],
+            crm:P190_has_symbolic_content "Warum willst du andre fragen aus op. 12, No. 11" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Warum willst du andre fragen aus op. 12, No. 11" ] ;
+            crm:P190_has_symbolic_content "Warum willst du andre fragen" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1663821755" ],
         [ a crm:E42_Identifier ;
@@ -15151,9 +15151,9 @@ k10plus:1667439898 a crm:E73_Information_Object ;
 
 k10plus:1667444077 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Album Robert und Clara Schumann 111 Keine Declamation - Mus.Schu.111 : [Gedicht] / Abschrift von Clara Schumann" ],
-        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "For Declamation os naadig beva" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Album Robert und Clara Schumann 111 Keine Declamation - Mus.Schu.111 : [Gedicht] / Abschrift von Clara Schumann" ],
         [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Man i Costume nu frem skal" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
@@ -15630,9 +15630,9 @@ k10plus:1691429864 a crm:E73_Information_Object ;
 
 k10plus:169143664X a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Reisenotizen 9 Reisenotizen. IX. - 4871,VII,A,9,9-A3 / Robert Schumann" ],
+            crm:P190_has_symbolic_content "Reisebüchlein vom 24. November 1846 bis 25 März 1847" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Reisebüchlein vom 24. November 1846 bis 25 März 1847" ] ;
+            crm:P190_has_symbolic_content "Reisenotizen 9 Reisenotizen. IX. - 4871,VII,A,9,9-A3 / Robert Schumann" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "169143664X" ],
         [ a crm:E42_Identifier ;
@@ -16297,9 +16297,9 @@ k10plus:1693394278 a crm:E73_Information_Object ;
 
 k10plus:1693397331 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "[Jugendtagebücher von Clara Schumann]" ],
+            crm:P190_has_symbolic_content "Tagebuch von Clara Schumann" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Tagebuch von Clara Schumann" ] ;
+            crm:P190_has_symbolic_content "[Jugendtagebücher von Clara Schumann]" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1693397331" ],
         [ a crm:E42_Identifier ;
@@ -16362,11 +16362,11 @@ k10plus:1693399059 a crm:E73_Information_Object ;
 
 k10plus:1694043061 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Liebeszauber = The charm of love" ],
-        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "The charm of love" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Die Liebe sass als Nachtigall. - Love borrow'd from the nightingale" ] ;
+            crm:P190_has_symbolic_content "Die Liebe sass als Nachtigall. - Love borrow'd from the nightingale" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Liebeszauber = The charm of love" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1694043061" ],
         [ a crm:E42_Identifier ;
@@ -16958,9 +16958,9 @@ k10plus:1778215793 a crm:E73_Information_Object ;
 
 k10plus:1780007523 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Scènes de Bal. Neuf Morceaux caractéristiques" ],
-        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Ball Scenes. Nine Charakteristic Pieces" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Scènes de Bal. Neuf Morceaux caractéristiques" ],
         [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Klavierwerke [?] Ballscenen : Neun Charakterstücke : op. 109 = Scènes de Bal. Neuf Morceaux caractéristiques / R. Schumann" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
@@ -17002,9 +17002,9 @@ k10plus:1780156332 a crm:E73_Information_Object ;
 
 k10plus:1780156677 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "klavierstücke" ],
+            crm:P190_has_symbolic_content "Zwölf vierhändige Clavierstücke für kleine und Goße Kinder op. 85" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Zwölf vierhändige Clavierstücke für kleine und Goße Kinder op. 85" ] ;
+            crm:P190_has_symbolic_content "klavierstücke" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1780156677" ],
         [ a crm:E42_Identifier ;
@@ -17260,9 +17260,9 @@ k10plus:1827511036 a crm:E73_Information_Object ;
 
 k10plus:1828144134 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Souvenir de Vienne impromptu pour le Piano-Forte ; ouevre 9" ],
+            crm:P190_has_symbolic_content "Souvenir de Vienne : impromptu pour le piano-forte ; op. 9 / par Clara Wieck" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Souvenir de Vienne : impromptu pour le piano-forte ; op. 9 / par Clara Wieck" ] ;
+            crm:P190_has_symbolic_content "Souvenir de Vienne impromptu pour le Piano-Forte ; ouevre 9" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1828144134" ],
         [ a crm:E42_Identifier ;
@@ -17275,9 +17275,9 @@ k10plus:183091992X a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Played by Madame Schumann" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Played by Madame Schumann" ],
+            crm:P190_has_symbolic_content "Nachtstück für das Pianoforte" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Nachtstück für das Pianoforte" ] ;
+            crm:P190_has_symbolic_content "Played by Madame Schumann" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "183091992X" ],
         [ a crm:E42_Identifier ;
@@ -17406,9 +17406,9 @@ k10plus:1838201483 a crm:E73_Information_Object ;
 
 k10plus:184206763X a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Eltern Oktober MNY III 3 c 3c 42 246" ],
+            crm:P190_has_symbolic_content "Brief an die Familie in Berlin, adressiert an Abraham Mendelssohn Bartholdy, 06.10.1835 (Auszug)" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Brief an die Familie in Berlin, adressiert an Abraham Mendelssohn Bartholdy, 06.10.1835 (Auszug)" ] ;
+            crm:P190_has_symbolic_content "Eltern Oktober MNY III 3 c 3c 42 246" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "184206763X" ],
         [ a crm:E42_Identifier ;
@@ -17536,11 +17536,11 @@ k10plus:1892256630 a crm:E73_Information_Object ;
 
 k10plus:1892287706 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Klavier-Werke Robert Schumann" ],
-        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Klavierwerke" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Klavier-Werke" ] ;
+            crm:P190_has_symbolic_content "Klavier-Werke" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Klavier-Werke Robert Schumann" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1892287706" ],
         [ a crm:E42_Identifier ;
@@ -17633,11 +17633,11 @@ k10plus:1944914358 a crm:E73_Information_Object ;
 
 k10plus:1952573971 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Zwölf Gedichte aus F. Rückert's Liebesfrühling op. 37" ],
-        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Robert Schumann's Werke 76 : Zwölf Gedichte aus F. Rückert's Liebesfrühling op. 37 ; 12 So wahr die Sonne scheinet (zweistimmig)" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Für eine Singstimme mit Begleitung des Pianoforte" ] ;
+            crm:P190_has_symbolic_content "Für eine Singstimme mit Begleitung des Pianoforte" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Zwölf Gedichte aus F. Rückert's Liebesfrühling op. 37" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "1952573971" ],
         [ a crm:E42_Identifier ;
@@ -17659,9 +17659,9 @@ k10plus:1952619408 a crm:E73_Information_Object ;
 
 k10plus:195719247X a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Zweite Sonate" ],
+            crm:P190_has_symbolic_content "Werke" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Werke" ] ;
+            crm:P190_has_symbolic_content "Zweite Sonate" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "195719247X" ],
         [ a crm:E42_Identifier ;
@@ -17703,9 +17703,9 @@ k10plus:211117226 a crm:E73_Information_Object ;
 
 k10plus:214370631 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Rob. Schumanns Werke" ],
+            crm:P190_has_symbolic_content "Robert Schumanns Werke" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumanns Werke" ] ;
+            crm:P190_has_symbolic_content "Rob. Schumanns Werke" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "214370631" ],
         [ a crm:E42_Identifier ;
@@ -17742,9 +17742,9 @@ k10plus:243615051 a crm:E73_Information_Object ;
 
 k10plus:247125806 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Concerte Concertstücke Konzerte Konzertstücke" ],
+            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 7 [Concerte und Concertstücke] für Pianoforte zu 2 Händen Bd. 3-4" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 7 [Concerte und Concertstücke] für Pianoforte zu 2 Händen Bd. 3-4" ] ;
+            crm:P190_has_symbolic_content "Concerte Concertstücke Konzerte Konzertstücke" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "247125806" ],
         [ a crm:E42_Identifier ;
@@ -17755,9 +17755,9 @@ k10plus:247125806 a crm:E73_Information_Object ;
 
 k10plus:247125849 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 7 [Concerte und Concertstücke] für Pianoforte zu 2 Händen Bd. 5-6" ],
+            crm:P190_has_symbolic_content "Concerte Concertstücke Konzerte Konzertstücke" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Concerte Concertstücke Konzerte Konzertstücke" ] ;
+            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 7 [Concerte und Concertstücke] für Pianoforte zu 2 Händen Bd. 5-6" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "247125849" ],
         [ a crm:E42_Identifier ;
@@ -17777,19 +17777,19 @@ k10plus:248074288 a crm:E73_Information_Object ;
 
 k10plus:268266050 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Klavierwerke = Pianoforte compositions = Oeuvres de piano" ],
+            crm:P190_has_symbolic_content "Robert Schumann's Klavier-Werke" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Oeuvres de piano" ],
         [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Pianoforte compositions" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Klavier-Werke" ],
+            crm:P190_has_symbolic_content "Pianoforte compositions" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Oeuvres de piano" ],
-        [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Oeuvres de piano" ],
+            crm:P190_has_symbolic_content "Klavierwerke = Pianoforte compositions = Oeuvres de piano" ],
         [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Robert Schumann's Klavier-Werke" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Pianoforte compositions" ] ;
+            crm:P190_has_symbolic_content "Oeuvres de piano" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "268266050" ],
         [ a crm:E42_Identifier ;
@@ -17877,9 +17877,9 @@ k10plus:334667542 a crm:E73_Information_Object ;
 
 k10plus:335432093 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 10 Mehrstimmige Gesangwerke mit Pianoforte Nr. 6-7 Romanzen für Frauenstimmen mit willkürlicher Begleitung des Pianoforte / von Robert Schumann H. 1 Op. 69" ],
+            crm:P190_has_symbolic_content "Opus" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Opus" ] ;
+            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 10 Mehrstimmige Gesangwerke mit Pianoforte Nr. 6-7 Romanzen für Frauenstimmen mit willkürlicher Begleitung des Pianoforte / von Robert Schumann H. 1 Op. 69" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "335432093" ],
         [ a crm:E42_Identifier ;
@@ -17977,9 +17977,9 @@ k10plus:335434940 a crm:E73_Information_Object ;
 
 k10plus:335437044 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "5 Opus" ],
+            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 1 = 112 Fünf Lieder : Op. 55 ; Das Hochlandmädchen, Zahnweh, \"Mich zieht es nach dem Dörfchen hin\", Die alte gute Zeit, Hochlandbursch / von Robert Burns. Für gemischten Chor von Robert Schumann" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 1 = 112 Fünf Lieder : Op. 55 ; Das Hochlandmädchen, Zahnweh, \"Mich zieht es nach dem Dörfchen hin\", Die alte gute Zeit, Hochlandbursch / von Robert Burns. Für gemischten Chor von Robert Schumann" ] ;
+            crm:P190_has_symbolic_content "5 Opus" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "335437044" ],
         [ a crm:E42_Identifier ;
@@ -18003,9 +18003,9 @@ k10plus:335437737 a crm:E73_Information_Object ;
 
 k10plus:335437990 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 3 = 114 Romanzen und Balladen für gemischten Chor : Op. 67 ; Der König von Thule ; Schön-Rohtraut ; Heidenröslein ; Ungewitter ; John Anderson / von Robert Schumann" ],
+            crm:P190_has_symbolic_content "Opus Heideröslein" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Opus Heideröslein" ] ;
+            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 3 = 114 Romanzen und Balladen für gemischten Chor : Op. 67 ; Der König von Thule ; Schön-Rohtraut ; Heidenröslein ; Ungewitter ; John Anderson / von Robert Schumann" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "335437990" ],
         [ a crm:E42_Identifier ;
@@ -18029,9 +18029,9 @@ k10plus:335438253 a crm:E73_Information_Object ;
 
 k10plus:335438539 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "4 Opus" ],
+            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 5 = 116 Vier doppelchörige Gesänge für grössere Gesangvereine : Op. 141 (Nr. 6 der nachgelassenen Werke) ; An die Sterne ; Ungewisses Licht ; Zuversicht ; Talismane / von Robert Schumann" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 5 = 116 Vier doppelchörige Gesänge für grössere Gesangvereine : Op. 141 (Nr. 6 der nachgelassenen Werke) ; An die Sterne ; Ungewisses Licht ; Zuversicht ; Talismane / von Robert Schumann" ] ;
+            crm:P190_has_symbolic_content "4 Opus" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "335438539" ],
         [ a crm:E42_Identifier ;
@@ -18042,9 +18042,9 @@ k10plus:335438539 a crm:E73_Information_Object ;
 
 k10plus:335438873 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 6 = 117 Romanzen und Balladen für gemischten Chor : Op. 145 ; Der Schmidt ; Die Nonne ; Der Sänger ; John Anderson ; Romanze vom Gänsebuben / von Robert Schumann" ],
+            crm:P190_has_symbolic_content "Opus" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Opus" ] ;
+            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 6 = 117 Romanzen und Balladen für gemischten Chor : Op. 145 ; Der Schmidt ; Die Nonne ; Der Sänger ; John Anderson ; Romanze vom Gänsebuben / von Robert Schumann" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "335438873" ],
         [ a crm:E42_Identifier ;
@@ -18055,9 +18055,9 @@ k10plus:335438873 a crm:E73_Information_Object ;
 
 k10plus:335439233 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Opus" ],
+            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 7 = 118 Romanzen und Balladen : Op. 146 ; Brautgesang ; Bänkelsänger Willie ; Der Traum ; Sommerlied ; Das Schifflein / [Robert Schumann]" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke Serie 12 [Mehrstimmige Gesangwerke] für Sopran, Alt, Tenor und Bass Nr. 7 = 118 Romanzen und Balladen : Op. 146 ; Brautgesang ; Bänkelsänger Willie ; Der Traum ; Sommerlied ; Das Schifflein / [Robert Schumann]" ] ;
+            crm:P190_has_symbolic_content "Opus" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "335439233" ],
         [ a crm:E42_Identifier ;
@@ -18125,9 +18125,9 @@ k10plus:349255350 a crm:E73_Information_Object ;
 
 k10plus:34927813X a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Grandes Etudes de Paganini pour le Piano par F. Liszt" ],
+            crm:P190_has_symbolic_content "Grandes Etudes de Paganini transcrites pour le Piano et dédiées À Madame Clara Schumann" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Grandes Etudes de Paganini transcrites pour le Piano et dédiées À Madame Clara Schumann" ] ;
+            crm:P190_has_symbolic_content "Grandes Etudes de Paganini pour le Piano par F. Liszt" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "34927813X" ],
         [ a crm:E42_Identifier ;
@@ -18151,9 +18151,9 @@ k10plus:349278318 a crm:E73_Information_Object ;
 
 k10plus:349278695 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Grandes Etudes de Paganini transcrites pour le Piano et dédiées À Madame Clara Schumann par F. Liszt Cahier 2" ],
+            crm:P190_has_symbolic_content "Grandes Etudes de Paganini pour le Piano par F. Liszt" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Grandes Etudes de Paganini pour le Piano par F. Liszt" ] ;
+            crm:P190_has_symbolic_content "Grandes Etudes de Paganini transcrites pour le Piano et dédiées À Madame Clara Schumann par F. Liszt Cahier 2" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "349278695" ],
         [ a crm:E42_Identifier ;
@@ -18164,11 +18164,11 @@ k10plus:349278695 a crm:E73_Information_Object ;
 
 k10plus:372692605 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Genoveva Oper in vier Acten ; nach Tieck und F. Hebbel ; 81. Werk" ],
+        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Akten, Opus, Klavierauszug" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Op. 81" ],
-        [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Genoveva Oper in vier Acten ; nach Tieck und F. Hebbel ; 81. Werk" ] ;
+            crm:P190_has_symbolic_content "Op. 81" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "372692605" ],
         [ a crm:E42_Identifier ;
@@ -18181,9 +18181,9 @@ k10plus:372692605 a crm:E73_Information_Object ;
 
 k10plus:382422945 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Fünf Stücke im Volkston für Violoncell (ad libitum Violine) und Pianoforte Op. 102" ],
+            crm:P190_has_symbolic_content "Stücke im Volkston" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Stücke im Volkston" ] ;
+            crm:P190_has_symbolic_content "Fünf Stücke im Volkston für Violoncell (ad libitum Violine) und Pianoforte Op. 102" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "382422945" ],
         [ a crm:E42_Identifier ;
@@ -18269,9 +18269,9 @@ k10plus:545715482 a crm:E73_Information_Object ;
 
 k10plus:545715601 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Scenen aus Goethe's Faust" ],
+            crm:P190_has_symbolic_content "Szenen" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Szenen" ] ;
+            crm:P190_has_symbolic_content "Scenen aus Goethe's Faust" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "545715601" ],
         [ a crm:E42_Identifier ;
@@ -18385,9 +18385,9 @@ k10plus:564548812 a crm:E73_Information_Object ;
 
 k10plus:566455196 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Gedächtnissfeier für Robert Schumann am 17., 18. und 19. August 1873 in Bonn" ],
+            crm:P190_has_symbolic_content "Gedächtnisfeier" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Gedächtnisfeier" ] ;
+            crm:P190_has_symbolic_content "Gedächtnissfeier für Robert Schumann am 17., 18. und 19. August 1873 in Bonn" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "566455196" ],
         [ a crm:E42_Identifier ;
@@ -18425,9 +18425,9 @@ k10plus:610326228 a crm:E73_Information_Object ;
 
 k10plus:613458389 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "deux œuv. op." ],
+            crm:P190_has_symbolic_content "2 Etudes de Concert pour le Pianoforte ; Oeuv. 28" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "2 Etudes de Concert pour le Pianoforte ; Oeuv. 28" ] ;
+            crm:P190_has_symbolic_content "deux œuv. op." ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "613458389" ],
         [ a crm:E42_Identifier ;
@@ -18569,9 +18569,9 @@ k10plus:636846067 a crm:E73_Information_Object ;
 
 k10plus:637243188 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Gedächtnisfeier" ],
+            crm:P190_has_symbolic_content "Gedächtnissfeier für Robert Schumann am 17., 18. und 19. August 1873 in Bonn" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Gedächtnissfeier für Robert Schumann am 17., 18. und 19. August 1873 in Bonn" ] ;
+            crm:P190_has_symbolic_content "Gedächtnisfeier" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "637243188" ],
         [ a crm:E42_Identifier ;
@@ -18658,9 +18658,9 @@ k10plus:640974007 a crm:E73_Information_Object ;
 
 k10plus:640974244 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Zweite grosse Sonate für Violine u. Pianoforte op. 121" ],
+            crm:P190_has_symbolic_content "große" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "große" ] ;
+            crm:P190_has_symbolic_content "Zweite grosse Sonate für Violine u. Pianoforte op. 121" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "640974244" ],
         [ a crm:E42_Identifier ;
@@ -18774,9 +18774,9 @@ k10plus:644922001 a crm:E73_Information_Object ;
 
 k10plus:654599327 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Das Paradies und die Peri Dichtung aus \"Lalla Rookh\"" ],
+            crm:P190_has_symbolic_content "Robert Schumann's Paradies und die Peri" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Paradies und die Peri" ] ;
+            crm:P190_has_symbolic_content "Das Paradies und die Peri Dichtung aus \"Lalla Rookh\"" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "654599327" ],
         [ a crm:E42_Identifier ;
@@ -18808,9 +18808,9 @@ k10plus:654835454 a crm:E73_Information_Object ;
         [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Ouvertüren" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann 's Werke Ser. 2 Ouverturen für Orchester / [Schumann, Robert ; Schumann, Clara]" ],
+            crm:P190_has_symbolic_content "Overtures" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Overtures" ] ;
+            crm:P190_has_symbolic_content "Robert Schumann 's Werke Ser. 2 Ouverturen für Orchester / [Schumann, Robert ; Schumann, Clara]" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "654835454" ],
         [ a crm:E42_Identifier ;
@@ -18825,9 +18825,9 @@ k10plus:654835454 a crm:E73_Information_Object ;
 
 k10plus:654835748 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann 's Werke Ser. 3 Concerte und Concertstücke für Orchester / [Schumann, Robert ; Schumann, Clara]" ],
-        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Concertos & concert pieces" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Robert Schumann 's Werke Ser. 3 Concerte und Concertstücke für Orchester / [Schumann, Robert ; Schumann, Clara]" ],
         [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Concertos & concert pieces" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
@@ -18842,9 +18842,9 @@ k10plus:654835748 a crm:E73_Information_Object ;
 
 k10plus:655027335 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "String quartets: piano quintet and quartet" ],
-        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Robert Schumann's Werke Ser. 4 Erstes Quartett für zwei Violinen, Bratsche und Violoncell : op. 41 No. 1" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "String quartets: piano quintet and quartet" ],
         [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "String quartets: piano quintet and quartet" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
@@ -18913,11 +18913,11 @@ k10plus:655203893 a crm:E73_Information_Object ;
 
 k10plus:655206965 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Works for chorus & orchestra" ],
+            crm:P190_has_symbolic_content "Robert Schumann's Werke Ser. 9 Grössere Gesangwerke mit Orchester oder mit mehreren Instrumenten Bd. 4" ],
         [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "Works for chorus & orchestra" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Robert Schumann's Werke Ser. 9 Grössere Gesangwerke mit Orchester oder mit mehreren Instrumenten Bd. 4" ] ;
+            crm:P190_has_symbolic_content "Works for chorus & orchestra" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "655206965" ],
         [ a crm:E42_Identifier ;
@@ -19668,9 +19668,9 @@ k10plus:726906166 a crm:E73_Information_Object ;
 
 k10plus:726906425 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "drei" ],
+            crm:P190_has_symbolic_content "3 Romanzen op. 22" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "3 Romanzen op. 22" ] ;
+            crm:P190_has_symbolic_content "drei" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "726906425" ],
         [ a crm:E42_Identifier ;
@@ -19781,9 +19781,9 @@ k10plus:773958428 a crm:E73_Information_Object ;
 
 k10plus:78227806X a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Ouverture zu Braut von Messina Op. 100" ],
+            crm:P190_has_symbolic_content "Ouverture zu Schiller's Braut von Messina" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Ouverture zu Schiller's Braut von Messina" ] ;
+            crm:P190_has_symbolic_content "Ouverture zu Braut von Messina Op. 100" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "78227806X" ],
         [ a crm:E42_Identifier ;
@@ -19887,9 +19887,9 @@ k10plus:797376992 a crm:E73_Information_Object ;
 
 k10plus:797435832 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Soirées musicales pour le pianoforte ; op. 6" ],
+            crm:P190_has_symbolic_content "Stücke, Kl op. 6" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Stücke, Kl op. 6" ] ;
+            crm:P190_has_symbolic_content "Soirées musicales pour le pianoforte ; op. 6" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "797435832" ],
         [ a crm:E42_Identifier ;
@@ -19999,15 +19999,15 @@ k10plus:857310291 a crm:E73_Information_Object ;
 
 k10plus:86126634X a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "6me. Trio" ],
-        [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "6. Grand Trio Pour Piano, Violon et Violoncello" ],
         [ a crm:E35_Title ;
             crm:P190_has_symbolic_content "6me. Grand Trio Pour Piano, Violon et Violoncello" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Sixième Grand Trio Pour Piano, Violon et Violoncello" ],
+            crm:P190_has_symbolic_content "6me. Trio" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "6 E. Grand Trio Pour Piano, Violon et Violoncello Op: 139" ] ;
+            crm:P190_has_symbolic_content "6 E. Grand Trio Pour Piano, Violon et Violoncello Op: 139" ],
+        [ a crm:E35_Title ;
+            crm:P190_has_symbolic_content "Sixième Grand Trio Pour Piano, Violon et Violoncello" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "86126634X" ],
         [ a crm:E42_Identifier ;
@@ -20033,9 +20033,9 @@ k10plus:871338637 a crm:E73_Information_Object ;
 
 k10plus:872020495 a crm:E73_Information_Object ;
     crm:P102_has_title [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "Grand duo à 4 ms. Op. 140" ],
+            crm:P190_has_symbolic_content "quatre mains sämtliche Kompositionen" ],
         [ a crm:E35_Title ;
-            crm:P190_has_symbolic_content "quatre mains sämtliche Kompositionen" ] ;
+            crm:P190_has_symbolic_content "Grand duo à 4 ms. Op. 140" ] ;
     crm:P1_is_identified_by [ a crm:E42_Identifier ;
             crm:P190_has_symbolic_content "872020495" ],
         [ a crm:E42_Identifier ;

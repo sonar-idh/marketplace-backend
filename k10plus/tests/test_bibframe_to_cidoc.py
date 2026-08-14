@@ -109,6 +109,11 @@ def test_exclude_works_without_contributions(tmp_path):
             a bf:Contribution ;
             bf:agent <https://d-nb.info/gnd/12345> ;
             bf:role <http://id.loc.gov/vocabulary/relators/aut>
+        ] ;
+        bf:hasInstance [
+            bf:provisionActivity [
+                bf:date "2020"
+            ]
         ] .
 
     # Work 2: Has NO contributions (should be ignored)

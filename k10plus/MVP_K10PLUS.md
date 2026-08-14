@@ -1,5 +1,5 @@
 # MVP: K10Plus
-*Updated: 03.08.2026*
+*Updated: 14.08.2026*
 
 ## Data Transformation Pipeline
 
@@ -34,7 +34,7 @@ Presentation Flow:
 Detailed Analyis of this data dump is available [here](./data/statistics.txt).
 
 ### Cataloging Issues
-- $e: describes human readable role description 
+- $e: describes human readable role description
 - $4: Standardised & Machine readable relator
 ```bash
 # Issue 1: Presence of RAK and RDA(DACH) formats
@@ -71,18 +71,22 @@ Total 100_e : 441
 Data considered:
 - Record Title
 - Record ID
-- Contributors(Tag 100 & Tag 700) and their roles.
+- Contributors (Tag 100 & Tag 700) and their roles.
+- Creation / Publication Date (Tag 534 original date or Tag 264/260/008 publication date).
 
 | Source BIBFRAME Element | XPath / Graph Pattern | Target CIDOC CRM Class | Target CIDOC CRM Property | Description / Minting Pattern |
 | :--- | :--- | :--- | :--- | :--- |
 | `bf:Work` (Event Creation) | `?work a bf:Work` | `crm:E65_Creation` | `crm:P94_has_created` | The creation event of the work. URI: `{objectURI}#CreationEvent` |
-| `bf:Work` | `?work a bf:Work` | `crm:E73_Information_Object` | - | Represents the bibliographic item / work. URI: `https://opac.k10plus.de/DB=2.299/PPNSET?PPN={titleId}` |
+| `bf:Work` | `?work a bf:Work` | `crm:E73_Information_Object` | - | Represents the bibliographic item / work. URI: `https://opac.k10plus.de/PPNSET?PPN={titleId}` |
 | `bf:identifiedBy` | `bf:adminMetadata/bf:identifiedBy/rdf:value` | `crm:E42_Identifier` | `crm:P1_is_identified_by` | Links the work to its identifier (PPN) via a blank node with `crm:P190_has_symbolic_content`. |
 | `bf:title` | `bf:title/bf:mainTitle` | `crm:E35_Title` | `crm:P102_has_title` | Links the work to its main title via a blank node with `crm:P190_has_symbolic_content`. |
 | `bf:contribution` | `bf:contribution` | `crm:PC14_Carried_Out_By` | - | Reified participation node representing an agent's role. URI: `{objectURI}#RoleAssignment_{SHA1(agentURI)}` |
 | `bf:contribution` (Domain) | `bf:contribution` | `crm:PC14_Carried_Out_By` | `crm:P01_has_domain` | Links the reified relationship to the creation event (`crm:E65_Creation`). |
 | `bf:agent` | `bf:contribution/bf:agent` | `crm:E21_Person` | `crm:P02_has_range` | Links the reified relationship to the person's GND URI. |
 | `bf:role` | `bf:contribution/bf:role` | `crm:E55_Type` | `<http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of>` | Links the reified relationship to the role type (Relator URI). |
+| `bf:Instance` (Time-Span) | `?instance` (via `bf:hasInstance`) | `crm:E52_Time_Span` | `crm:P4_has_time-span` | Links the creation event (`crm:E65_Creation`) to its time-span node. URI: `{objectURI}#TimeSpan` |
+| `bf:note` / `bf:date` | `origDate` or `pubDate` | `crm:E61_Time_Primitive` | `crm:P170i_time_is_defined_by` | Year primitive (4-digit string typed as `crm:E61_Time_Primitive`) defining the time-span. |
+
 ### Core Modeling Principles
 
 * **Class Hierarchy / Taxonomy**: Classes are organized hierarchically where subclasses inherit all properties of their parent classes. For example, because `crm:E65_Creation` is a subclass of `crm:E7_Activity`, any creation event inherits properties for actors, time, and location.
@@ -95,12 +99,22 @@ Data considered:
 ### Reification
 Because RDF triples only connect a subject and an object, the standard `crm:P14_carried_out_by` property has no direct way to attach what role they had. To preserve these specific roles (e.g., editor vs. author), we model the relationship using the reified class `crm:PC14_Carried_Out_By` to link each agent and their role to the creation event.
 
+### Time-Span Modeling
+Dates are associated with the creation event (`crm:E65_Creation`) via a time-span node (`crm:E52_Time_Span`):
+1. **Date Resolution Prioritization**: `COALESCE(?origDate, ?pubDate)` prioritizes the original date note (MARC Tag 534, `mnotetype/orig`) over the publication/provision date (MARC Tag 264/260/008).
+2. **Year Primitive Formatting**: Extracted dates are truncated to a 4-digit year primitive (`SUBSTR(STR(?correctDate), 1, 4)`) and typed as `crm:E61_Time_Primitive`.
+3. **Graph Linkage**:
+   ```ttl
+   <#CreationEvent> crm:P4_has_time-span <#TimeSpan> .
+   <#TimeSpan> a crm:E52_Time_Span ;
+       crm:P170i_time_is_defined_by "1841"^^crm:E61_Time_Primitive .
+   ```
+
 ## Qlever Triple Store: Indexing and Examples
 The converted data is available [here](./data/schumann_cidoc.ttl) and it is indexed in Qlever triple store.
 
 ## Next Steps
-- Differentiating primary(Tag 100) and secondary(Tag 700) contributions.
+- Differentiating primary (Tag 100) and secondary (Tag 700) contributions.
 - Testing with a bigger data dump.
-- Time and Place modeling
-- Implmenting Title Entry (Tag 700 $a $b $n) in SPARQL CONSTRUCT.
-
+- Place modeling.
+- Implementing Title Entry (Tag 700 $a $b $n) in SPARQL CONSTRUCT.

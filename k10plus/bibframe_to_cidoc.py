@@ -43,14 +43,37 @@ PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX bf:    <http://id.loc.gov/ontologies/bibframe/>
 """
 
-# Queries to create HNA Graph from BIBFRAME
+# Shared work validation filters (contribution completeness & date requirement)
+WORK_FILTER_BLOCK = """
+        # Enforce that the work has at least one contribution
+        FILTER EXISTS { ?work bf:contribution [] }
+
+        # Only select works that have all contributions with a GND ID
+        FILTER NOT EXISTS {
+            ?work bf:contribution/bf:agent ?anyAgentURI .
+            FILTER(!STRSTARTS(STR(?anyAgentURI), "https://d-nb.info/gnd/"))
+        }
+
+        # Only select works that have all contributions with a role definition
+        FILTER NOT EXISTS {
+            ?work bf:contribution ?anyContrib .
+            FILTER NOT EXISTS { ?anyContrib bf:role ?anyRole . }
+        }
+
+        # Enforce date requirement (original date or publication date)
+        ?work bf:hasInstance ?instance .
+        OPTIONAL {
+            ?instance bf:note ?note .
+            ?note a <http://id.loc.gov/vocabulary/mnotetype/orig> ;
+                rdfs:label ?origDate .
+        }
+        OPTIONAL {
+            ?instance bf:provisionActivity/bf:date ?pubDate .
+        }
+        BIND(COALESCE(?origDate, ?pubDate) AS ?correctDate)
+        FILTER(BOUND(?correctDate))
 """
-Modelling Decisions:
-- The data from a work object in bibframe is an Information object, as we are interested in specific data about the work
-- like ID, name, persons involved.
-- strict class defintiions or inference based definitions
-- selecting the works with all agents with GND IDs and role definition
-"""
+
 queries = {
     "Q1_titleInfo": PREFIX_BLOCK
     + """
@@ -72,20 +95,9 @@ queries = {
             bf:adminMetadata/bf:identifiedBy/rdf:value ?titleId ;
             bf:title/bf:mainTitle ?titleName .
 
-        # Enforce that the work has at least one contribution
-        FILTER EXISTS { ?work bf:contribution [] }
-
-        # Only select works that have all contributions with a GND ID
-        FILTER NOT EXISTS {
-            ?work bf:contribution/bf:agent ?anyAgentURI .
-            FILTER(!STRSTARTS(STR(?anyAgentURI), "https://d-nb.info/gnd/"))
-        }
-        # Only select works that have all contributions with a role definition
-        FILTER NOT EXISTS {
-            ?work bf:contribution ?anyContrib .
-            FILTER NOT EXISTS { ?anyContrib bf:role ?anyRole . }
-        }
-
+"""
+    + WORK_FILTER_BLOCK
+    + """
         BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId)) AS ?objectURI)
     }
 
@@ -114,17 +126,9 @@ queries = {
             # Only process contributions with GND IDs
             FILTER(STRSTARTS(STR(?agentURI), "https://d-nb.info/gnd/"))
 
-            # Only select works that have all contributions with a GND ID
-            FILTER NOT EXISTS {
-                ?work bf:contribution/bf:agent ?anyAgentURI .
-                FILTER(!STRSTARTS(STR(?anyAgentURI), "https://d-nb.info/gnd/"))
-            }
-            # Only select works that have all contributions with a role definition
-            FILTER NOT EXISTS {
-                ?work bf:contribution ?anyContrib .
-                FILTER NOT EXISTS { ?anyContrib bf:role ?anyRole . }
-            }
-
+"""
+    + WORK_FILTER_BLOCK
+    + """
             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId)) AS ?objectURI)
             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#CreationEvent")) AS ?creationEventURI)
             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#RoleAssignment_", SHA1(STR(?agentURI)))) AS ?agentAssignmentURI)
@@ -135,42 +139,16 @@ queries = {
         CONSTRUCT {
             ?creationEventURI crm:P4_has_time-span ?timeSpanURI .
 
-            ?timeSpanURI a crm:E52_Time-Span ;
+            ?timeSpanURI a crm:E52_Time_Span ;
                 crm:P170i_time_is_defined_by ?correctDatePrimitive .
         }
         WHERE {
             ?work a bf:Work ;
-                    bf:adminMetadata/bf:identifiedBy/rdf:value ?titleId ;
-                    bf:hasInstance ?instance .
+                    bf:adminMetadata/bf:identifiedBy/rdf:value ?titleId .
 
-            # 1. Attempt to get original date note (e.g. tag 534)
-            OPTIONAL {
-                ?instance bf:note ?note .
-                ?note a <http://id.loc.gov/vocabulary/mnotetype/orig> ;
-                    rdfs:label ?origDate .
-            }
-
-            # 2. Attempt to get publication date (e.g. tag 264/260/008)
-            OPTIONAL {
-                ?instance bf:provisionActivity/bf:date ?pubDate .
-            }
-
-            # 3. Prioritize original date, fallback to publication date
-            BIND(COALESCE(?origDate, ?pubDate) AS ?correctDate)
-
-            # Only select works that have all contributions with a GND ID
-            FILTER NOT EXISTS {
-                ?work bf:contribution/bf:agent ?anyAgentURI .
-                FILTER(!STRSTARTS(STR(?anyAgentURI), "https://d-nb.info/gnd/"))
-            }
-            # Only select works that have all contributions with a role definition
-            FILTER NOT EXISTS {
-                ?work bf:contribution ?anyContrib .
-                FILTER NOT EXISTS { ?anyContrib bf:role ?anyRole . }
-            }
-
-            FILTER(BOUND(?correctDate))
-
+"""
+    + WORK_FILTER_BLOCK
+    + """
             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId)) AS ?objectURI)
             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#CreationEvent")) AS ?creationEventURI)
             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#TimeSpan")) AS ?timeSpanURI)
@@ -216,12 +194,15 @@ def bibframe_to_cidoc(input_path: Path, output_path: Path) -> None:
             target.add(triple)
 
     logger.info(f"Serializing to Turtle: {output_path}")
+    serialized_ttl = target.serialize(format="turtle")
+    cleaned_ttl = serialized_ttl.rstrip() + "\n"
+
     if str(output_path) == "-":
         import sys
 
-        target.serialize(destination=sys.stdout.buffer, format="turtle")
+        sys.stdout.write(cleaned_ttl)
     else:
-        target.serialize(destination=str(output_path), format="turtle")
+        Path(output_path).write_text(cleaned_ttl, encoding="utf-8")
 
     logger.info(f"Done. {len(target)} CRM triples → {output_path}")
 

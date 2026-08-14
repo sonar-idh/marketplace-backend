@@ -88,7 +88,17 @@ crm:CreationEventShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:message "Each Creation Event must point to exactly one crm:E73_Information_Object." ;
+    ] ;
+
+    # Event must have at least one timestamp
+    sh:property [
+        sh:path crm:P4_has_time-span ;
+        sh:class crm:E52_Time_Span ;
+        sh:minCount 1 ;
+        sh:message "Each Creation Event must have at least one timestamp." ;
     ] .
+
+
 
 # ==========================================
 # 5. SHAPE FOR THE ROLE ASSIGNMENT (PC14)
@@ -121,4 +131,18 @@ crm:RoleAssignmentShape
         sh:class crm:E55_Type ;
         sh:minCount 1 ;
         sh:message "The role (P14.1) must point to a crm:E55_Type." ;
+    ] .
+
+# ==========================================
+# 6. SHAPE FOR THE TIME SPAN
+# ==========================================
+crm:TimeSpanShape
+    a sh:NodeShape ;
+    sh:targetClass crm:E52_Time_Span ;
+    sh:property [
+        sh:path crm:P170i_time_is_defined_by ;
+        sh:datatype crm:E61_Time_Primitive ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each time span must be defined by exactly one time primitive." ;
     ] .
