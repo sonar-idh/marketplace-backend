@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ead2rico.xsl  —  EAD (Kalliope/EAD 2002) -> RiC-O 1.1 (Turtle)
-  XSLT 3.0 (Saxon-HE / SaxonC-HE).
+  ead2rico_main.xsl  —  EAD (Kalliope/EAD 2002) -> RiC-O 1.1 (Turtle)
+  XSLT 3.0 (Saxon-HE / SaxonC-HE). saxonb-xslt (Saxon-B) reicht NICHT aus,
+  da XSLT-3.0/XPath-3.1-Funktionen genutzt werden.
 
   Aufruf (Beispiel):
-    saxonb-xslt -s:ead_DE-1_5364_test.xml -xsl:ead2rico.xsl -o:out.ttl
-  Parameter (per -base:... etc. überschreibbar):
-    base       Basis-IRI für lokal geprägte Ressourcen 
+    java -cp /usr/share/java/Saxon-HE.jar net.sf.saxon.Transform \
+      -s:ead_DE-1_5364_test.xml -xsl:ead2rico_main.xsl -o:out.ttl
+    (oder: ./transform.sh [quelle.xml] [ziel.ttl])
+  Parameter (als name=wert an den Aufruf anhängen, z. B. gnd=...):
+    base       Basis-IRI für lokal geprägte Ressourcen
 -->
 <xsl:stylesheet version="3.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -18,17 +21,11 @@
   <xsl:output method="text" encoding="UTF-8" />
   <xsl:strip-space elements="*" />
 
-  <!-- ============ Parameter ============ -->
-  <xsl:param
-    name="base" select="'https://kalliope-verbund.info/ead?ead.id='" />
-  <xsl:param name="gnd"
-    select="'https://d-nb.info/gnd/'" />
-  <xsl:param name="lang-base"
-    select="'http://id.loc.gov/vocabulary/iso639-2/'" />
-
-
   <!-- ============ Funktionen aus Helper-Stylesheet einbinden ============ -->
-  <xsl:include href="ead2rico_helpers.xsl" />
+  <xsl:include
+    href="ead2rico_helpers.xsl" />
+  <xsl:include
+    href="ead2rico_dates.xsl" />
 
   <!-- ============ Einstieg ============ -->
   <xsl:template
@@ -56,48 +53,48 @@
     <xsl:variable name="iri" select="string(@id)" />
     <xsl:text>&#10;# ===== Bestand =====&#10;&#10;</xsl:text>
     <xsl:value-of
-      select="concat('kpe:',$iri,' a rico:RecordSet')" />
+      select="'kpe:' || $iri || ' a rico:RecordSet'" />
 
     <!-- Bestandstitel extrahieren und als Tripel schreiben -->
     <xsl:if
       test="e:did/e:unittitle">
       <xsl:value-of
-        select="concat(' ;&#10;    rico:title ',
-        f:lit(string(e:did/e:unittitle)))" />
+        select="' ;&#10;    rico:title ' ||
+        f:lit(string(e:did/e:unittitle))" />
     </xsl:if>
 
-    <!-- falls vorhanden, Bestands-ID extrahieren und als Tripel schreiben -->  
+    <!-- falls vorhanden, Bestands-ID extrahieren und als Tripel schreiben -->
     <xsl:if
       test="@id">
       <xsl:value-of
-        select="concat(' ;&#10;    rico:identifier ',
-        f:lit(string(@id)))" />
+        select="' ;&#10;    rico:identifier ' ||
+        f:lit(string(@id))" />
     </xsl:if>
 
     <!-- Genreformen des Bestands, falls Referenz auf GND vorhanden ist -->
     <xsl:for-each
       select="e:controlaccess/e:genreform[@source='GND' and @authfilenumber]">
       <xsl:value-of
-        select="concat(' ;&#10;    rico:hasRecordSetType gnd:', @authfilenumber)" />
+        select="' ;&#10;    rico:hasRecordSetType gnd:' || @authfilenumber" />
     </xsl:for-each>
 
     <!-- OPTIONAL: falls vorhanden, Bestandsumfang extrahieren und als Tripel schreiben -->
     <!-- <xsl:if test="e:did/e:physdesc/e:extent">
-      <xsl:value-of select="concat(' ;&#10;    rico:recordResourceExtent ',
-        f:lit(string(e:did/e:physdesc/e:extent[1])))"/>
+      <xsl:value-of select="' ;&#10;    rico:recordResourceExtent ' ||
+        f:lit(string(e:did/e:physdesc/e:extent[1]))"/>
     </xsl:if> -->
 
     <!-- OPTIONAL: falls vorhanden, Beschreibung der Bestandsinhalte extrahieren und als Tripel
     schreiben -->
     <!-- <xsl:if test="e:scopecontent/e:p">
-      <xsl:value-of select="concat(' ;&#10;    rico:scopeAndContent ',
-        f:lit(string-join(e:scopecontent/e:p,' ')))"/>
+      <xsl:value-of select="' ;&#10;    rico:scopeAndContent ' ||
+        f:lit(string-join(e:scopecontent/e:p,' '))"/>
     </xsl:if> -->
 
     <!-- OPTIONAL: falls vorhanden, Bemerkung zum Bestand extrahieren und als Tripel schreiben -->
     <!-- <xsl:if test="e:did/e:note/e:p">
-      <xsl:value-of select="concat(' ;&#10;    rico:history ',
-        f:lit(string-join(e:did/e:note/e:p,' ')))"/>
+      <xsl:value-of select="' ;&#10;    rico:history ' ||
+        f:lit(string-join(e:did/e:note/e:p,' '))"/>
     </xsl:if> -->
 
     <!-- did/repository/corpname auf rico:hasOrHadHolder abbilden. Nur ISIL-referenzierte
@@ -106,7 +103,7 @@
       select="e:did/e:repository/e:corpname">
       <xsl:if
         test="@source='ISIL' and @authfilenumber">
-        <xsl:value-of select="concat(' ;&#10;    rico:hasOrHadHolder ', 'isil:', @authfilenumber)" />
+        <xsl:value-of select="' ;&#10;    rico:hasOrHadHolder ' || 'isil:' || @authfilenumber" />
       </xsl:if>
     </xsl:for-each>
 
@@ -114,22 +111,16 @@
     abgebildet. Hier sollte Analyse von did/origination erfolgen, um Werteverteilung der role- und
     source-Attribute bei persname/corpname besser zu verstehen -->
     <xsl:for-each
-      select="e:did/e:origination/e:persname[@role='Bestandsbildner']">
-      <xsl:if
-        test="@source='GND' and @authfilenumber">
-        <xsl:value-of select="concat(' ;&#10;    rico:hasOrganicProvenance gnd:', @authfilenumber)" />
-      </xsl:if>
+      select="e:did/e:origination/e:persname[@role='Bestandsbildner' and @source='GND' and @authfilenumber]">
+      <xsl:value-of select="' ;&#10;    rico:hasOrganicProvenance gnd:' || @authfilenumber" />
     </xsl:for-each>
 
     <!-- Verweise auf enthaltene Brief-Records hinzufügen. c-Verschachtelungsstruktur momentan
     ausgeblendet. Soll rico:includesOrIncluded oder ricoIncludesTransitive hier verwendet werden? -->
     <xsl:for-each
-      select="e:dsc//e:c">
-      <xsl:if
-        test="*:controlaccess/*:genreform = 'Brief'">
-        <xsl:value-of select="concat(' ;&#10;    rico:includesTransitive kpe:', @id)" />
-        <!-- Hier könnte man noch komma-separierte Angabe der Verzeichnungseinheiten einführen -->
-      </xsl:if>
+      select="e:dsc//e:c[e:controlaccess/e:genreform = 'Brief']">
+      <xsl:value-of select="' ;&#10;    rico:includesTransitive kpe:' || @id" />
+      <!-- Hier könnte man noch komma-separierte Angabe der Verzeichnungseinheiten einführen -->
     </xsl:for-each>
     <xsl:text> .&#10;</xsl:text>
 
@@ -146,39 +137,42 @@
       <!-- Parent-Element zur Referenzierung speichern. Prüfen, ob verschachteltes <c>-Element -->
       <xsl:variable name="parent"
         select="(ancestor::e:c[1], ancestor::e:archdesc[1])[1]" />
-      
+
       <xsl:value-of
-        select="concat('kpe:',$iri,' a rico:Record')" />
+        select="'kpe:' || $iri || ' a rico:Record'" />
 
       <!-- Record-Titel extrahieren und als Tripel schreiben -->
       <xsl:value-of
-        select="concat(' ;&#10;    rico:title ',
-        f:lit(string(e:did/e:unittitle)))" />
+        select="' ;&#10;    rico:title ' ||
+        f:lit(string(e:did/e:unittitle))" />
 
       <!-- falls vorhanden Record-Signatur extrahieren und als Tripel schreiben (das ist nicht der
       Identifier, oder? Gibt es für die Signatur eine Entsprechung in RiC-O?) -->
       <!-- <xsl:if
         test="e:did/e:unitid[@label='Signatur']">
         <xsl:value-of
-          select="concat(' ;&#10;    rico:identifier ',
-          f:lit(string(e:did/e:unitid[@label='Signatur'][1])))" />
+          select="' ;&#10;    rico:identifier ' ||
+          f:lit(string(e:did/e:unitid[@label='Signatur'][1]))" />
       </xsl:if> -->
 
       <!-- Genreformen des Records, falls Referenz auf GND vorhanden ist -->
       <xsl:for-each
         select="e:controlaccess/e:genreform[@source='GND' and @authfilenumber]">
         <xsl:value-of
-          select="concat(' ;&#10;    rico:hasDocumentaryFormType gnd:', @authfilenumber)" />
+          select="' ;&#10;    rico:hasDocumentaryFormType gnd:' || @authfilenumber" />
       </xsl:for-each>
 
-      <!-- Entstehungsdatum -> rico:creationDate. Hier muss der Datumsauflösungsmechanismus von
-      ead2cer mit rico:beginningDate und rico:endDate integriert werden -->
-      <!-- <xsl:if
-        test="e:did/e:unitdate[@label='Entstehungsdatum' and @normal]">
+      <!-- Entstehungsdatum wird behelfsmäßig auf rico:beginningDate und rico:endDate statt auf
+      rico:creationDate abgebildet. Alternativen müssten disutiert werden. Die Verarbeitung
+      verschiedener Input-Datumsformate erfolgt in ead2rico_dates.xsl -->
+      <xsl:for-each
+        select="e:did/e:unitdate[@label='Entstehungsdatum' and @normal and f:parse-normal(@normal) instance of map(*)]">
+        <xsl:variable name="dm" select="f:parse-normal(@normal)" />
         <xsl:value-of
-          select="concat(' ;&#10;    rico:creationDate ',
-          f:date-lit(string(e:did/e:unitdate/@normal)))" />
-      </xsl:if> -->
+          select="' ;&#10;    rico:beginningDate ' || f:lit(string($dm?begin)) || '^^xs:date'" />
+        <xsl:value-of
+          select="' ;&#10;    rico:endDate ' || f:lit(string($dm?end)) || '^^xs:date'" />
+      </xsl:for-each>
 
       <!-- Verfasser -> rico:hasAuthor -->
       <xsl:for-each
@@ -186,52 +180,52 @@
         <!-- Hier müssen Körperschaften auch als potentielle Verfasser/Adressaten berücksichtigt
         werden -->
         <xsl:value-of
-          select="concat(' ;&#10;    rico:hasAuthor gnd:', @authfilenumber)" />
+          select="' ;&#10;    rico:hasAuthor gnd:' || @authfilenumber" />
       </xsl:for-each>
 
       <!-- Adressat -> rico:hasAddressee (Unbekannt wird ausgelassen) -->
       <xsl:for-each
         select="e:controlaccess/e:persname[@role='Adressat' and @source='GND' and @authfilenumber]">
-        <xsl:value-of select="concat(' ;&#10;    rico:hasAddressee gnd:', @authfilenumber)" />
+        <xsl:value-of select="' ;&#10;    rico:hasAddressee gnd:' || @authfilenumber" />
       </xsl:for-each>
 
       <!-- Entstehungsort -> rico:isAssociatedWithPlace  -->
       <!-- <xsl:for-each
         select="e:controlaccess/e:geogname[@role='Entstehungsort']">
         <xsl:value-of
-          select="concat(' ;&#10;    rico:isAssociatedWithPlace ',
-          f:lit(string(.)))" />
+          select="' ;&#10;    rico:isAssociatedWithPlace ' ||
+          f:lit(string(.))" />
       </xsl:for-each> -->
 
       <!-- Sprache -->
       <!-- <xsl:for-each
         select="e:did/e:langmaterial/e:language[@langcode]">
         <xsl:value-of
-          select="concat(' ;&#10;    rico:hasOrHadLanguage &lt;',$lang-base,@langcode,'&gt;')" />
+          select="' ;&#10;    rico:hasOrHadLanguage &lt;' || $lang-base || @langcode || '&gt;'" />
       </xsl:for-each> -->
 
       <!-- OPTIONAL: Inhaltsnotiz -> rico:scopeAndContent  -->
       <!-- <xsl:if test="e:did/e:note/e:p">
-        <xsl:value-of select="concat(' ;&#10;    rico:scopeAndContent ',
-          f:lit(string-join(e:did/e:note/e:p,' '),'de'))"/>
+        <xsl:value-of select="' ;&#10;    rico:scopeAndContent ' ||
+          f:lit(string-join(e:did/e:note/e:p,' '),'de')"/>
       </xsl:if> -->
 
       <!-- Aufbewahrungsort -> rico:hasOrHadHolder -->
       <!-- <xsl:for-each
         select="e:did/e:repository/e:corpname[@role='Aufbewahrungsort']">
-        <xsl:value-of select="concat(' ;&#10;    rico:hasOrHadHolder &lt;',f:agent-iri(.),'&gt;')" />
+        <xsl:value-of select="' ;&#10;    rico:hasOrHadHolder &lt;' || f:agent-iri(.) || '&gt;'" />
       </xsl:for-each> -->
 
       <!-- Bestandszugehörigkeit -> rico:isOrWasIncludedIn -->
       <xsl:value-of
-        select="concat(' ;&#10;    rico:isOrWasIncludedIn kpe:', string($parent/@id))" />
+        select="' ;&#10;    rico:isOrWasIncludedIn kpe:' || string($parent/@id)" />
 
       <!-- Umfang -> rico:instantiationExtent -->
       <!-- <xsl:if
         test="e:did/e:physdesc/e:extent[@label='Umfang']">
         <xsl:value-of
-          select="concat(' ;&#10;    rico:instantiationExtent ',
-          f:lit(string(e:did/e:physdesc/e:extent[1])))" />
+          select="' ;&#10;    rico:instantiationExtent ' ||
+          f:lit(string(e:did/e:physdesc/e:extent[1]))" />
       </xsl:if> -->
 
       <xsl:text> .&#10;&#10;</xsl:text>

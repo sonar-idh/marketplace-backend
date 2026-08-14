@@ -11,7 +11,7 @@
     name="f:lit" as="xs:string">
     <xsl:param name="t" as="xs:string?" />
     <xsl:sequence
-      select="concat('&quot;', f:esc(normalize-space($t)), '&quot;')" />
+      select="'&quot;' || f:esc(normalize-space($t)) || '&quot;'" />
   </xsl:function>
 
   <!-- Literale Turtle-konform escapen -->
