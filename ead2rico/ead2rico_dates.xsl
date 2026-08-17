@@ -1,33 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  cer_dates.xsl  –  Datumsverarbeitung EAD unitdate/@normal  ->  CER 2.0
-  Einzubinden per <xsl:include href="cer_dates.xsl"/> in ead2cer_main.xsl
+  ead2rico_dates.xsl  –  Datumsverarbeitung EAD unitdate/@normal  ->  RiC-O 1.1 (Turtle)
+  Einzubinden per <xsl:include href="cer_dates.xsl"/> in ead2rico_main.xsl
 -->
 <xsl:stylesheet version="3.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     xmlns:f="urn:local:funcs"
-    xmlns:e="urn:isbn:1-931666-22-9"
     exclude-result-prefixes="#all"
     expand-text="no">
-
-    <!-- ==================================================================
-       Konfiguration
-       ================================================================== -->
-
-    <!-- Wertproperty fuer CER26/CER27 ist in der publizierten Ontologie
-       nicht definiert. Zentral parametrisiert, damit sie nach Klaerung
-       an einer zentralen Stelle getauscht werden kann. -->
-  <xsl:param name="date-value-prop" as="xs:string" select="'crm:P90_has_value'" />
-
-    <!-- Sekundengenaues Ende des Tages fuer P82b -->
-    <!-- Funktion wird nur gebraucht, falls CRM-Vierpunkt-Achse implementiert wird --> 
-  <xsl:variable
-        name="f:t-start" as="xs:time" select="xs:time('00:00:00Z')" />
-    <!-- Funktion wird nur gebraucht, falls CRM-Vierpunkt-Achse implementiert wird -->
-  <xsl:variable name="f:t-end"
-        as="xs:time" select="xs:time('23:59:59Z')" />
 
     <!-- ==================================================================
        Ebene 1: Einstieg - kompletter @normal-Wert, inkl. Laufzeiten
