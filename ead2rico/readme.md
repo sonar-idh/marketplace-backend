@@ -19,11 +19,12 @@ Oder über die SaxonC-HE-Python-Bindung:
 
 ```python
 from saxonche import PySaxonProcessor
+
 with PySaxonProcessor(license=False) as proc:
     exe = proc.new_xslt30_processor().compile_stylesheet(
-        stylesheet_file="ead2rico_main.xsl")
-    exe.transform_to_file(source_file="ead_DE-1_5364_test.xml",
-                          output_file="out.ttl")
+        stylesheet_file="ead2rico_main.xsl"
+    )
+    exe.transform_to_file(source_file="ead_DE-1_5364_test.xml", output_file="out.ttl")
 ```
 
 `ead2rico_helpers.xsl` und `ead2rico_dates.xsl` müssen im gleichen Verzeichnis wie `ead2rico_main.xsl` liegen (relative `xsl:include href="..."`).
@@ -115,7 +116,22 @@ Es gibt keine lokale Agenten-Materialisierung oder -Deduplizierung mehr. Ressour
 
 # Tests
 
-`tests/test_ead_xslt.py` (pytest) ruft die Transformation auf `ead_DE-1_5364_test.xml` per Saxon-HE-Subprozess auf und prüft, dass die Ausgabe mit `rdflib` als valides Turtle geparst werden kann.
+`tests/test_ead_xslt.py` (pytest) ruft `ead2rico_main.xsl` per Saxon-HE-Subprozess auf zwei Quelldateien auf und prüft den resultierenden Turtle-Output mit `rdflib`:
+
+
+| Fixture | Quelldatei | Zweck |
+| --------- | ------------ | ------- |
+| `graph` | `ead_DE-1_5364_test.xml` | realer Kalliope-Auszug; prüft das Mapping am tatsächlichen Datenbild |
+| `transform_snippet` | `tests/ead_test_snippet.xml` | minimales, handgeschriebenes EAD-Dokument für gezielte Einzelfälle, die im realen Auszug nicht vorkommen |
+
+**Abgedeckte Fälle:**
+
+- **Turtle-Validität** — Output ist parsebares, nicht-leeres Turtle
+- **Bestand (RecordSet)** — `rico:title`, `rico:identifier`, `rico:hasRecordSetType`, `rico:hasOrHadHolder`, `rico:hasOrganicProvenance` (mehrere Bestandsbildner), `rico:includesTransitive` (Anzahl muss zur Anzahl der Brief-`<c>` im Testdatensatz passen)
+- **Verzeichnungseinheiten (Record)** — Anzahl der erzeugten `rico:Record` passend zur Anzahl Brief-`<c>`, `rico:isOrWasIncludedIn`, `rico:hasAuthor`/`rico:hasAddressee`, sowie dass ein Adressat ohne GND-Referenz (z. B. „Unbekannt") korrekt **nicht** übernommen wird
+- **Filterlogik** — ein `<c>` ohne `genreform='Brief'` erzeugt keinen `rico:Record` (`ead_test_snippet.xml`)
+- **Escaping** — Titel mit Anführungszeichen/Backslash überstehen die Turtle-Serialisierung und lassen sich unverändert zurückparsen (`ead_test_snippet.xml`)
+- **Datumsverarbeitung** — Jahres-, Monats- und Tagespräzision, Zeitspannen (auch mit vertauschten Grenzen), kalendarisch ungültige Tage (Rückfall auf Monatsgrenzen), fehlendes/nicht erkennbares `@normal` (keine Datums-Tripel), sowie dass `rico:beginningDate`/`rico:endDate` im gesamten Output immer als `^^xs:date` typisiert sind
 
 # Beispiel-Output (Auszug)
 
