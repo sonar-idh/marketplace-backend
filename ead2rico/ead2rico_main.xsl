@@ -4,16 +4,9 @@
   XSLT 3.0 (Saxon-HE / SaxonC-HE). saxonb-xslt (Saxon-B) reicht NICHT aus,
   da XSLT-3.0/XPath-3.1-Funktionen genutzt werden.
 
-  EAD-Elemente werden über Namespace-Wildcards (*:name) statt eines fest gebundenen
-  Namespace-Präfixes angesprochen, da im Kalliope-Korpus nicht alle Dokumente denselben
-  (oder überhaupt einen) EAD-Namespace deklarieren, obwohl die Struktur identisch ist.
-
   Aufruf (Beispiel):
     java -cp /usr/share/java/Saxon-HE.jar net.sf.saxon.Transform \
       -s:ead_DE-1_5364_test.xml -xsl:ead2rico_main.xsl -o:out.ttl
-    (oder: ./transform.sh [quelle.xml] [ziel.ttl])
-  Parameter (als name=wert an den Aufruf anhängen, z. B. gnd=...):
-    base       Basis-IRI für lokal geprägte Ressourcen
 -->
 <xsl:stylesheet version="3.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -33,7 +26,7 @@
   <!-- ============ Einstieg ============ -->
   <xsl:template
     match="/">
-    <!-- Präfixe -->
+    <!-- Praefixe -->
     <xsl:text>@prefix rico: &lt;https://www.ica.org/standards/RiC/ontology#&gt; .&#10;</xsl:text>
     <xsl:text>@prefix rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .&#10;</xsl:text>
     <xsl:text>@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .&#10;</xsl:text>
@@ -49,6 +42,7 @@
   </xsl:template>
 
   <!-- ============ Bestand (RecordSet) ============ -->
+
   <xsl:template
     match="*:archdesc">
 
@@ -123,23 +117,25 @@
     <xsl:for-each
       select="*:dsc//*:c[*:controlaccess/*:genreform = 'Brief']">
       <xsl:value-of select="' ;&#10;    rico:includesTransitive kpe:' || @id" />
-      <!-- Hier könnte man noch komma-separierte Angabe der Verzeichnungseinheiten einführen -->
+      <!-- Hier könnte man noch komma-separierte Angabe der Verzeichnungseinheiten einfuehren -->
     </xsl:for-each>
     <xsl:text> .&#10;</xsl:text>
+
+
+  <!-- ============ Verzeichnungseinheit (Record) ============ -->
 
     <xsl:text>&#10;# ===== Verzeichnungseinheiten =====&#10;&#10;</xsl:text>
     <xsl:apply-templates
       select=".//*:c" />
   </xsl:template>
 
-  <!-- ============ Verzeichnungseinheit (Record) ============ -->
   <xsl:template match="*:c">
     <xsl:if
       test="*:controlaccess/*:genreform = 'Brief'">
       <xsl:variable name="iri" select="string(@id)" />
-      <!-- TODO: zeigt momentan immer auf den Bestand statt auf das nächste umschließende <c>,
+      <!-- TODO: zeigt momentan immer auf den Bestand statt auf das naechste umschließende <c>,
       da die c-Verschachtelungsstruktur beim Erzeugen der Records noch nicht korrekt
-      nachgebildet wird. Später durch echte Verschachtelung ersetzen
+      nachgebildet wird. Spaeter durch echte Verschachtelung ersetzen
       (z. B. wieder (ancestor::*:c[1], ancestor::*:archdesc[1])[1]). -->
       <xsl:variable name="parent"
         select="ancestor::*:archdesc[1]" />
@@ -153,7 +149,7 @@
         f:lit(string(*:did/*:unittitle))" />
 
       <!-- falls vorhanden Record-Signatur extrahieren und als Tripel schreiben (das ist nicht der
-      Identifier, oder? Gibt es für die Signatur eine Entsprechung in RiC-O?) -->
+      Identifier, oder? Gibt es fuer die Signatur eine Entsprechung in RiC-O?) -->
       <!-- <xsl:if
         test="*:did/*:unitid[@label='Signatur']">
         <xsl:value-of
@@ -168,7 +164,7 @@
           select="' ;&#10;    rico:hasDocumentaryFormType gnd:' || @authfilenumber" />
       </xsl:for-each>
 
-      <!-- Entstehungsdatum wird behelfsmäßig auf rico:beginningDate und rico:endDate statt auf
+      <!-- Entstehungsdatum wird behelfsmaeßig auf rico:beginningDate und rico:endDate statt auf
       rico:creationDate abgebildet. Alternativen müssten disutiert werden. Die Verarbeitung
       verschiedener Input-Datumsformate erfolgt in ead2rico_dates.xsl -->
       <xsl:for-each
@@ -180,18 +176,16 @@
           select="' ;&#10;    rico:endDate ' || f:lit(string($dm?end)) || '^^xs:date'" />
       </xsl:for-each>
 
-      <!-- Verfasser -> rico:hasAuthor -->
+      <!-- Verfasser -> rico:hasAuthor (persname und corpname) -->
       <xsl:for-each
-        select="*:controlaccess/*:persname[@role='Verfasser' and @source='GND' and @authfilenumber]">
-        <!-- Hier müssen Körperschaften auch als potentielle Verfasser/Adressaten berücksichtigt
-        werden -->
+        select="*:controlaccess/(*:persname|*:corpname)[@role='Verfasser' and @source='GND' and @authfilenumber]">
         <xsl:value-of
           select="' ;&#10;    rico:hasAuthor gnd:' || @authfilenumber" />
       </xsl:for-each>
 
-      <!-- Adressat -> rico:hasAddressee (Unbekannt wird ausgelassen) -->
+      <!-- Adressat -> rico:hasAddressee (persname und corpname, Unbekannt wird ausgelassen) -->
       <xsl:for-each
-        select="*:controlaccess/*:persname[@role='Adressat' and @source='GND' and @authfilenumber]">
+        select="*:controlaccess/(*:persname|*:corpname)[@role='Adressat' and @source='GND' and @authfilenumber]">
         <xsl:value-of select="' ;&#10;    rico:hasAddressee gnd:' || @authfilenumber" />
       </xsl:for-each>
 

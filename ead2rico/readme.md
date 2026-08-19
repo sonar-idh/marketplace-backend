@@ -60,7 +60,7 @@ Es gibt aktuell kein Template zur Erzeugung eigener Agenten-Ressourcen (`rico:Pe
 | `did/unittitle`                                                      | `rico:title`                 | Literal                                                            |
 | `@id`                                                                | `rico:identifier`            | Literal (derselbe Wert wie die Subjekt-IRI)                        |
 | `controlaccess/genreform[@source='GND']/@authfilenumber`            | `rico:hasRecordSetType`      | als `gnd:<authfilenumber>`                                        |
-| `did/repository/corpname[@source='ISIL']/@authfilenumber`           | `rico:hasOrHadHolder`        | als `isil:<authfilenumber>`; `@role` wird nicht mehr geprüft       |
+| `did/repository/corpname[@source='ISIL']/@authfilenumber`           | `rico:hasOrHadHolder`        | als `isil:<authfilenumber>`       |
 | `did/origination/persname[@role='Bestandsbildner' und @source='GND']/@authfilenumber` | `rico:hasOrganicProvenance` | als `gnd:<authfilenumber>`                                        |
 | `dsc//c[controlaccess/genreform='Brief']`                           | `rico:includesTransitive`    | über alle Ebenen, gefiltert auf Brief-Verzeichnungseinheiten; offene Frage im Code, ob stattdessen `rico:includesOrIncluded` passender wäre |
 
@@ -97,13 +97,13 @@ Frühere Hilfsfunktionen zur IRI-Bildung, Agenten-Deduplizierung und Datumstypis
 
 Verarbeitet `unitdate/@normal`-Werte in drei Schritten:
 
-1. **`f:parse-normal($normal)`** — Einstiegspunkt. Erkennt Zeitspannen (`.../ ...`-getrennt) und ruft für Einzeldaten bzw. beide Enden einer Zeitspanne `f:token()` auf. Bei einer Zeitspanne werden `begin`/`end` über `min()`/`max()` gebildet statt direkt aus dem ersten/zweiten Token übernommen — das fängt in Kalliope vorkommende vertauschte Bereichsgrenzen ab (`swapped`-Flag im Ergebnis).
-2. **`f:token($raw)`** — erkennt das Eingabeformat per Regex (`YYYY-MM-DD`, `YYYY-MM`, `YYYYMMDD`, `YYYYMM`, `YYYY`) und ruft `f:ymd()` mit den erkannten Werten auf.
-3. **`f:ymd($y, $m, $d)`** — löst die Präzision auf: `$m = 0` → Jahrespräzision (`begin` = 1.1., `end` = 31.12.), `$d = 0` → Monatspräzision (`begin`/`end` = erster/letzter Tag des Monats via `f:last-day`), sonst Tagespräzision. Kalendarisch ungültige Tagesangaben (z. B. `20130231`) werden nicht verworfen, sondern über `f:day-safe` erkannt und auf Monatspräzision zurückgeführt (`prec: 'month-repaired'`).
+1. **`f:parse-normal($normal)`** dient als Einstiegspunkt. Erkennt Zeitspannen (`.../ ...`-getrennt) und ruft für Einzeldaten bzw. beide Enden einer Zeitspanne `f:token()` auf. Bei einer Zeitspanne werden `begin`/`end` über `min()`/`max()` gebildet statt direkt aus dem ersten/zweiten Token übernommen — das fängt in Kalliope vorkommende vertauschte Bereichsgrenzen ab (`swapped`-Flag im Ergebnis).
+2. **`f:token($raw)`** erkennt das Eingabeformat per Regex (`YYYY-MM-DD`, `YYYY-MM`, `YYYYMMDD`, `YYYYMM`, `YYYY`) und ruft `f:ymd()` mit den erkannten Werten auf.
+3. **`f:ymd($y, $m, $d)`** löst die Präzision auf: `$m = 0` → Jahrespräzision (`begin` = 1.1., `end` = 31.12.), `$d = 0` → Monatspräzision (`begin`/`end` = erster/letzter Tag des Monats via `f:last-day`), sonst Tagespräzision. Kalendarisch ungültige Tagesangaben (z. B. `20130231`) werden nicht verworfen, sondern über `f:day-safe` erkannt und auf Monatspräzision zurückgeführt (`prec: 'month-repaired'`).
 
 Rückgabe ist jeweils eine `map(*)` mit `prec` (`year`/`month`/`day`/`month-repaired`/`range`), `key`, `begin` und `end` (beide `xs:date`), oder `()` bei leerem/nicht erkanntem Wert.
 
-**Wichtig:** `rico:beginningDate`/`rico:endDate` werden unabhängig von der erkannten Präzision immer als `xs:date` ausgegeben (Jahres-/Monatsangaben werden auf die jeweilige Vollzeitspanne aufgelöst), nicht als `xs:gYear`/`xs:gYearMonth`. Nur so können vergleichende Datumsabfragen via SPARQL gewährleistet werden.
+**Wichtig:** `rico:beginningDate`/`rico:endDate` werden unabhängig von der erkannten Präzision immer als `xs:date` (`YYYY-MM-DD`) ausgegeben (Jahres-/Monatsangaben werden auf die jeweilige Vollzeitspanne aufgelöst), nicht als `xs:gYear`/`xs:gYearMonth`. Nur so können vergleichende Datumsabfragen via SPARQL gewährleistet werden.
 
 # IRI-Strategie
 
@@ -112,7 +112,7 @@ Es gibt keine lokale Agenten-Materialisierung oder -Deduplizierung mehr. Ressour
 - **Eigene Ressourcen** (Bestand, Verzeichnungseinheiten): `kpe:` + `@id`.
 - **GND-referenzierte Entitäten** (Personen, Körperschaften, Genreformen): `gnd:` + `@authfilenumber`, nur wenn `@source='GND'` und `@authfilenumber` vorhanden sind. Es wird lediglich auf die GND-IRI verwiesen, es entsteht kein eigenes `rico:Person`/`rico:CorporateBody`-Tripel im Output.
 - **ISIL-referenzierte Aufbewahrungsorte**: `isil:` + `@authfilenumber`.
-- Alles ohne GND-/ISIL-Referenz (z. B. „Unbekannt", reine KPE-Angaben) wird bei den entsprechenden Properties schlicht nicht geschrieben.
+- Alles ohne GND-/ISIL-Referenz (z. B. „Unbekannt", reine KPE-Angaben) wird bei den entsprechenden Properties schlicht nicht erfasst.
 
 # Tests
 
@@ -165,6 +165,6 @@ kpe:DE-611-HS-3859381 a rico:Record ;
 
 - **Nur `<c>` mit `genreform = 'Brief'` werden zu `rico:Record`.** `rico:isOrWasIncludedIn` zeigt deshalb bewusst und einheitlich auf den übergeordneten Bestand (`ancestor::*:archdesc[1]`), statt auf das nächste umschließende `<c>`. Das umgeht vorerst das Problem hängender Referenzen auf `<c>`-Elemente, die selbst kein `rico:Record` sind. Die korrekte `<c>`-Verschachtelungsstruktur (Records innerhalb von Records) soll später nachgebildet werden; markiert mit TODO in `ead2rico_main.xsl`.
 - **Keine Agenten-Entitäten mehr im Output.** Personen und Körperschaften werden nur noch als GND-/ISIL-IRI referenziert, es entstehen keine eigenen `rico:Person`/`rico:CorporateBody`-Tripel mehr. Agenten ohne GND-/ISIL-Nummer (z. B. „Unbekannt") tauchen im Output gar nicht mehr auf.
-- **`rico:includesTransitive` vs. `rico:includesOrIncluded`** — Welche Property soll für Beziehungen zwischen Bestand und Verzeichnungseinheit benutzt werden? (`ead2rico_main.xsl`). Außerdem wird die `c`-Verschachtelungsstruktur beim Erzeugen dieser Kante aktuell ausgeblendet.
+- **`rico:includesTransitive` vs. `rico:includesOrIncluded`** — Welche Property soll für Beziehungen zwischen Bestand und Verzeichnungseinheit benutzt werden? (`ead2rico_main.xsl`). 
 - **Mehrere Properties sind auskommentiert/inaktiv:** `rico:identifier` (Signatur), `rico:isAssociatedWithPlace`, `rico:hasOrHadLanguage`, `rico:scopeAndContent`, `rico:hasOrHadHolder` auf Record-Ebene, `rico:instantiationExtent`. Auch offen: ob `unitid[@label='Signatur']` überhaupt als `rico:identifier` sinnvoll ist, oder ob es dafür eine eigene RiC-O-Entsprechung bräuchte.
 - **`did/repository/corpname[@role='Aufbewahrungsort']`** wird bislang nur auf Bestandsebene ausgewertet.

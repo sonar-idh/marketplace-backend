@@ -235,3 +235,9 @@ def test_date_unparseable_normal_produces_no_date_triples(transform_snippet):
     record = KPE["TEST-C-DATE-UNPARSEABLE"]
     assert transform_snippet.value(record, RICO.beginningDate) is None
     assert transform_snippet.value(record, RICO.endDate) is None
+
+
+def test_corpname_adressee(transform_snippet):
+    # Koerperschaft als Adressat wird korrekt erfasst
+    record = KPE["TEST-CORPNAME-ADRESSEE"]
+    assert (record, RICO.hasAddressee, GND["test"]) in transform_snippet

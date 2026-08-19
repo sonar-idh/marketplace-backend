@@ -1,57 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ead>
     <archdesc id="TEST-BESTAND">
-        <did><unittitle>Test-Bestand</unittitle></did>
+        <did>
+            <unittitle>Test-Bestand</unittitle>
+        </did>
         <dsc>
             <c id="TEST-C-NOBRIEF">
-                <did><unittitle>Keine Verzeichnungseinheit vom Typ Brief</unittitle></did>
-                <controlaccess><genreform>Akte</genreform></controlaccess>
+                <did>
+                    <unittitle>Keine Verzeichnungseinheit vom Typ Brief</unittitle>
+                </did>
+                <controlaccess>
+                    <genreform>Akte</genreform>
+                </controlaccess>
             </c>
             <c id="TEST-C-ESCAPE">
-                <did><unittitle>Brief mit "Anführungszeichen" und \Backslash\</unittitle></did>
-                <controlaccess><genreform>Brief</genreform></controlaccess>
+                <did>
+                    <unittitle>Brief mit "Anführungszeichen" und \Backslash\</unittitle>
+                </did>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
             </c>
             <c id="TEST-C-DATE-YEAR">
                 <did>
                     <unittitle>Datumstest Jahrespräzision</unittitle>
                     <unitdate label="Entstehungsdatum" normal="1934">1934</unitdate>
                 </did>
-                <controlaccess><genreform>Brief</genreform></controlaccess>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
             </c>
             <c id="TEST-C-DATE-RANGE">
                 <did>
                     <unittitle>Datumstest Zeitspanne</unittitle>
                     <unitdate label="Entstehungsdatum" normal="1930/1931">1930-1931</unitdate>
                 </did>
-                <controlaccess><genreform>Brief</genreform></controlaccess>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
             </c>
             <c id="TEST-C-DATE-RANGE-SWAPPED">
                 <did>
                     <unittitle>Datumstest vertauschte Zeitspanne</unittitle>
                     <unitdate label="Entstehungsdatum" normal="1931/1930">1931-1930</unitdate>
                 </did>
-                <controlaccess><genreform>Brief</genreform></controlaccess>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
             </c>
             <c id="TEST-C-DATE-INVALID-DAY">
                 <did>
                     <unittitle>Datumstest kalendarisch ungültiger Tag</unittitle>
                     <unitdate label="Entstehungsdatum" normal="20130231">31.02.2013</unitdate>
                 </did>
-                <controlaccess><genreform>Brief</genreform></controlaccess>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
             </c>
             <c id="TEST-C-DATE-MISSING-NORMAL">
                 <did>
                     <unittitle>Datumstest ohne normal-Attribut</unittitle>
                     <unitdate label="Entstehungsdatum">ohne normal-Attribut</unitdate>
                 </did>
-                <controlaccess><genreform>Brief</genreform></controlaccess>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
             </c>
             <c id="TEST-C-DATE-UNPARSEABLE">
                 <did>
                     <unittitle>Datumstest nicht erkennbares Format</unittitle>
                     <unitdate label="Entstehungsdatum" normal="nicht-erkennbar">unbekannt</unitdate>
                 </did>
-                <controlaccess><genreform>Brief</genreform></controlaccess>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
+            </c>
+            <c id="TEST-CORPNAME-ADRESSEE">
+                <did>
+                    <unittitle>Körperschaft als Adressat</unittitle>
+                </did>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                    <corpname role="Adressat" source="GND" authfilenumber="test">Test-Corp</corpname>
+                </controlaccess>
             </c>
         </dsc>
     </archdesc>
