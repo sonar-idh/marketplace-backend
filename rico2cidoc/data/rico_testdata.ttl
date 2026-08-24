@@ -1,0 +1,422 @@
+@prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xs:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix sonar: <https://data.sbb.spk-berlin.de/sonar/id/> .
+@prefix gnd: <https://d-nb.info/gnd/> .
+@prefix isil: <https://isil.staatsbibliothek-berlin.de/isil/> .
+@prefix kpe: <https://kalliope-verbund.info/ead?ead.id=> .
+
+
+# ===== Bestand =====
+
+kpe:DE-611-BF-5364 a rico:RecordSet ;
+    rico:title "N.Mus.Nachl. 15 (Teilnachlass Arnold Schönberg)" ;
+    rico:identifier "DE-611-BF-5364" ;
+    rico:hasRecordSetType gnd:4123811-4 ;
+    rico:hasOrHadHolder isil:DE-1 ;
+    rico:hasOrganicProvenance gnd:118610023 ;
+    rico:hasOrganicProvenance gnd:116701218 ;
+    rico:includesTransitive kpe:DE-611-HS-3685983 ;
+    rico:includesTransitive kpe:DE-611-HS-3686072 ;
+    rico:includesTransitive kpe:DE-611-HS-3695945 ;
+    rico:includesTransitive kpe:DE-611-HS-3696115 ;
+    rico:includesTransitive kpe:DE-611-HS-3696127 ;
+    rico:includesTransitive kpe:DE-611-HS-3696130 ;
+    rico:includesTransitive kpe:DE-611-HS-3696395 ;
+    rico:includesTransitive kpe:DE-611-HS-3802064 ;
+    rico:includesTransitive kpe:DE-611-HS-3802129 ;
+    rico:includesTransitive kpe:DE-611-HS-3802133 ;
+    rico:includesTransitive kpe:DE-611-HS-3802187 ;
+    rico:includesTransitive kpe:DE-611-HS-3802191 ;
+    rico:includesTransitive kpe:DE-611-HS-3802203 ;
+    rico:includesTransitive kpe:DE-611-HS-3802235 ;
+    rico:includesTransitive kpe:DE-611-HS-3815943 ;
+    rico:includesTransitive kpe:DE-611-HS-3815957 ;
+    rico:includesTransitive kpe:DE-611-HS-3816136 ;
+    rico:includesTransitive kpe:DE-611-HS-3816139 ;
+    rico:includesTransitive kpe:DE-611-HS-3816143 ;
+    rico:includesTransitive kpe:DE-611-HS-3816146 ;
+    rico:includesTransitive kpe:DE-611-HS-3816148 ;
+    rico:includesTransitive kpe:DE-611-HS-3852815 ;
+    rico:includesTransitive kpe:DE-611-HS-3852819 ;
+    rico:includesTransitive kpe:DE-611-HS-3852845 ;
+    rico:includesTransitive kpe:DE-611-HS-3852847 ;
+    rico:includesTransitive kpe:DE-611-HS-3852861 ;
+    rico:includesTransitive kpe:DE-611-HS-3852863 ;
+    rico:includesTransitive kpe:DE-611-HS-3852864 ;
+    rico:includesTransitive kpe:DE-611-HS-3852866 ;
+    rico:includesTransitive kpe:DE-611-HS-3852867 ;
+    rico:includesTransitive kpe:DE-611-HS-3852872 ;
+    rico:includesTransitive kpe:DE-611-HS-3852874 ;
+    rico:includesTransitive kpe:DE-611-HS-3852877 ;
+    rico:includesTransitive kpe:DE-611-HS-3852883 ;
+    rico:includesTransitive kpe:DE-611-HS-3859360 ;
+    rico:includesTransitive kpe:DE-611-HS-3859364 ;
+    rico:includesTransitive kpe:DE-611-HS-3859367 ;
+    rico:includesTransitive kpe:DE-611-HS-3859381 ;
+    rico:includesTransitive kpe:DE-611-HS-3859386 .
+
+# ===== Verzeichnungseinheiten =====
+
+kpe:DE-611-HS-3685983 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Unbekannt, 11.1934 [November 1934]" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1934-11-01"^^xs:date ;
+    rico:endDate "1934-11-30"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3686072 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Unbekannt, 11.1934 [November 1934]" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1934-11-01"^^xs:date ;
+    rico:endDate "1934-11-30"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3695945 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Alban Berg, 09.08.1930" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1930-08-09"^^xs:date ;
+    rico:endDate "1930-08-09"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:118509322 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3696115 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Alban Berg, 23.10.1931" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1931-10-23"^^xs:date ;
+    rico:endDate "1931-10-23"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:118509322 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3696127 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Alban Berg, 02.01.1934" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1934-01-02"^^xs:date ;
+    rico:endDate "1934-01-02"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:118509322 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3696130 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Luigi Dallapiccola und Josef Rufer, 19.01.1951" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1951-01-19"^^xs:date ;
+    rico:endDate "1951-01-19"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:118670913 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3696395 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Werner David, 19.01.1951" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1951-01-19"^^xs:date ;
+    rico:endDate "1951-01-19"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116037865 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3802064 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Walter Gerstenberg, 14.07.1950" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1950-07-14"^^xs:date ;
+    rico:endDate "1950-07-14"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:118690965 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3802129 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 28.06.1949" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1949-06-28"^^xs:date ;
+    rico:endDate "1949-06-28"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3802133 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Akademie der Künste, 20.03.1933" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1933-03-20"^^xs:date ;
+    rico:endDate "1933-03-20"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3802187 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Akademie der Künste, 20.03.1933" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1933-03-20"^^xs:date ;
+    rico:endDate "1933-03-20"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3802191 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 02.10.1927" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1927-10-02"^^xs:date ;
+    rico:endDate "1927-10-02"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3802203 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 02.09.1929" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1929-09-02"^^xs:date ;
+    rico:endDate "1929-09-02"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3802235 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 05.08.1931" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1931-08-05"^^xs:date ;
+    rico:endDate "1931-08-05"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3815943 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg und Gertrud Schönberg an Josef Rufer und Maria Antonie Rufer, 01.09.1931" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1931-09-01"^^xs:date ;
+    rico:endDate "1931-09-01"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAuthor gnd:116860146 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:hasAddressee gnd:125100573X ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3815957 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 16.12.1931" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1931-12-16"^^xs:date ;
+    rico:endDate "1931-12-16"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3816136 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 07.03.1932" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1932-03-07"^^xs:date ;
+    rico:endDate "1932-03-07"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3816139 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg und Gertrud Schönberg an Josef Rufer und Maria Antonie Rufer, 15.04.1932" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1932-04-15"^^xs:date ;
+    rico:endDate "1932-04-15"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAuthor gnd:116860146 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:hasAddressee gnd:125100573X ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3816143 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 03.05.1932" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1932-05-03"^^xs:date ;
+    rico:endDate "1932-05-03"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3816146 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 07.05.1932" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1932-05-07"^^xs:date ;
+    rico:endDate "1932-05-07"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3816148 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg und Gertrud Schönberg an Josef Rufer und Maria Antonie Rufer, 05.10.1932" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1932-10-05"^^xs:date ;
+    rico:endDate "1932-10-05"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAuthor gnd:116860146 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:hasAddressee gnd:125100573X ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852815 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg und Gertrud Schönberg an Josef Rufer und Maria Antonie Rufer, 21.07.1933" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1933-07-21"^^xs:date ;
+    rico:endDate "1933-07-21"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAuthor gnd:116860146 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:hasAddressee gnd:125100573X ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852819 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 24.08.1933" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1933-08-24"^^xs:date ;
+    rico:endDate "1933-08-24"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852845 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg und Gertrud Schönberg an Josef Rufer und Maria Antonie Rufer, 17.09.1933" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1933-09-17"^^xs:date ;
+    rico:endDate "1933-09-17"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAuthor gnd:116860146 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:hasAddressee gnd:125100573X ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852847 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg und Gertrud Schönberg an Josef Rufer und Maria Antonie Rufer, 06.10.1933" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1933-10-06"^^xs:date ;
+    rico:endDate "1933-10-06"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAuthor gnd:116860146 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:hasAddressee gnd:125100573X ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852861 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 18.10.1933" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1933-10-18"^^xs:date ;
+    rico:endDate "1933-10-18"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852863 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 24.10.1933" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1933-10-24"^^xs:date ;
+    rico:endDate "1933-10-24"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852864 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 08.02.1934" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1934-02-08"^^xs:date ;
+    rico:endDate "1934-02-08"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852866 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 17.02.1934 [Datum mutmaßlich]" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1934-02-17"^^xs:date ;
+    rico:endDate "1934-02-17"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852867 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 16.04.1934" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1934-04-16"^^xs:date ;
+    rico:endDate "1934-04-16"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852872 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg und Gertrud Schönberg an Josef Rufer, 22.07.1934" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1934-07-22"^^xs:date ;
+    rico:endDate "1934-07-22"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAuthor gnd:116860146 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852874 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 23.10.1945" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1945-10-23"^^xs:date ;
+    rico:endDate "1945-10-23"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852877 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 25.06.1946" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1946-06-25"^^xs:date ;
+    rico:endDate "1946-06-25"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3852883 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 25.06.1946" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1946-06-25"^^xs:date ;
+    rico:endDate "1946-06-25"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3859360 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg und Gertrud Schönberg an Josef Rufer, 07.12.1946" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1946-12-07"^^xs:date ;
+    rico:endDate "1946-12-07"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAuthor gnd:116860146 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3859364 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 06.06.1947" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1947-06-06"^^xs:date ;
+    rico:endDate "1947-06-06"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3859367 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 06.06.1947" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1947-06-06"^^xs:date ;
+    rico:endDate "1947-06-06"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3859381 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 18.12.1947" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1947-12-18"^^xs:date ;
+    rico:endDate "1947-12-18"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
+kpe:DE-611-HS-3859386 a rico:Record ;
+    rico:title "Brief von Arnold Schönberg an Josef Rufer, 15.01.1948" ;
+    rico:hasDocumentaryFormType gnd:4008240-4 ;
+    rico:beginningDate "1948-01-15"^^xs:date ;
+    rico:endDate "1948-01-15"^^xs:date ;
+    rico:hasAuthor gnd:118610023 ;
+    rico:hasAddressee gnd:116701218 ;
+    rico:isOrWasIncludedIn kpe:DE-611-BF-5364 .
+
