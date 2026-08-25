@@ -10,7 +10,7 @@ Input:
 Output:
 - RDF file in CIDOC-CRM/CER format (ttl)
 
-Check the documentation at:
+Check the documentation at: MVP_KALLIOPE.md
 """
 
 import argparse
@@ -67,13 +67,13 @@ queries = {
     }
 
     """,
-    "Q2_Agents": PREFIX_BLOCK
+    "Q2_Creation": PREFIX_BLOCK
     + """
             CONSTRUCT {
                 ?agentAssignmentURI a crm:PC14_Carried_Out_By ;
                     crm:P01_has_domain ?creationEventURI ;
                     crm:P02_has_range ?agentURI ;
-                    crm:P14.1_in_the_role_of ?roleURI .
+                    crm:P14.1_in_the_role_of rel:aut .
                 ?agentURI a crm:E21_Person .
                 ?roleURI a crm:E55_Type .
                 ?creationEventURI a crm:E65_Creation ;
@@ -81,22 +81,41 @@ queries = {
             }
             WHERE {
                 ?letterURI a rico:Record .
-
-                {
-                    ?letterURI rico:hasAuthor ?agentURI .
-                    BIND(rel:aut AS ?roleURI)
-                }
-                UNION
-                {
-                    ?letterURI rico:hasAddressee ?agentURI .
-                    BIND(rel:rcp AS ?roleURI)
-                }
-
+                ?letterURI rico:hasAuthor ?agentURI .
+                BIND(rel:aut AS ?roleURI)
                 BIND(STRAFTER(STR(?letterURI), STR(kpe:)) AS ?letterId)
                 BIND(URI(CONCAT(STR(kpe:), ?letterId, "-CreationEvent")) AS ?creationEventURI)
                 BIND(URI(CONCAT(STR(kpe:), ?letterId, "-RoleAssignment_", SHA1(CONCAT(STR(?agentURI), STR(?roleURI))))) AS ?agentAssignmentURI)
             }
         """,
+    "Q3_Sending": PREFIX_BLOCK
+    + """
+            CONSTRUCT {
+                ?SendingURI a cer:13_Sending ;
+                    cer:P9_was_intended_use_of ?letterURI ;
+                    cer:P8_carried_out_by ?agentURI .
+            }
+            WHERE {
+                ?letterURI a rico:Record .
+                ?letterURI rico:hasAuthor ?agentURI .
+                BIND(STRAFTER(STR(?letterURI), STR(kpe:)) AS ?letterId)
+                BIND(URI(CONCAT(STR(kpe:Sending_), ?letterId)) AS ?SendingURI)  
+            }
+        """,
+    "Q4_Receiving": PREFIX_BLOCK
+    + """
+                CONSTRUCT {
+                    ?ReceivingURI a cer:14_Receiving ;
+                        cer:P9_was_intended_use_of ?letterURI ;
+                        cer:P8_carried_out_by ?agentURI .
+                }
+                WHERE {
+                    ?letterURI a rico:Record .
+                    ?letterURI rico:hasAddressee ?agentURI .
+                    BIND(STRAFTER(STR(?letterURI), STR(kpe:)) AS ?letterId)
+                    BIND(URI(CONCAT(STR(kpe:Receiving_), ?letterId)) AS ?ReceivingURI)
+                }
+            """,
     #     "Q3_Timestamp": PREFIX_BLOCK
     #     + """
     #         CONSTRUCT {
@@ -129,7 +148,7 @@ def rico_to_cidoc(input_path: Path, output_path: Path) -> None:
             source.parse(
                 source=sys.stdin.buffer,
                 format="turtle",
-                publicID="https://opac.k10plus.de/PPNSET/PPN/",  # has to be changed
+                publicID="https://kalliope-verbund.info/ead?ead.id=",  # not sure about this
             )
         else:
             source.parse(str(input_path), format="turtle")
@@ -174,7 +193,7 @@ def main():
     argp.add_argument(
         "-i",
         "--input",
-        default=str(SCRIPT_DIR / "data/schumann_bib.ttl"),
+        default=str(SCRIPT_DIR / "data/rico_testdata.ttl"),
         help="RiC-O Turtle input",
     )
     argp.add_argument(
