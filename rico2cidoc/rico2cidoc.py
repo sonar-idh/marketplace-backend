@@ -84,8 +84,8 @@ queries = {
                 ?letterURI rico:hasAuthor ?agentURI .
                 BIND(rel:aut AS ?roleURI)
                 BIND(STRAFTER(STR(?letterURI), STR(kpe:)) AS ?letterId)
-                BIND(URI(CONCAT(STR(kpe:), ?letterId, "-CreationEvent")) AS ?creationEventURI)
-                BIND(URI(CONCAT(STR(kpe:), ?letterId, "-RoleAssignment_", SHA1(CONCAT(STR(?agentURI), STR(?roleURI))))) AS ?agentAssignmentURI)
+                BIND(URI(CONCAT(STR(kpe:), ?letterId, "#CreationEvent")) AS ?creationEventURI)
+                BIND(URI(CONCAT(STR(kpe:), ?letterId, "#RoleAssignment_", SHA1(CONCAT(STR(?agentURI), STR(?roleURI))))) AS ?agentAssignmentURI)
             }
         """,
     "Q3_Sending": PREFIX_BLOCK
@@ -104,37 +104,34 @@ queries = {
         """,
     "Q4_Receiving": PREFIX_BLOCK
     + """
-                CONSTRUCT {
-                    ?ReceivingURI a cer:14_Receiving ;
-                        cer:P9_was_intended_use_of ?letterURI ;
-                        cer:P8_carried_out_by ?agentURI .
-                }
-                WHERE {
-                    ?letterURI a rico:Record .
-                    ?letterURI rico:hasAddressee ?agentURI .
-                    BIND(STRAFTER(STR(?letterURI), STR(kpe:)) AS ?letterId)
-                    BIND(URI(CONCAT(STR(kpe:Receiving_), ?letterId)) AS ?ReceivingURI)
-                }
-            """,
-    #     "Q3_Timestamp": PREFIX_BLOCK
-    #     + """
-    #         CONSTRUCT {
-    #             ?creationEventURI crm:P4_has_time-span ?timeSpanURI .
-    #             ?timeSpanURI a crm:E52_Time_Span ;
-    #                 crm:P170i_time_is_defined_by ?correctDatePrimitive .
-    #         }
-    #         WHERE {
-    #             ?work a bf:Work ;
-    #                     bf:adminMetadata/bf:identifiedBy/rdf:value ?titleId .
-    # """
-    #     + WORK_FILTER_BLOCK
-    #     + """
-    #             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId)) AS ?objectURI)
-    #             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#CreationEvent")) AS ?creationEventURI)
-    #             BIND(URI(CONCAT("https://opac.k10plus.de/PPNSET?PPN=", ?titleId, "#TimeSpan")) AS ?timeSpanURI)
-    #             BIND(STRDT(SUBSTR(STR(?correctDate), 1, 4), crm:E61_Time_Primitive) AS ?correctDatePrimitive)
-    #         }
-    #     """,
+            CONSTRUCT {
+                ?ReceivingURI a cer:14_Receiving ;
+                    cer:P9_was_intended_use_of ?letterURI ;
+                    cer:P8_carried_out_by ?agentURI .
+            }
+            WHERE {
+                ?letterURI a rico:Record .
+                ?letterURI rico:hasAddressee ?agentURI .
+                BIND(STRAFTER(STR(?letterURI), STR(kpe:)) AS ?letterId)
+                BIND(URI(CONCAT(STR(kpe:Receiving_), ?letterId)) AS ?ReceivingURI)
+            }
+        """,
+    "Q5_Timestamp": PREFIX_BLOCK
+    + """
+            CONSTRUCT {
+                ?creationEventURI crm:P4_has_time-span ?timeSpanURI .
+                ?timeSpanURI a crm:E52_Time_Span ;
+                    crm:P170i_time_is_defined_by ?correctDatePrimitive .
+            }
+            WHERE {
+                ?letterURI a rico:Record .
+                ?letterURI rico:endDate ?date .
+                BIND(STRAFTER(STR(?letterURI), STR(kpe:)) AS ?letterId)
+                BIND(URI(CONCAT(STR(kpe:), ?letterId, "#CreationEvent")) AS ?creationEventURI)
+                BIND(URI(CONCAT(STR(kpe:), ?letterId, "#TimeSpan")) AS ?timeSpanURI)
+                BIND(STRDT(SUBSTR(STR(?date), 1, 4), crm:E61_Time_Primitive) AS ?correctDatePrimitive)
+            }
+    """,
 }
 
 

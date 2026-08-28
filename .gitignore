@@ -3,3 +3,8 @@ ead2cer/
 .pytest_cache/
 __pycache__
 ead2rico/out.ttl
+rico2cidoc/data/test_rico_clara_schumann.ttl
+rico2cidoc/data/test_record_clara_schumann.xml
+rico2cidoc/data/test_cidoc_clara_schumann.ttl
+rico2cidoc/data/rico_to_cidoc.log
+rico2cidoc/data/cidoc_result.ttl
