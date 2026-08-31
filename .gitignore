@@ -3,3 +3,5 @@ ead2cer/
 .pytest_cache/
 __pycache__
 ead2rico/out.ttl
+fetch_gnd_sru_subset/
+rico2cidoc/
