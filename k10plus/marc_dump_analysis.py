@@ -75,6 +75,8 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
     complete_records_count = 0
     date_counts = Counter()
     record_dates = {}
+    genre_form_counts = Counter()
+    genre_forms = {}
 
     record_idx = 0
 
@@ -126,7 +128,6 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
             1. Identify whether the record is a reproduction by checking for tag 534. If it is present, then the original details are in this tag because the reproduction details are not of use to us.
             2. Else look for control field 008 to get machine readable date by parsing it.
                 - Char position 06-17 --> Date
-            3. Fall back: if control field 008 contains uuuu or 19uu, check tag 264$C and 260$c.
         """
         record_id = record["001"].value() if "001" in record else "unknown"
         field_534 = record.get_fields("534")
@@ -148,6 +149,33 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
         if date is None:
             logger.error(f"Could not find the record date for record {record_id}")
         return date
+
+    def get_genre_forms(record):
+        """
+        Get all genre forms for a record.
+        Uses this logic:
+        1. Look for all instances of tag 655 (Genre/Form), which is repeatable (R).
+        2. Extract values from subfield $0 that start with "(DE-588".
+        Source: https://sta.dnb.de/doc/RDA-VW-E-W075-LISTE-2
+        """
+        record_id = record["001"].value() if "001" in record else "unknown"
+        fields_655 = record.get_fields("655")
+        found_genre_forms = []
+        if fields_655:
+            for field in fields_655:
+                for val in field.get_subfields("0"):
+                    if val.startswith("(DE-588"):
+                        found_genre_forms.append(val)
+                        logger.info(
+                            f"Using 655 field (DE-588) to get genre form: {val}"
+                        )
+            if not found_genre_forms:
+                logger.error(
+                    f"Could not find any genre form starting with (DE-588) for record {record_id}"
+                )
+        else:
+            logger.error(f"Could not find the 655 field for record {record_id}")
+        return found_genre_forms
 
     # iterating over each record in MARC file --> iteration over Tags --> get all the fields and subfields --> add to the counter --> print statistics
     def process_record(record):
@@ -182,10 +210,18 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
         #     record_id = record['001'].value() if '001' in record else "unknown"
         #     issues_file.write(f"Record {record_idx} (ID: {record_id}): Missing Tag 100\n")
 
+        # Get record date
         record_date = get_record_date(record)
         if record_date:
             date_counts[record_date] += 1
             record_dates[record_id] = record_date
+
+        # Get genre forms (tag 655 is repeatable)
+        rec_genre_forms = get_genre_forms(record)
+        if rec_genre_forms:
+            genre_forms[record_id] = rec_genre_forms
+            for gf in rec_genre_forms:
+                genre_form_counts[gf] += 1
 
         # iterating over required tags
         for tag in tags:
@@ -271,6 +307,32 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
         )
         f.write("\n")
 
+        # genre form counts
+        f.write("=" * 80 + "\n")
+        f.write("GENRE FORM COUNTS (Sorted by Frequency)\n")
+        f.write("=" * 80 + "\n")
+        f.write(
+            f"Total records with Genre Forms: {len(genre_forms)} ({len(genre_forms) / record_idx * 100:.2f}%)\n"
+        )
+        f.write(
+            f"Missing Genre Forms: {(record_idx - len(genre_forms)):,} ({(record_idx - len(genre_forms)) / record_idx * 100:.2f}%)\n"
+        )
+        f.write(f"Total Genre Forms: {sum(genre_form_counts.values())}\n")
+        f.write("\n")
+        sorted_genre_forms = sorted(
+            genre_form_counts.keys(),
+            key=lambda x: genre_form_counts[x],
+            reverse=True,
+        )
+        for genre_form in sorted_genre_forms:
+            count = genre_form_counts[genre_form]
+            if count > 0:
+                pct = (count / record_idx * 100) if record_idx > 0 else 0
+                label = genre_form
+                f.write(f"- {label:<40}: {count:,} ({pct:.2f}%)\n")
+        f.write("\n")
+
+        # bibliographic level counts
         f.write("=" * 80 + "\n")
         f.write("BIBLIOGRAPHIC LEVEL COUNTS (Sorted by Frequency)\n")
         f.write("=" * 80 + "\n")
@@ -287,6 +349,7 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
                 f.write(f"- {label:<40}: {count:,} ({pct:.2f}%)\n")
         f.write("\n")
 
+        # type of record counts
         f.write("=" * 80 + "\n")
         f.write("TYPE OF RECORD COUNTS (Sorted by Frequency)\n")
         f.write("=" * 80 + "\n")
@@ -303,6 +366,7 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
                 f.write(f"- {label:<40}: {count:,} ({pct:.2f}%)\n")
         f.write("\n")
 
+        # tag frequency
         f.write("=" * 80 + "\n")
         f.write("TAG FREQUENCY\n")
         f.write("=" * 80 + "\n")
@@ -319,6 +383,7 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
             )
         f.write("\n")
 
+        # relator coverage summary
         f.write("=" * 80 + "\n")
         f.write("RELATOR COVERAGE SUMMARY\n")
         f.write("=" * 80 + "\n")
@@ -333,6 +398,7 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
                 )
         f.write("\n")
 
+        # relator detail breakdown
         f.write("=" * 80 + "\n")
         f.write("RELATOR DETAIL BREAKDOWN (Sorted by Frequency)\n")
         f.write("=" * 80 + "\n")
@@ -362,6 +428,7 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
                 f.write(f"  - {role_name:<30}: {count:,} ({pct:.2f}%)\n")
         f.write("\n")
 
+        # gnd linking coverage
         f.write("=" * 80 + "\n")
         f.write("GND LINKING COVERAGE (Percentage of subfields mapped to a GND ID)\n")
         f.write("=" * 80 + "\n")
