@@ -15,6 +15,7 @@ Output:
 
 import json
 import logging
+import re
 from collections import Counter
 from pathlib import Path
 
@@ -123,29 +124,55 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
 
     def get_record_date(record):
         """
-        Get the record date
-        Uses this logic:
-            1. Identify whether the record is a reproduction by checking for tag 534. If it is present, then the original details are in this tag because the reproduction details are not of use to us.
-            2. Else look for control field 008 to get machine readable date by parsing it.
-                - Char position 06-17 --> Date
+        Get the publication date for a record using the following priority:
+        1. If control field 008 position 06 is 'r' (Reproduction) and Date 2 (pos 11-14) is valid (not 'uuuu'),
+           use Date 2 as the original publication year (replacing 'u' with 'X').
+        2. Else if Tag 534 (Original Version Note) is present, extract year(s) from subfield $c.
+           If multiple 4-digit years are found, format as an ISO 8601 interval (YYYY/YYYY).
+        3. Else fallback to control field 008 Date 1 (pos 07-10), replacing 'u' with 'X'.
         """
         record_id = record["001"].value() if "001" in record else "unknown"
+        field_008 = (
+            record.get_fields("008")[0].value() if record.get_fields("008") else ""
+        )
         field_534 = record.get_fields("534")
+
         date = None
-        if len(field_534) > 1:
-            logger.info(f"Found {len(field_534)} instances of tag 534")
-        if field_534:
-            logger.info(
-                f"Using 534 field to get the record date: {field_534[0].get_subfields('c')}"
-            )
-            date = field_534[0].get_subfields("c")[0]
-        else:
-            field_008 = record.get_fields("008")[0].value()
-            raw_date = field_008[7:11]
-            date = raw_date.replace("u", "X")
-            logger.info(
-                f"Using 008 field (with 'u' replaced by 'X') to get the record date: {date}"
-            )
+
+        # 1. Check if 008 pos 06 is 'r' (reproduction) and Date 2 (pos 11-14) is valid
+        if len(field_008) >= 15 and field_008[6] == "r":
+            d2 = field_008[11:15].strip()
+            if d2 and d2 != "uuuu":
+                date = d2.replace("u", "X")
+                logger.info(
+                    f"Using 008 field Date 2 (reproduction original date) for record {record_id}: {date}"
+                )
+
+        # 2. Check Tag 534 $c if date not found yet
+        if not date and field_534:
+            sub_c = field_534[0].get_subfields("c")
+            if sub_c:
+                raw_text = sub_c[0]
+                years = re.findall(r"\b(1[5-9]\d{2}|20\d{2})\b", raw_text)
+                if len(years) > 1:
+                    date = f"{years[0]}/{years[1]}"
+                elif years:
+                    date = years[0]
+                else:
+                    date = raw_text
+                logger.info(
+                    f"Using 534 field $c to get record date for record {record_id}: {date}"
+                )
+
+        # 3. Fallback to 008 Date 1 (pos 07-10)
+        if not date and len(field_008) >= 11:
+            d1 = field_008[7:11]
+            if d1.strip():
+                date = d1.replace("u", "X")
+                logger.info(
+                    f"Using 008 field Date 1 (with 'u' replaced by 'X') for record {record_id}: {date}"
+                )
+
         if date is None:
             logger.error(f"Could not find the record date for record {record_id}")
         return date
@@ -494,8 +521,10 @@ def marc_analyser(file_path: str, tags: list, subfields: list, output_path: str 
         # write date counts to json file
         with open("data/date_counts_marc.json", "w", encoding="utf-8") as f:
             json.dump(date_counts, f, indent=4)
+            f.write("\n")
         with open("data/dates_with_recordID_marc.json", "w", encoding="utf-8") as f:
             json.dump(record_dates, f, indent=4)
+            f.write("\n")
 
 
 if __name__ == "__main__":

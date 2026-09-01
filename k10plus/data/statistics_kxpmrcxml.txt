@@ -248,11 +248,11 @@ DATE STATISTICS
  Overview
 ----------------------------------------
 Time span: 1480 - 2017
-Total date entries: 58308
-Total numeric dates instances: 55344
-Total non-numeric dates instances: 2964
-Unique numeric dates: 185 (94.92%)
-Unique non-numeric dates: 6 (5.08%)
+Total date entries: 58301
+Total numeric dates instances: 55345
+Total non-numeric dates instances: 2956
+Unique numeric dates: 185 (94.93%)
+Unique non-numeric dates: 4 (5.07%)
 
 
 Date Breakdown (Sorted by Frequency):
@@ -319,7 +319,7 @@ Date Breakdown (Sorted by Frequency):
 - 1831: 431 (0.74%)
 - 1805: 429 (0.74%)
 - 1828: 427 (0.73%)
-- 1836: 423 (0.73%)
+- 1836: 424 (0.73%)
 - 1847: 422 (0.72%)
 - 1878: 421 (0.72%)
 - 1837: 418 (0.72%)
@@ -371,7 +371,6 @@ Date Breakdown (Sorted by Frequency):
 - 1798: 9 (0.02%)
 - 1730: 8 (0.01%)
 - 1931: 7 (0.01%)
--     : 7 (0.01%)
 - 1799: 7 (0.01%)
 - 17XX: 7 (0.01%)
 - 1960: 6 (0.01%)
@@ -416,7 +415,6 @@ Date Breakdown (Sorted by Frequency):
 - 2012: 1 (0.00%)
 - 1983: 1 (0.00%)
 - 1968: 1 (0.00%)
-- 1836/39: 1 (0.00%)
 - 1963: 1 (0.00%)
 - 1946: 1 (0.00%)
 - 1933: 1 (0.00%)
