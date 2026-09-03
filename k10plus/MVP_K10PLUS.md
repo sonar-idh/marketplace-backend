@@ -74,18 +74,18 @@ Data considered:
 - Contributors (Tag 100 & Tag 700) and their roles.
 - Creation / Publication Date (Tag 534 original date or Tag 264/260/008 publication date).
 
-| Source BIBFRAME Element | XPath / Graph Pattern | Target CIDOC CRM Class | Target CIDOC CRM Property | Description / Minting Pattern |
-| :--- | :--- | :--- | :--- | :--- |
-| `bf:Work` (Event Creation) | `?work a bf:Work` | `crm:E65_Creation` | `crm:P94_has_created` | The creation event of the work. URI: `{objectURI}#CreationEvent` |
-| `bf:Work` | `?work a bf:Work` | `crm:E73_Information_Object` | - | Represents the bibliographic item / work. URI: `https://opac.k10plus.de/PPNSET?PPN={titleId}` |
-| `bf:identifiedBy` | `bf:adminMetadata/bf:identifiedBy/rdf:value` | `crm:E42_Identifier` | `crm:P1_is_identified_by` | Links the work to its identifier (PPN) via a blank node with `crm:P190_has_symbolic_content`. |
-| `bf:title` | `bf:title/bf:mainTitle` | `crm:E35_Title` | `crm:P102_has_title` | Links the work to its main title via a blank node with `crm:P190_has_symbolic_content`. |
-| `bf:contribution` | `bf:contribution` | `crm:PC14_Carried_Out_By` | - | Reified participation node representing an agent's role. URI: `{objectURI}#RoleAssignment_{SHA1(agentURI)}` |
-| `bf:contribution` (Domain) | `bf:contribution` | `crm:PC14_Carried_Out_By` | `crm:P01_has_domain` | Links the reified relationship to the creation event (`crm:E65_Creation`). |
-| `bf:agent` | `bf:contribution/bf:agent` | `crm:E21_Person` | `crm:P02_has_range` | Links the reified relationship to the person's GND URI. |
-| `bf:role` | `bf:contribution/bf:role` | `crm:E55_Type` | `<http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of>` | Links the reified relationship to the role type (Relator URI). |
-| `bf:Instance` (Time-Span) | `?instance` (via `bf:hasInstance`) | `crm:E52_Time_Span` | `crm:P4_has_time-span` | Links the creation event (`crm:E65_Creation`) to its time-span node. URI: `{objectURI}#TimeSpan` |
-| `bf:note` / `bf:date` | `origDate` or `pubDate` | `crm:E61_Time_Primitive` | `crm:P170i_time_is_defined_by` | Year primitive (4-digit string typed as `crm:E61_Time_Primitive`) defining the time-span. |
+| MARC Field / Tag | Source BIBFRAME Element | XPath / Graph Pattern | Target CIDOC CRM Class | Target CIDOC CRM Property | Description / Minting Pattern |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `Tag 001` | `bf:Work` | `?work a bf:Work` | `crm:E65_Creation` | `crm:P94_has_created` | The creation event of the work. URI: `{objectURI}#CreationEvent` |
+| `Tag 001` | `bf:Work` | `?work a bf:Work` | `crm:E73_Information_Object` | - | Represents the bibliographic item / work. URI: `https://opac.k10plus.de/PPNSET?PPN={titleId}` |
+| `Tag 001` | `bf:identifiedBy` | `bf:adminMetadata/bf:identifiedBy/rdf:value` | `crm:E42_Identifier` | `crm:P1_is_identified_by` | Links the work to its identifier (PPN) via a blank node with `crm:P190_has_symbolic_content`. |
+| `Tag 245` | `bf:title` | `bf:title/bf:mainTitle` | `crm:E35_Title` | `crm:P102_has_title` | Links the work to its main title via a blank node with `crm:P190_has_symbolic_content`. |
+| `Tag 100` / `Tag 700` | `bf:contribution` | `bf:contribution` | `crm:PC14_Carried_Out_By` | - | Reified participation node representing an agent's role. URI: `{objectURI}#RoleAssignment_{SHA1(agentURI)}` |
+| `Tag 100` / `Tag 700` | `bf:contribution` (Domain) | `bf:contribution` | `crm:PC14_Carried_Out_By` | `crm:P01_has_domain` | Links the reified relationship to the creation event (`crm:E65_Creation`). |
+| `Tag 100` / `Tag 700` (`$0` starting with `DE-588`) | `bf:agent` | `bf:contribution/bf:agent` | `crm:E21_Person` | `crm:P02_has_range` | Links the reified relationship to the person's GND URI. |
+| `Tag 100` / `Tag 700` (`$4`) | `bf:role` | `bf:contribution/bf:role` | `crm:E55_Type` | `<http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of>` | Links the reified relationship to the role type (Relator URI). |
+| `Tag 264` / `Tag 260` / `Tag 008` | `bf:Instance` (Time-Span) | `?instance` (via `bf:hasInstance`) | `crm:E52_Time_Span` | `crm:P4_has_time-span` | Links the creation event (`crm:E65_Creation`) to its time-span node. URI: `{objectURI}#TimeSpan` |
+| `Tag 534` / `Tag 264` / `Tag 260` / `Tag 008` | `bf:note` / `bf:date` | `origDate` or `pubDate` | `crm:E61_Time_Primitive` | `crm:P170i_time_is_defined_by` | Year primitive (4-digit string typed as `crm:E61_Time_Primitive`) defining the time-span. |
 
 ### Core Modeling Principles
 
