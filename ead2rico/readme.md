@@ -74,6 +74,7 @@ Wird nur erzeugt, wenn `controlaccess/genreform = 'Brief'`.
 | ------------------------------------------------------------ | ------------------------------- | ------------------------------------------------------------ |
 | `@id`                                                       | (Subjekt-IRI)                  | `kpe:` + `@id`                                              |
 | `did/unittitle`                                             | `rico:title`                   | Literal                                                      |
+| `did/langmaterial/language/@langcode`   | `rico:hasOrHadLanguage`  | ISO 639-2-Sprachcode als Literal                                  |
 | `controlaccess/genreform[@source='GND']/@authfilenumber`   | `rico:hasDocumentaryFormType`  | als `gnd:<authfilenumber>`                                  |
 | `did/unitdate[@label='Entstehungsdatum']/@normal`          | `rico:beginningDate`, `rico:endDate` | beide immer `^^xs:date`, siehe „Datumsverarbeitung"    |
 | `controlaccess/persname[@role='Verfasser' und @source='GND']/@authfilenumber` | `rico:hasAuthor`  | als `gnd:<authfilenumber>`                                  |

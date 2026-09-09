@@ -84,6 +84,14 @@
                     <corpname role="Adressat" source="GND" authfilenumber="test">Test-Corp</corpname>
                 </controlaccess>
             </c>
+            <c id="TEST-NO-LANGCODE">
+                <did>
+                    <unittitle>Sprachangabe ohne @langcode-Attribut</unittitle>
+                    <langmaterial>
+                        <language>Deutsch</language>
+                    </langmaterial>
+                </did>
+            </c>
         </dsc>
     </archdesc>
 </ead>

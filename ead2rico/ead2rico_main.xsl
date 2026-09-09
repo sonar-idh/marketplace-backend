@@ -122,7 +122,7 @@
     <xsl:text> .&#10;</xsl:text>
 
 
-  <!-- ============ Verzeichnungseinheit (Record) ============ -->
+    <!-- ============ Verzeichnungseinheit (Record) ============ -->
 
     <xsl:text>&#10;# ===== Verzeichnungseinheiten =====&#10;&#10;</xsl:text>
     <xsl:apply-templates
@@ -148,14 +148,12 @@
         select="' ;&#10;    rico:title ' ||
         f:lit(string(*:did/*:unittitle))" />
 
-      <!-- falls vorhanden Record-Signatur extrahieren und als Tripel schreiben (das ist nicht der
-      Identifier, oder? Gibt es fuer die Signatur eine Entsprechung in RiC-O?) -->
-      <!-- <xsl:if
-        test="*:did/*:unitid[@label='Signatur']">
+      <!-- ISO-639-2-Sprachcodes des Briefes extrahieren -->
+      <xsl:for-each
+        select="*:did/*:langmaterial/*:language[@langcode]">
         <xsl:value-of
-          select="' ;&#10;    rico:identifier ' ||
-          f:lit(string(*:did/*:unitid[@label='Signatur'][1]))" />
-      </xsl:if> -->
+          select="' ;&#10;    rico:hasOrHadLanguage ' || f:lit(string(@langcode))" />
+      </xsl:for-each>
 
       <!-- Genreformen des Records, falls Referenz auf GND vorhanden ist -->
       <xsl:for-each

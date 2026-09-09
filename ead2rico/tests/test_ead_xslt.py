@@ -138,6 +138,12 @@ def test_record_addressee_without_gnd_reference_is_omitted(graph):
     assert graph.value(record, RICO.hasAddressee) is None
 
 
+def test_record_langcode(graph):
+    # ISO-Sprachcode wird korrekt erfasst
+    record = KPE["DE-611-HS-3695945"]  # langcode="ger"
+    assert graph.value(record, RICO.hasOrHadLanguage) == Literal("ger")
+
+
 def test_record_date_day_precision(graph):
     # Datumsangabe mit Tagespraezision wird korrekt erfasst
     record = KPE["DE-611-HS-3695945"]  # normal="19300809"
@@ -241,3 +247,9 @@ def test_corpname_adressee(transform_snippet):
     # Koerperschaft als Adressat wird korrekt erfasst
     record = KPE["TEST-CORPNAME-ADRESSEE"]
     assert (record, RICO.hasAddressee, GND["test"]) in transform_snippet
+
+
+def test_language_missing_langcode_produces_no_language_triple(transform_snippet):
+    # Sprachangabe ohne langcode-Attribut wird nicht erfasst
+    record = KPE["TEST-NO-LANGCODE"]
+    assert transform_snippet.value(record, RICO.hasOrHadHolder) is None
