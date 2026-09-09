@@ -1,6 +1,25 @@
 # MVP: Kalliope
 *Updated: 31.08.2026*
 
+```mermaid
+flowchart LR
+    subgraph EAD2RICO[EAD2RICO Converter XSLT]
+        direction LR
+        m1[ead2rico_main.xsl: EAD to RiC-O Mapping] --> m2[Includes: ead2rico_dates.xsl + ead2rico_helpers.xsl]
+    end
+    subgraph RICO2CIDOC[rico2cidoc.py: RiC-O to CIDOC-CRM/CER Converter]
+        direction LR
+        f --> t2[/HNR Graph/]
+    end
+    subgraph RICOGRAPH[RiC-O Graph]
+        direction LR
+        m2 --> t[/RiC-O .ttl/]
+    end
+
+    s1[/Kalliope EAD XML/] --> m1
+    t --> f[Data Filter: SPARQL Construct]
+
+```
 ## RiC-O to CIDOC-CRM: Data Modeling
 Data considered:
 - Record Title
