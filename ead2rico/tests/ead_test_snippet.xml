@@ -75,7 +75,7 @@
                     <genreform>Brief</genreform>
                 </controlaccess>
             </c>
-            <c id="TEST-CORPNAME-ADRESSEE">
+            <c id="TEST-C-CORPNAME-ADRESSEE">
                 <did>
                     <unittitle>Körperschaft als Adressat</unittitle>
                 </did>
@@ -84,13 +84,28 @@
                     <corpname role="Adressat" source="GND" authfilenumber="test">Test-Corp</corpname>
                 </controlaccess>
             </c>
-            <c id="TEST-NO-LANGCODE">
+            <c id="TEST-C-NO-LANGCODE">
                 <did>
                     <unittitle>Sprachangabe ohne @langcode-Attribut</unittitle>
                     <langmaterial>
                         <language>Deutsch</language>
                     </langmaterial>
                 </did>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
+            </c>
+            <c id="TEST-C-PLACE">
+                <did>
+                    <unittitle>Angabe eines Entstehungsortes</unittitle>
+                </did>
+                <controlaccess>
+                    <head>Orte</head>
+                    <geogname role="Entstehungsort" source="GND" authfilenumber="4005728-8">Berlin</geogname>
+                </controlaccess>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
             </c>
         </dsc>
     </archdesc>

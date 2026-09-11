@@ -75,6 +75,7 @@ Wird nur erzeugt, wenn `controlaccess/genreform = 'Brief'`.
 | `@id`                                                       | (Subjekt-IRI)                  | `kpe:` + `@id`                                              |
 | `did/unittitle`                                             | `rico:title`                   | Literal                                                      |
 | `did/langmaterial/language/@langcode`   | `rico:hasOrHadLanguage`  | ISO 639-2-Sprachcode als Literal                                  |
+| `controlaccess/geogname[@role='Entstehungort' and @source='GND' and @authfilenumber]/@authfilenumber`  | `rico:hasOrHadLocation`  | Entstehungsort als `gnd:<authfilenumber>`                                  |
 | `controlaccess/genreform[@source='GND']/@authfilenumber`   | `rico:hasDocumentaryFormType`  | als `gnd:<authfilenumber>`                                  |
 | `did/unitdate[@label='Entstehungsdatum']/@normal`          | `rico:beginningDate`, `rico:endDate` | beide immer `^^xs:date`, siehe „Datumsverarbeitung"    |
 | `controlaccess/persname[@role='Verfasser' und @source='GND']/@authfilenumber` | `rico:hasAuthor`  | als `gnd:<authfilenumber>`                                  |
@@ -83,7 +84,7 @@ Wird nur erzeugt, wenn `controlaccess/genreform = 'Brief'`.
 
 Das Elternelement wird über `ancestor::*:archdesc[1]` ermittelt: `isOrWasIncludedIn` zeigt momentan bei jedem `rico:Record` auf den Bestand, unabhängig von der `<c>`-Verschachtelungstiefe im Quelldokument. Das ist ein bewusster Platzhalter (siehe „Bekannte Einschränkungen") — die korrekte Nachbildung der Verschachtelungsstruktur (Verweis auf das jeweils umschließende `<c>`, falls dieses selbst ein `rico:Record` ist) ist ein offener Folgeschritt.
 
-Aktuell auskommentiert (nicht aktiv): `rico:identifier` aus `unitid[@label='Signatur']`, `rico:isAssociatedWithPlace` aus `geogname[@role='Entstehungsort']`, `rico:hasOrHadLanguage` aus `langmaterial/language/@langcode`, `rico:scopeAndContent`, `rico:hasOrHadHolder` (Record-Ebene), `rico:instantiationExtent`.
+Aktuell auskommentiert (nicht aktiv): `rico:identifier` aus `unitid[@label='Signatur']`, `rico:scopeAndContent`, `rico:hasOrHadHolder` (Record-Ebene), `rico:instantiationExtent`.
 
 # Hilfsfunktionen (`ead2rico_helpers.xsl`)
 
@@ -167,5 +168,5 @@ kpe:DE-611-HS-3859381 a rico:Record ;
 - **Nur `<c>` mit `genreform = 'Brief'` werden zu `rico:Record`.** `rico:isOrWasIncludedIn` zeigt deshalb bewusst und einheitlich auf den übergeordneten Bestand (`ancestor::*:archdesc[1]`), statt auf das nächste umschließende `<c>`. Das umgeht vorerst das Problem hängender Referenzen auf `<c>`-Elemente, die selbst kein `rico:Record` sind. Die korrekte `<c>`-Verschachtelungsstruktur (Records innerhalb von Records) soll später nachgebildet werden; markiert mit TODO in `ead2rico_main.xsl`.
 - **Keine Agenten-Entitäten mehr im Output.** Personen und Körperschaften werden nur noch als GND-/ISIL-IRI referenziert, es entstehen keine eigenen `rico:Person`/`rico:CorporateBody`-Tripel mehr. Agenten ohne GND-/ISIL-Nummer (z. B. „Unbekannt") tauchen im Output gar nicht mehr auf.
 - **`rico:includesTransitive` vs. `rico:includesOrIncluded`** — Welche Property soll für Beziehungen zwischen Bestand und Verzeichnungseinheit benutzt werden? (`ead2rico_main.xsl`). 
-- **Mehrere Properties sind auskommentiert/inaktiv:** `rico:identifier` (Signatur), `rico:isAssociatedWithPlace`, `rico:hasOrHadLanguage`, `rico:scopeAndContent`, `rico:hasOrHadHolder` auf Record-Ebene, `rico:instantiationExtent`. Auch offen: ob `unitid[@label='Signatur']` überhaupt als `rico:identifier` sinnvoll ist, oder ob es dafür eine eigene RiC-O-Entsprechung bräuchte.
+- **Mehrere Properties sind auskommentiert/inaktiv:** `rico:identifier` (Signatur), `rico:scopeAndContent`, `rico:hasOrHadHolder` auf Record-Ebene, `rico:instantiationExtent`. Auch offen: ob `unitid[@label='Signatur']` überhaupt als `rico:identifier` sinnvoll ist, oder ob es dafür eine eigene RiC-O-Entsprechung bräuchte.
 - **`did/repository/corpname[@role='Aufbewahrungsort']`** wird bislang nur auf Bestandsebene ausgewertet.

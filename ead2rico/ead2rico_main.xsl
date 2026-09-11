@@ -155,6 +155,14 @@
           select="' ;&#10;    rico:hasOrHadLanguage ' || f:lit(string(@langcode))" />
       </xsl:for-each>
 
+      <!-- GND-Referenz der Entstehungsorte extrahieren  -->
+      <xsl:for-each
+        select="*:controlaccess/*:geogname[@role='Entstehungsort' and @source='GND' and @authfilenumber]">
+        <xsl:value-of
+          select="' ;&#10;    rico:hasOrHadLocation gnd:' ||
+          @authfilenumber" />
+      </xsl:for-each>
+
       <!-- Genreformen des Records, falls Referenz auf GND vorhanden ist -->
       <xsl:for-each
         select="*:controlaccess/*:genreform[@source='GND' and @authfilenumber]">
@@ -187,20 +195,6 @@
         <xsl:value-of select="' ;&#10;    rico:hasAddressee gnd:' || @authfilenumber" />
       </xsl:for-each>
 
-      <!-- Entstehungsort -> rico:isAssociatedWithPlace  -->
-      <!-- <xsl:for-each
-        select="*:controlaccess/*:geogname[@role='Entstehungsort']">
-        <xsl:value-of
-          select="' ;&#10;    rico:isAssociatedWithPlace ' ||
-          f:lit(string(.))" />
-      </xsl:for-each> -->
-
-      <!-- Sprache -->
-      <!-- <xsl:for-each
-        select="*:did/*:langmaterial/*:language[@langcode]">
-        <xsl:value-of
-          select="' ;&#10;    rico:hasOrHadLanguage &lt;' || $lang-base || @langcode || '&gt;'" />
-      </xsl:for-each> -->
 
       <!-- OPTIONAL: Inhaltsnotiz -> rico:scopeAndContent  -->
       <!-- <xsl:if test="*:did/*:note/*:p">

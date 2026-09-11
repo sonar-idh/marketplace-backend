@@ -30,7 +30,9 @@ def run_transform(source=TEST_XML_PATH, **params) -> str:
         f"-xsl:{STYLESHEET}",
     ]
     args += [f"{k}={v}" for k, v in params.items()]
-    result = subprocess.run(args, capture_output=True, text=True, cwd=STYLESHEET.parent)
+    result = subprocess.run(
+        args, capture_output=True, text=True, cwd=STYLESHEET.parent, check=False
+    )
     if result.returncode != 0:
         pytest.fail(f"Saxon failed:\n{result.stderr}")
     return result.stdout
@@ -40,7 +42,7 @@ def parse_turtle(ttl: str) -> rdflib.Graph:
     g = rdflib.Graph()
     try:
         g.parse(data=ttl, format="turtle")
-    except Exception as e:
+    except Exception as e: #noqa
         pytest.fail(f"Output is not valid Turtle: {e}\n{ttl}")
     return g
 
@@ -144,6 +146,14 @@ def test_record_langcode(graph):
     assert graph.value(record, RICO.hasOrHadLanguage) == Literal("ger")
 
 
+def test_record_place_without_gnd_reference_is_omitted(graph):
+    # Entstehungsort ohne GND-Referenz wird nicht erfasst
+    record = KPE[
+        "DE-611-HS-3695945"
+    ]  # <geogname role="Entstehungsort">Berlin</geogname>
+    assert graph.value(record, RICO.hasOrHadLocation) is None
+
+
 def test_record_date_day_precision(graph):
     # Datumsangabe mit Tagespraezision wird korrekt erfasst
     record = KPE["DE-611-HS-3695945"]  # normal="19300809"
@@ -176,6 +186,15 @@ def test_dates_are_always_typed_as_xs_date(graph):
 def test_c_without_brief_genreform_produces_no_record(transform_snippet):
     # <c>-Element ohne genreform 'Brief' erzeugt keinen Record
     assert (KPE["TEST-C-NOBRIEF"], RDF.type, RICO.Record) not in transform_snippet
+
+
+def test_record_place(transform_snippet):
+    # Entstehungsort wird korrekt als GND-Referenz erfasst
+    assert (
+        KPE["TEST-C-PLACE"],
+        RICO.hasOrHadLocation,
+        GND["4005728-8"],
+    ) in transform_snippet
 
 
 def test_title_escaping_roundtrips_through_turtle(transform_snippet):
@@ -245,11 +264,11 @@ def test_date_unparseable_normal_produces_no_date_triples(transform_snippet):
 
 def test_corpname_adressee(transform_snippet):
     # Koerperschaft als Adressat wird korrekt erfasst
-    record = KPE["TEST-CORPNAME-ADRESSEE"]
+    record = KPE["TEST-C-CORPNAME-ADRESSEE"]
     assert (record, RICO.hasAddressee, GND["test"]) in transform_snippet
 
 
 def test_language_missing_langcode_produces_no_language_triple(transform_snippet):
     # Sprachangabe ohne langcode-Attribut wird nicht erfasst
-    record = KPE["TEST-NO-LANGCODE"]
+    record = KPE["TEST-C-NO-LANGCODE"]
     assert transform_snippet.value(record, RICO.hasOrHadHolder) is None
