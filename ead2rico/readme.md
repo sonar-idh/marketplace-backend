@@ -76,6 +76,7 @@ Wird nur erzeugt, wenn `controlaccess/genreform = 'Brief'`.
 | `did/unittitle`                                             | `rico:title`                   | Literal                                                      |
 | `did/langmaterial/language/@langcode`   | `rico:hasOrHadLanguage`  | ISO 639-2-Sprachcode als Literal                                  |
 | `controlaccess/geogname[@role='Entstehungort' and @source='GND' and @authfilenumber]/@authfilenumber`  | `rico:hasOrHadLocation`  | Entstehungsort als `gnd:<authfilenumber>`                                  |
+| `controlaccess/subject[@source='GND' and @authfilenumber]/@authfilenumber`  | `rico:hasOrHadSubject`  | Themen/Sachschlagwörter als `gnd:<authfilenumber>`                                  |
 | `controlaccess/genreform[@source='GND']/@authfilenumber`   | `rico:hasDocumentaryFormType`  | als `gnd:<authfilenumber>`                                  |
 | `did/unitdate[@label='Entstehungsdatum']/@normal`          | `rico:beginningDate`, `rico:endDate` | beide immer `^^xs:date`, siehe „Datumsverarbeitung"    |
 | `controlaccess/persname[@role='Verfasser' und @source='GND']/@authfilenumber` | `rico:hasAuthor`  | als `gnd:<authfilenumber>`                                  |

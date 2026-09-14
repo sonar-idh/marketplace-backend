@@ -107,6 +107,18 @@
                     <genreform>Brief</genreform>
                 </controlaccess>
             </c>
+            <c id="TEST-C-SUBJECT">
+                <did>
+                    <unittitle>Angabe eines Sachschlagwortes</unittitle>
+                </did>
+                <controlaccess>
+                    <head>Sachschlagwörter</head>
+                    <subject source="GND" authfilenumber="4027096-8">Innsbruck</subject>
+                </controlaccess>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
+            </c>
         </dsc>
     </archdesc>
 </ead>

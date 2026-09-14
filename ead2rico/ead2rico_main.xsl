@@ -163,6 +163,14 @@
           @authfilenumber" />
       </xsl:for-each>
 
+      <!-- GND-Referenz der Sachschlagwörter extrahieren  -->
+      <xsl:for-each
+        select="*:controlaccess/*:subject[@source='GND' and @authfilenumber]">
+        <xsl:value-of
+          select="' ;&#10;    rico:hasOrHadSubject gnd:' ||
+          @authfilenumber" />
+      </xsl:for-each>
+
       <!-- Genreformen des Records, falls Referenz auf GND vorhanden ist -->
       <xsl:for-each
         select="*:controlaccess/*:genreform[@source='GND' and @authfilenumber]">

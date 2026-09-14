@@ -1,8 +1,8 @@
-import subprocess
 from pathlib import Path
 import pytest
 import rdflib
 from rdflib import RDF, Literal, Namespace, XSD
+import subprocess
 
 HERE = Path(__file__).parent
 STYLESHEET = HERE.parent / "ead2rico_main.xsl"
@@ -42,7 +42,7 @@ def parse_turtle(ttl: str) -> rdflib.Graph:
     g = rdflib.Graph()
     try:
         g.parse(data=ttl, format="turtle")
-    except Exception as e: #noqa
+    except Exception as e:  # noqa
         pytest.fail(f"Output is not valid Turtle: {e}\n{ttl}")
     return g
 
@@ -194,6 +194,15 @@ def test_record_place(transform_snippet):
         KPE["TEST-C-PLACE"],
         RICO.hasOrHadLocation,
         GND["4005728-8"],
+    ) in transform_snippet
+
+
+def test_record_subject(transform_snippet):
+    # Sachschlagwort wird korrekt als GND-Referenz erfasst
+    assert (
+        KPE["TEST-C-SUBJECT"],
+        RICO.hasOrHadSubject,
+        GND["4027096-8"],
     ) in transform_snippet
 
 
