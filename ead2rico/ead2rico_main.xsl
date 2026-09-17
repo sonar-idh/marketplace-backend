@@ -52,7 +52,8 @@
     <xsl:value-of
       select="'kpe:' || $iri || ' a rico:RecordSet'" />
 
-    <!-- Bestandstitel extrahieren und als Tripel schreiben -->
+    <!-- Bestandstitel extrahieren und als Tripel schreiben. To-Do: Mehrere Titel pro Record lösen
+    momentan Error aus -->
     <xsl:if
       test="*:did/*:unittitle">
       <xsl:value-of
@@ -70,9 +71,9 @@
 
     <!-- Genreformen des Bestands, falls Referenz auf GND vorhanden ist -->
     <xsl:for-each
-      select="*:controlaccess/*:genreform[@source='GND' and @authfilenumber]">
+      select="distinct-values(*:controlaccess/*:genreform[@source='GND' and @authfilenumber]/@authfilenumber)">
       <xsl:value-of
-        select="' ;&#10;    rico:hasRecordSetType gnd:' || @authfilenumber" />
+        select="' ;&#10;    rico:hasRecordSetType gnd:' || ." />
     </xsl:for-each>
 
     <!-- OPTIONAL: falls vorhanden, Bestandsumfang extrahieren und als Tripel schreiben -->
@@ -97,19 +98,16 @@
     <!-- did/repository/corpname auf rico:hasOrHadHolder abbilden. Nur ISIL-referenzierte
     Institutionen werden momentan erfasst -->
     <xsl:for-each
-      select="*:did/*:repository/*:corpname">
-      <xsl:if
-        test="@source='ISIL' and @authfilenumber">
-        <xsl:value-of select="' ;&#10;    rico:hasOrHadHolder ' || 'isil:' || @authfilenumber" />
-      </xsl:if>
+      select="distinct-values(*:did/*:repository/*:corpname[@source='ISIL' and @authfilenumber]/@authfilenumber)">
+      <xsl:value-of select="' ;&#10;    rico:hasOrHadHolder ' || 'isil:' || ." />
     </xsl:for-each>
 
     <!-- GND-referenzierte Bestandsbildner werden extrahiert und auf rico:hasOrganicProvenance
     abgebildet. Hier sollte Analyse von did/origination erfolgen, um Werteverteilung der role- und
     source-Attribute bei persname/corpname besser zu verstehen -->
     <xsl:for-each
-      select="*:did/*:origination/*:persname[@role='Bestandsbildner' and @source='GND' and @authfilenumber]">
-      <xsl:value-of select="' ;&#10;    rico:hasOrganicProvenance gnd:' || @authfilenumber" />
+      select="distinct-values(*:did/*:origination/*:persname[@role='Bestandsbildner' and @source='GND' and @authfilenumber]/@authfilenumber)">
+      <xsl:value-of select="' ;&#10;    rico:hasOrganicProvenance gnd:' || ." />
     </xsl:for-each>
 
     <!-- Verweise auf enthaltene Brief-Records hinzufügen. c-Verschachtelungsstruktur momentan
@@ -143,39 +141,38 @@
       <xsl:value-of
         select="'kpe:' || $iri || ' a rico:Record'" />
 
-      <!-- Record-Titel extrahieren und als Tripel schreiben -->
+      <!-- Record-Titel extrahieren und als Tripel schreiben. To-Do: Records mit mehreren Titlen
+      führen momentan zu Error -->
       <xsl:value-of
         select="' ;&#10;    rico:title ' ||
         f:lit(string(*:did/*:unittitle))" />
 
       <!-- ISO-639-2-Sprachcodes des Briefes extrahieren -->
       <xsl:for-each
-        select="*:did/*:langmaterial/*:language[@langcode]">
+        select="distinct-values(*:did/*:langmaterial/*:language[@langcode]/@langcode)">
         <xsl:value-of
-          select="' ;&#10;    rico:hasOrHadLanguage ' || f:lit(string(@langcode))" />
+          select="' ;&#10;    rico:hasOrHadLanguage ' || f:lit(string(.))" />
       </xsl:for-each>
 
       <!-- GND-Referenz der Entstehungsorte extrahieren  -->
       <xsl:for-each
-        select="*:controlaccess/*:geogname[@role='Entstehungsort' and @source='GND' and @authfilenumber]">
+        select="distinct-values(*:controlaccess/*:geogname[@role='Entstehungsort' and @source='GND' and @authfilenumber]/@authfilenumber)">
         <xsl:value-of
-          select="' ;&#10;    rico:hasOrHadLocation gnd:' ||
-          @authfilenumber" />
+          select="' ;&#10;    rico:hasOrHadLocation gnd:' || ." />
       </xsl:for-each>
 
       <!-- GND-Referenz der Sachschlagwörter extrahieren  -->
       <xsl:for-each
-        select="*:controlaccess/*:subject[@source='GND' and @authfilenumber]">
+        select="distinct-values(*:controlaccess/*:subject[@source='GND' and @authfilenumber]/@authfilenumber)">
         <xsl:value-of
-          select="' ;&#10;    rico:hasOrHadSubject gnd:' ||
-          @authfilenumber" />
+          select="' ;&#10;    rico:hasOrHadSubject gnd:' || ." />
       </xsl:for-each>
 
       <!-- Genreformen des Records, falls Referenz auf GND vorhanden ist -->
       <xsl:for-each
-        select="*:controlaccess/*:genreform[@source='GND' and @authfilenumber]">
+        select="distinct-values(*:controlaccess/*:genreform[@source='GND' and @authfilenumber]/@authfilenumber)">
         <xsl:value-of
-          select="' ;&#10;    rico:hasDocumentaryFormType gnd:' || @authfilenumber" />
+          select="' ;&#10;    rico:hasDocumentaryFormType gnd:' || ." />
       </xsl:for-each>
 
       <!-- Entstehungsdatum wird behelfsmaeßig auf rico:beginningDate und rico:endDate statt auf
@@ -192,15 +189,15 @@
 
       <!-- Verfasser -> rico:hasAuthor (persname und corpname) -->
       <xsl:for-each
-        select="*:controlaccess/(*:persname|*:corpname)[@role='Verfasser' and @source='GND' and @authfilenumber]">
+        select="distinct-values(*:controlaccess/(*:persname|*:corpname)[@role='Verfasser' and @source='GND' and @authfilenumber]/@authfilenumber)">
         <xsl:value-of
-          select="' ;&#10;    rico:hasAuthor gnd:' || @authfilenumber" />
+          select="' ;&#10;    rico:hasAuthor gnd:' || ." />
       </xsl:for-each>
 
       <!-- Adressat -> rico:hasAddressee (persname und corpname, Unbekannt wird ausgelassen) -->
       <xsl:for-each
-        select="*:controlaccess/(*:persname|*:corpname)[@role='Adressat' and @source='GND' and @authfilenumber]">
-        <xsl:value-of select="' ;&#10;    rico:hasAddressee gnd:' || @authfilenumber" />
+        select="distinct-values(*:controlaccess/(*:persname|*:corpname)[@role='Adressat' and @source='GND' and @authfilenumber]/@authfilenumber)">
+        <xsl:value-of select="' ;&#10;    rico:hasAddressee gnd:' || ." />
       </xsl:for-each>
 
 
