@@ -6,3 +6,4 @@ ead2rico/out.ttl
 fetch_gnd_sru_subset/
 rico2cidoc/
 test_full_kpe_transformation/
+nifi_dataflow_kpe/
