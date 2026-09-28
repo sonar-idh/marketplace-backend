@@ -281,3 +281,13 @@ def test_language_missing_langcode_produces_no_language_triple(transform_snippet
     # Sprachangabe ohne langcode-Attribut wird nicht erfasst
     record = KPE["TEST-C-NO-LANGCODE"]
     assert transform_snippet.value(record, RICO.hasOrHadHolder) is None
+
+
+def test_only_main_title_is_extracted(transform_snippet):
+    # Trägt eine Ressource mehrere Titel, wird nur der Haupttitel extrahiert
+    # Problem dieses Tests: Wenn er fehlschlaegt, passiert das auch bei anderen Tests, unabhaengig von ihrer eigenen Logik
+    record = KPE["TEST-C-SINGLE-TITLE-EXTRACTED"]
+    assert transform_snippet.value(record, RICO.title) == Literal(
+        "Ausschließlich Extraktion des Haupttitels"
+    )
+    assert transform_snippet.value(record, RICO.title) != Literal("Weiterer Titel")

@@ -119,6 +119,15 @@
                     <genreform>Brief</genreform>
                 </controlaccess>
             </c>
+            <c id="TEST-C-SINGLE-TITLE-EXTRACTED">
+                <did>
+                    <unittitle>Ausschließlich Extraktion des Haupttitels</unittitle>
+                    <unittitle>Weiterer Titel</unittitle>
+                </did>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
+            </c>
         </dsc>
     </archdesc>
 </ead>

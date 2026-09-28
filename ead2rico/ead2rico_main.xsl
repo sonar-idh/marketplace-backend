@@ -52,13 +52,13 @@
     <xsl:value-of
       select="'kpe:' || $iri || ' a rico:RecordSet'" />
 
-    <!-- Bestandstitel extrahieren und als Tripel schreiben. To-Do: Mehrere Titel pro Record lösen
-    momentan Error aus -->
+    <!-- Bestandstitel extrahieren und als Tripel schreiben. Momentan wird nur der erste angegebene
+    Titelknoten erfasst, da dieser meist der Haupttitel ist. -->
     <xsl:if
       test="*:did/*:unittitle">
       <xsl:value-of
         select="' ;&#10;    rico:title ' ||
-        f:lit(string(*:did/*:unittitle))" />
+        f:lit(string((*:did/*:unittitle)[1]))" />
     </xsl:if>
 
     <!-- falls vorhanden, Bestands-ID extrahieren und als Tripel schreiben -->
@@ -141,11 +141,11 @@
       <xsl:value-of
         select="'kpe:' || $iri || ' a rico:Record'" />
 
-      <!-- Record-Titel extrahieren und als Tripel schreiben. To-Do: Records mit mehreren Titlen
-      führen momentan zu Error -->
+      <!-- Record-Titel extrahieren und als Tripel schreiben. Momentan wird nur der erste angegebene
+      Titelknoten erfasst, da dieser meist der Haupttitel ist. -->
       <xsl:value-of
         select="' ;&#10;    rico:title ' ||
-        f:lit(string(*:did/*:unittitle))" />
+        f:lit(string((*:did/*:unittitle)[1]))" />
 
       <!-- ISO-639-2-Sprachcodes des Briefes extrahieren -->
       <xsl:for-each
