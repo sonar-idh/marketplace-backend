@@ -2,7 +2,7 @@
 Script that converts bibframe to CIDOC CRM using SPARQL construct.
 
 Usage:
-python3 bibframe_to_cidoc_simple.py -i <input_file> -o <output_file>
+python3 bibframe2cidoc.py -i <input_file> -o <output_file>
 
 Input:
 - RDF file in bibframe format (ttl)
@@ -17,7 +17,9 @@ Check the documentation at: MVP_K10PLUS.md
 # 2. including 773 to integrate parts with host, because titles might me missing in parts of the host.(EX:https://opac.k10plus.de/PPNSET?PPN=1003381596)
 
 import argparse
+import gzip
 import logging
+import sys
 from pathlib import Path
 
 from rdflib import Graph
@@ -29,9 +31,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(
-            SCRIPT_DIR / "data/bibframe_to_cidoc.log", encoding="utf-8"
-        ),
+        logging.FileHandler(SCRIPT_DIR / "data/bibframe2cidoc.log", encoding="utf-8"),
         logging.StreamHandler(),
     ],
 )
@@ -158,24 +158,21 @@ queries = {
 }
 
 
-def bibframe_to_cidoc(input_path: Path, output_path: Path) -> None:
+def bibframe2cidoc(
+    input_path: Path,
+    output_path: Path,
+    shacl_shapes: Path = None,
+    shacl_log: Path = None,
+) -> None:
     logger.info(f"Loading Input BIBFRAME graph from: {input_path}")
     source = Graph()
-    try:
-        if str(input_path) == "-":
-            import sys
-
-            source.parse(
-                source=sys.stdin.buffer,
-                format="turtle",
-                publicID="https://opac.k10plus.de/PPNSET/PPN/",
-            )
-        else:
-            source.parse(str(input_path), format="turtle")
-        logger.info(f"{len(source)} triples loaded.")
-    except Exception as e:  # noqa: BLE001
-        logger.error(f"Error loading BIBFRAME graph: {e}")
-        return
+    if str(input_path) == "-":
+        raw_bytes = sys.stdin.buffer.read()
+        text = raw_bytes.decode("utf-8", errors="replace")
+    else:
+        text = Path(input_path).read_text(encoding="utf-8", errors="replace")
+    source.parse(data=text, format="turtle")
+    logger.info(f"{len(source)} triples loaded")
 
     # Target graph for storing CIDOC CRM triples
     target = Graph()
@@ -197,12 +194,16 @@ def bibframe_to_cidoc(input_path: Path, output_path: Path) -> None:
     serialized_ttl = target.serialize(format="turtle")
     cleaned_ttl = serialized_ttl.rstrip() + "\n"
 
-    if str(output_path) == "-":
-        import sys
-
+    out_str = str(output_path)
+    if out_str == "-":
         sys.stdout.write(cleaned_ttl)
+    elif out_str.endswith(".gz"):
+        Path(out_str).parent.mkdir(parents=True, exist_ok=True)
+        with gzip.open(out_str, "wt", encoding="utf-8") as f:
+            f.write(cleaned_ttl)
     else:
-        Path(output_path).write_text(cleaned_ttl, encoding="utf-8")
+        Path(out_str).parent.mkdir(parents=True, exist_ok=True)
+        Path(out_str).write_text(cleaned_ttl, encoding="utf-8")
 
     logger.info(f"Done. {len(target)} CRM triples → {output_path}")
 
@@ -222,7 +223,7 @@ def main():
         help="CIDOC CRM Turtle output",
     )
     args = argp.parse_args()
-    bibframe_to_cidoc(args.input, args.output)
+    bibframe2cidoc(args.input, args.output)
 
 
 if __name__ == "__main__":

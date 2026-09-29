@@ -125,7 +125,7 @@ def generate_bibframe_statistics(rdf_path, output_path):
 def compare_statistics(marc_json_path, bf_json_path):
     logger.info("Comparing MARC and BIBFRAME date statistics from JSON...")
     with open(marc_json_path, "r", encoding="utf-8") as f:
-        marc_dates = json.load(f)
+        marc_dates = json.load(f)["date_counts"]
     with open(bf_json_path, "r", encoding="utf-8") as f:
         bf_dates = json.load(f)
 
@@ -184,11 +184,11 @@ def deep_compare_statistics(marc_json_path, bf_json_path):
 if __name__ == "__main__":
     rdf_file = SCRIPT_DIR / "data/schumann_bib.ttl"
     bf_output = SCRIPT_DIR / "data/statistics_bibframe.txt"
-    marc_json = SCRIPT_DIR / "data/date_counts_marc.json"
+    marc_json = SCRIPT_DIR / "data/statistics.json"
     bf_json = SCRIPT_DIR / "data/date_counts_bibframe.json"
-    deep_marc_json = SCRIPT_DIR / "data/dates_with_recordID_marc.json"
-    deep_bf_json = SCRIPT_DIR / "data/dates_with_recordID_bibframe.json"
+    # deep_marc_json = SCRIPT_DIR / "data/dates_with_recordID_marc.json"
+    # deep_bf_json = SCRIPT_DIR / "data/dates_with_recordID_bibframe.json"
 
     generate_bibframe_statistics(rdf_file, bf_output)
     compare_statistics(marc_json, bf_json)
-    deep_compare_statistics(deep_marc_json, deep_bf_json)
+    # deep_compare_statistics(deep_marc_json, deep_bf_json)

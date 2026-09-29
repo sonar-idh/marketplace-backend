@@ -1,6 +1,6 @@
 # MVP: K10Plus MARC --> SoNAR HNA Graph
 
-![Coverage](https://img.shields.io/badge/coverage-84%25-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-38%25-red)
 
 ## Data Transformation Pipeline
 

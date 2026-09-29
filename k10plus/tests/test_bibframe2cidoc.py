@@ -2,10 +2,10 @@
 Regression Test for the k10 plus data pipeline.
 
 Run this test file with:
-    uv run pytest tests/test_bibframe_to_cidoc.py
+    uv run pytest tests/test_bibframe2cidoc.py
 
 For the full (slow) dataset tests:
-    uv run pytest tests/test_bibframe_to_cidoc.py -m slow
+    uv run pytest tests/test_bibframe2cidoc.py -m slow
 """
 
 from pathlib import Path
@@ -14,55 +14,55 @@ import pytest
 from pyshacl import validate
 from rdflib import Graph
 
-from k10plus.bibframe_to_cidoc import bibframe_to_cidoc
+from k10plus.bibframe2cidoc import bibframe2cidoc
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 
 @pytest.fixture(scope="module")
-def bibframe_to_cidoc_conversion(tmp_path_factory):
+def bibframe2cidoc_conversion(tmp_path_factory):
     """
-    Run the bibframe_to_cidoc conversion exactly once for the entire module.
+    Run the bibframe2cidoc conversion exactly once for the entire module.
     """
     tmp_dir = tmp_path_factory.mktemp("data")
     input_path = DATA_DIR / "schumann_example_bib.ttl"
     output_path = tmp_dir / "schumann_example_cidoc.ttl"
-    bibframe_to_cidoc(input_path=input_path, output_path=output_path)
+    bibframe2cidoc(input_path=input_path, output_path=output_path)
     return output_path
 
 
-def test_schema_validation(bibframe_to_cidoc_conversion):
+def test_schema_validation(bibframe2cidoc_conversion):
     """test for schema validation against schumann_example_cidoc.ttl (fast)."""
     shape_graph = DATA_DIR / "shacl.ttl"
     result = validate(
-        data_graph=str(bibframe_to_cidoc_conversion), shape_graph=str(shape_graph)
+        data_graph=str(bibframe2cidoc_conversion), shape_graph=str(shape_graph)
     )
     conforms, _, messages = result
     assert conforms, f"SHACL validation failed:\n{messages}"
 
 
-def test_bibframe_to_cidoc(file_regression, bibframe_to_cidoc_conversion):
+def test_bibframe2cidoc(file_regression, bibframe2cidoc_conversion):
     """Fast regression test using the small example dataset (~18KB vs 14MB)."""
-    with open(bibframe_to_cidoc_conversion, "r", encoding="utf-8") as f:
+    with open(bibframe2cidoc_conversion, "r", encoding="utf-8") as f:
         actual_output = f.read()
 
     file_regression.check(actual_output, extension=".ttl")
 
 
 @pytest.fixture(scope="module")
-def bibframe_to_cidoc_conversion_full(tmp_path_factory):
+def bibframe2cidoc_conversion_full(tmp_path_factory):
     """
-    Run the full bibframe_to_cidoc conversion exactly once for the entire module.
+    Run the full bibframe2cidoc conversion exactly once for the entire module.
     """
     tmp_dir = tmp_path_factory.mktemp("data_full")
     input_path = DATA_DIR / "schumann_bib.ttl"
     output_path = tmp_dir / "schumann_cidoc.ttl"
-    bibframe_to_cidoc(input_path=input_path, output_path=output_path)
+    bibframe2cidoc(input_path=input_path, output_path=output_path)
     return output_path
 
 
 @pytest.mark.slow
-def test_bibframe_to_cidoc_full(bibframe_to_cidoc_conversion_full):
+def test_bibframe2cidoc_full(bibframe2cidoc_conversion_full):
     """Slow regression test using the full Schumann dataset (14MB, ~25s).
 
     Run explicitly with:
@@ -70,17 +70,17 @@ def test_bibframe_to_cidoc_full(bibframe_to_cidoc_conversion_full):
     """
     g_obtained = Graph()
     g_expected = Graph()
-    g_obtained.parse(bibframe_to_cidoc_conversion_full, format="turtle")
+    g_obtained.parse(bibframe2cidoc_conversion_full, format="turtle")
     g_expected.parse(DATA_DIR / "schumann_cidoc.ttl", format="turtle")
     assert g_obtained.isomorphic(g_expected), "Graphs are not isomorphic"
 
 
 @pytest.mark.slow
-def test_schema_validation_full(bibframe_to_cidoc_conversion_full):
+def test_schema_validation_full(bibframe2cidoc_conversion_full):
     """SHACL validation against the full schumann_cidoc.ttl output."""
     shape_graph = DATA_DIR / "shacl.ttl"
     result = validate(
-        data_graph=str(bibframe_to_cidoc_conversion_full), shape_graph=str(shape_graph)
+        data_graph=str(bibframe2cidoc_conversion_full), shape_graph=str(shape_graph)
     )
     conforms, _, messages = result
     assert conforms, f"SHACL validation failed:\n{messages}"
@@ -133,7 +133,7 @@ def test_exclude_works_without_contributions(tmp_path):
     output_file = tmp_path / "output.ttl"
     input_file.write_text(input_ttl, encoding="utf-8")
 
-    bibframe_to_cidoc(input_file, output_file)
+    bibframe2cidoc(input_file, output_file)
 
     from rdflib import Graph, URIRef
 
