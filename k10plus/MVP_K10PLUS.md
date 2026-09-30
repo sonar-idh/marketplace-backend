@@ -1,5 +1,12 @@
 # MVP: K10Plus
-*Updated: 14.08.2026*
+*Updated: 30.09.2026*
+
+**Total size: 43GB (compressed) / ~650GB (extracted)**
+*(Extracted size is ~15x larger than the compressed size)*
+
+**Total records: 78 Million Titles**
+
+**Reference:** https://wiki.k10plus.de/spaces/K10PLUS/pages/358711298/Open+Data
 
 ## Data Transformation Pipeline
 
@@ -28,7 +35,7 @@ Presentation Flow:
 - BIBFRAME to CIDOC-CRM: Data Modeling
 - Qlever Triple Store: Indexing and Examples
 
-## MARC Data Dump Analysis
+## MARC Data Analysis
 *Data Dump: schumann.xml*
 
 Detailed Analyis of this data dump is available [here](./data/statistics.txt).
@@ -115,6 +122,5 @@ The converted data is available [here](./data/schumann_cidoc.ttl) and it is inde
 
 ## Next Steps
 - Differentiating primary (Tag 100) and secondary (Tag 700) contributions.
-- Testing with a bigger data dump.
 - Place modeling.
 - Implementing Title Entry (Tag 700 $a $b $n) in SPARQL CONSTRUCT.

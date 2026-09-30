@@ -1,7 +1,25 @@
 
-## Pipeline Benchmarks
+# Performance Benchmarking for K10Plus
+## ETL Pipeline
+### Single Chunk Detailed Breakdown
 
-### 2-Chunk Test Run Comparison (`kxp_chunk_182`, `kxp_chunk_183`)
+Measured on a single chunk (`kxp_chunk_183`) — **698,734 triples**, 3 SPARQL CONSTRUCT queries.
+Full pipeline: `MARC XML → XSLT → rapper → tee → bibframe_to_cidoc.py`
+
+### RDFLib Store: Oxigraph vs Default (Python step only)
+
+| Phase | Oxigraph | rdflib `default` | Speedup |
+|---|---:|---:|---:|
+| Parse (698K triples) | 28.8s | 24.7s | 1.2× |
+| Q1 titleInfo | 24.0s | 5.3s | **4.5×** |
+| Q2 Agents | 32.8s | 9.8s | **3.3×** |
+| Q3 Timestamp | 16.5s | 4.0s | **4.1×** |
+| Serialize | 1.4s | 1.4s | 1.0× |
+| **Total** | **1m 44s** | **0m 46s** | **2.3×** |
+
+→ `rdflib default` is the default store in `bibframe_to_cidoc.py`. Use `--store Oxigraph` to switch.
+
+### 2-Chunk Detailed Breakdown
 
 Measured on 2 chunks (`kxp_chunk_182`, `kxp_chunk_183`) with **2 parallel jobs** (`--jobs 2`) using `rdflib`.
 
@@ -20,26 +38,11 @@ Measured on 2 chunks (`kxp_chunk_182`, `kxp_chunk_183`) with **2 parallel jobs**
 
 ---
 
-### Single Chunk Detailed Breakdown (`kxp_chunk_183`)
-Measured on a single chunk (`kxp_chunk_183`) — **698,734 triples**, 3 SPARQL CONSTRUCT queries.
-Full pipeline: `MARC XML → XSLT → rapper → tee → bibframe_to_cidoc.py`
 
-### RDFLib Store: Oxigraph vs Default (Python step only)
-
-| Phase | Oxigraph | rdflib `default` | Speedup |
-|---|---:|---:|---:|
-| Parse (698K triples) | 28.8s | 24.7s | 1.2× |
-| Q1 titleInfo | 24.0s | 5.3s | **4.5×** |
-| Q2 Agents | 32.8s | 9.8s | **3.3×** |
-| Q3 Timestamp | 16.5s | 4.0s | **4.1×** |
-| Serialize | 1.4s | 1.4s | 1.0× |
-| **Total** | **1m 44s** | **0m 46s** | **2.3×** |
-
-→ `rdflib default` is the default store in `bibframe_to_cidoc.py`. Use `--store Oxigraph` to switch.
 
 ### Full Pipeline: Saxon-HE vs xsltproc
 
-Both using `rdflib default` store, GNU Parallel `--jobs 4`.
+Both using `rdflib default` store, GNU Parallel `--jobs 4` with 12 chunks
 
 | XSLT Engine | Wall time | User time | user/real |
 |---|---:|---:|---:|
@@ -87,7 +90,7 @@ Measured on **2 chunks** (`data/chunks/test/`) containing **6,816 MARC records**
 
 ### 184 Chunks Performance Profile (`pymarc` vs `lxml`)
 
-Measured across all **184 chunk files** (`data/chunks/*.xml`, ~9.2 GB total MARC XML data, >1,000,000 records).
+Measured across all **184 chunk files** (`data/chunks/*.xml`, ~9 GB total MARC XML data, ~1,000,000 records).
 
 | Script / Engine | Parser & Execution Model | Workers / Cores | Wall Time | Speedup vs Baseline |
 |---|---|---:|---:|---:|
@@ -95,8 +98,10 @@ Measured across all **184 chunk files** (`data/chunks/*.xml`, ~9.2 GB total MARC
 | **`lxml`** | `lxml.etree.iterparse` (C libxml2) + node memory clearing (`fast_iter`) | 1 Worker | **~2m 30s** | **~16× faster** |
 | **`lxml`** (Parallel) | `lxml` streaming + multiprocessing + summary `Counter` IPC returns | 4 Workers | **~35s** | **~70× faster** |
 | **`lxml`** (Parallel) | `lxml` streaming + multiprocessing + summary `Counter` IPC returns | 8 Workers | **~18s** | **~130× faster** |
-| **`lxml`** (36 Tasks / 40.9M Records) | `lxml` streaming + multiprocessing (36 chunks, 40,977,374 records) | 12 Cores | **28m 14s** (1694.48s, 24,183 rec/s) | N/A |
+| **`lxml`** (36 Tasks / 40.9M Records) | `lxml` streaming + multiprocessing (36 chunks, 40,977,374 records) | 6 Cores(2Thrds/Core) | **28m 14s** (1694.48s, 24,183 rec/s) | N/A |
+| **`lxml`** (73 Tasks / 80.3M Records) | `lxml` streaming + multiprocessing (73 .gz files, 80,354,013 records) | 6 Cores(2Thrds/Core) | **1hr 17m(5228 secs)** (1694.48s, 15,369 rec/s) | N/A |
 
+*Multiple threads in a core use contextswitching, when there is a gap between the two tasks*.
 ### Bottleneck Analysis & Optimization Breakdown
 
 1. **DOM Instantiation vs. Streaming C-Parsers**:
@@ -114,7 +119,7 @@ Measured across all **184 chunk files** (`data/chunks/*.xml`, ~9.2 GB total MARC
 
 ## Decompression Performance (`pigz` vs `gunzip`)
 
-Measured on `SA-MARC-verbund-001.xml.gz` decompressing directly to file (`> test.xml`).
+Measured on `SA-MARC-verbund-001.xml.gz` (~600MB) decompressing directly to file (`> test.xml`).
 
 | Tool | Execution Model | Real (Wall Time) | User CPU Time | Sys CPU Time | Speedup vs gunzip |
 |---|---|---:|---:|---:|---:|

@@ -81,9 +81,5 @@ def get_gnd_entity_type(gnd_id: str) -> str:
         print(f"Error fetching GND entity '{gnd_id}': {e}")
 
 
-def parse_entity_dump():
-    pass
-
-
 if __name__ == "__main__":
     print(get_gnd_entity_type("4139307-7"))
