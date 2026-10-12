@@ -81,7 +81,7 @@
                 </did>
                 <controlaccess>
                     <genreform>Brief</genreform>
-                    <corpname role="Adressat" source="GND" authfilenumber="test">Test-Corp</corpname>
+                    <corpname role="Adressat" source="GND" authfilenumber="2007744-0">Test-Corp</corpname>
                 </controlaccess>
             </c>
             <c id="TEST-C-NO-LANGCODE">
@@ -126,6 +126,22 @@
                 </did>
                 <controlaccess>
                     <genreform>Brief</genreform>
+                </controlaccess>
+            </c>
+            <c id="TEST-C-MALFORMED-GND-NUMBER-REPAIRED">
+                <did>
+                    <unittitle>Rekonstruierbare GND-Nummer-Angaben werden extrahiert</unittitle>
+                </did>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
+                <controlaccess>
+                    <head>Personen</head>
+                    <persname role="Verfasser" source="GND"
+                        authfilenumber="\(DE-588\)4021477-1">(DE-588)4021477-1</persname>
+                    <persname role="Verfasser" source="GND"
+                        authfilenumber="https:\/\/d-nb.info\/gnd\/118610023">
+                        https://d-nb.info/gnd/118610023</persname>
                 </controlaccess>
             </c>
         </dsc>

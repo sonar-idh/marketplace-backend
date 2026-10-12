@@ -72,8 +72,8 @@ Wird nur erzeugt, wenn `controlaccess/genreform = 'Brief'`.
 
 | EAD-Quelle                                                | RiC-O                         | Anmerkung                                                  |
 | ------------------------------------------------------------ | ------------------------------- | ------------------------------------------------------------ |
-| `@id`                                                       | (Subjekt-IRI)                  | `kpe:` + `@id`                                              |
-| `did/unittitle`                                             | `rico:title`                   | Literal                                                      |
+| `@id`                                                       | (Subjekt-IRI)                  | `kpe:` + `@id`                                              | 
+| `(did/unittitle)[1]`                                             | `rico:title`                   | Literal (aktuell wird nur der erste angegebene Titel extrahiert)                                                      |
 | `did/langmaterial/language/@langcode`   | `rico:hasOrHadLanguage`  | ISO 639-2-Sprachcode als Literal                                  |
 | `controlaccess/geogname[@role='Entstehungort' and @source='GND' and @authfilenumber]/@authfilenumber`  | `rico:hasOrHadLocation`  | Entstehungsort als `gnd:<authfilenumber>`                                  |
 | `controlaccess/subject[@source='GND' and @authfilenumber]/@authfilenumber`  | `rico:hasOrHadSubject`  | Themen/Sachschlagwörter als `gnd:<authfilenumber>`                                  |
@@ -93,6 +93,7 @@ Aktuell auskommentiert (nicht aktiv): `rico:identifier` aus `unitid[@label='Sign
 | ------------------ | ------------------------------------------------------------------------ |
 | `f:lit($t)`      | Baut ein Turtle-String-Literal (`normalize-space` + Escaping via `f:esc`) |
 | `f:esc($t)`      | Escaped `\`, `"`, Zeilenumbruch, CR und Tab Turtle-konform                |
+| `f:gnd_ids($t)`  | Prüft, ob Wert gemäß der [Wikidata-RegEx](https://www.wikidata.org/wiki/Property:P227) eine valide GND-Nummer darstellt |
 
 Frühere Hilfsfunktionen zur IRI-Bildung, Agenten-Deduplizierung und Datumstypisierung (`f:res-iri`, `f:slug`, `f:agent-key`, `f:agent-iri`, `f:known-agent`, `f:date-lit`, `f:years`) gibt es nicht mehr — IRIs werden inline gebildet (s. u.), die Datumslogik liegt vollständig in `ead2rico_dates.xsl`.
 

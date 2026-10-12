@@ -71,7 +71,7 @@
 
     <!-- Genreformen des Bestands, falls Referenz auf GND vorhanden ist -->
     <xsl:for-each
-      select="distinct-values(*:controlaccess/*:genreform[@source='GND' and @authfilenumber]/@authfilenumber)">
+      select="distinct-values(*:controlaccess/*:genreform[@source='GND']/@authfilenumber ! f:gnd-ids(.)[1])">
       <xsl:value-of
         select="' ;&#10;    rico:hasRecordSetType gnd:' || ." />
     </xsl:for-each>
@@ -106,7 +106,7 @@
     abgebildet. Hier sollte Analyse von did/origination erfolgen, um Werteverteilung der role- und
     source-Attribute bei persname/corpname besser zu verstehen -->
     <xsl:for-each
-      select="distinct-values(*:did/*:origination/*:persname[@role='Bestandsbildner' and @source='GND' and @authfilenumber]/@authfilenumber)">
+      select="distinct-values(*:did/*:origination/*:persname[@role='Bestandsbildner' and @source='GND']/@authfilenumber ! f:gnd-ids(.)[1])">
       <xsl:value-of select="' ;&#10;    rico:hasOrganicProvenance gnd:' || ." />
     </xsl:for-each>
 
@@ -156,21 +156,21 @@
 
       <!-- GND-Referenz der Entstehungsorte extrahieren  -->
       <xsl:for-each
-        select="distinct-values(*:controlaccess/*:geogname[@role='Entstehungsort' and @source='GND' and @authfilenumber]/@authfilenumber)">
+        select="distinct-values(*:controlaccess/*:geogname[@role='Entstehungsort' and @source='GND']/@authfilenumber ! f:gnd-ids(.)[1])">
         <xsl:value-of
           select="' ;&#10;    rico:hasOrHadLocation gnd:' || ." />
       </xsl:for-each>
 
       <!-- GND-Referenz der Sachschlagwörter extrahieren  -->
       <xsl:for-each
-        select="distinct-values(*:controlaccess/*:subject[@source='GND' and @authfilenumber]/@authfilenumber)">
+        select="distinct-values(*:controlaccess/*:subject[@source='GND']/@authfilenumber ! f:gnd-ids(.)[1])">
         <xsl:value-of
           select="' ;&#10;    rico:hasOrHadSubject gnd:' || ." />
       </xsl:for-each>
 
       <!-- Genreformen des Records, falls Referenz auf GND vorhanden ist -->
       <xsl:for-each
-        select="distinct-values(*:controlaccess/*:genreform[@source='GND' and @authfilenumber]/@authfilenumber)">
+        select="distinct-values(*:controlaccess/*:genreform[@source='GND']/@authfilenumber ! f:gnd-ids(.)[1])">
         <xsl:value-of
           select="' ;&#10;    rico:hasDocumentaryFormType gnd:' || ." />
       </xsl:for-each>
@@ -189,14 +189,14 @@
 
       <!-- Verfasser -> rico:hasAuthor (persname und corpname) -->
       <xsl:for-each
-        select="distinct-values(*:controlaccess/(*:persname|*:corpname)[@role='Verfasser' and @source='GND' and @authfilenumber]/@authfilenumber)">
+        select="distinct-values(*:controlaccess/(*:persname|*:corpname)[@role='Verfasser' and @source='GND']/@authfilenumber ! f:gnd-ids(.)[1])">
         <xsl:value-of
           select="' ;&#10;    rico:hasAuthor gnd:' || ." />
       </xsl:for-each>
 
       <!-- Adressat -> rico:hasAddressee (persname und corpname, Unbekannt wird ausgelassen) -->
       <xsl:for-each
-        select="distinct-values(*:controlaccess/(*:persname|*:corpname)[@role='Adressat' and @source='GND' and @authfilenumber]/@authfilenumber)">
+        select="distinct-values(*:controlaccess/(*:persname|*:corpname)[@role='Adressat' and @source='GND']/@authfilenumber ! f:gnd-ids(.)[1])">
         <xsl:value-of select="' ;&#10;    rico:hasAddressee gnd:' || ." />
       </xsl:for-each>
 

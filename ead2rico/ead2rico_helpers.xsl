@@ -34,4 +34,17 @@
         '&#9;','\\t')" />
   </xsl:function>
 
+  <xsl:variable
+    name="gnd-anchored" as="xs:string"
+    select="'^(?:1[0-4]?[0-9]{7}[0-9X]|[47][0-9]{6}-[0-9]|[1-9][0-9]{0,7}-[0-9X]|3[0-9]{7}[0-9X])$'" />
+
+  <xsl:function
+    name="f:gnd-ids" as="xs:string*">
+    <!-- GND-Nummer-Validitaetspruefung -->
+    <xsl:param name="value" as="xs:string?" />
+    <xsl:sequence
+      select="distinct-values(
+      tokenize($value, '[^0-9X\-]+')[matches(., $gnd-anchored)])" />
+  </xsl:function>
+
 </xsl:stylesheet>

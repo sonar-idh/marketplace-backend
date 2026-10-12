@@ -274,13 +274,13 @@ def test_date_unparseable_normal_produces_no_date_triples(transform_snippet):
 def test_corpname_adressee(transform_snippet):
     # Koerperschaft als Adressat wird korrekt erfasst
     record = KPE["TEST-C-CORPNAME-ADRESSEE"]
-    assert (record, RICO.hasAddressee, GND["test"]) in transform_snippet
+    assert (record, RICO.hasAddressee, GND["2007744-0"]) in transform_snippet
 
 
 def test_language_missing_langcode_produces_no_language_triple(transform_snippet):
     # Sprachangabe ohne langcode-Attribut wird nicht erfasst
     record = KPE["TEST-C-NO-LANGCODE"]
-    assert transform_snippet.value(record, RICO.hasOrHadHolder) is None
+    assert transform_snippet.value(record, RICO.hasOrHadLanguage) is None
 
 
 def test_only_main_title_is_extracted(transform_snippet):
@@ -291,3 +291,10 @@ def test_only_main_title_is_extracted(transform_snippet):
         "Ausschließlich Extraktion des Haupttitels"
     )
     assert transform_snippet.value(record, RICO.title) != Literal("Weiterer Titel")
+
+
+def test_malformed_gnd_numbers_are_reconstructed(transform_snippet):
+    # GND-Nummer-Angaben, die mehr als nur die reine Nummer enthalten, werden auf diese zurueckgefuehrt
+    record = KPE["TEST-C-MALFORMED-GND-NUMBER-REPAIRED"]
+    assert (record, RICO.hasAuthor, GND["118610023"]) in transform_snippet
+    assert (record, RICO.hasAuthor, GND["4021477-1"]) in transform_snippet
