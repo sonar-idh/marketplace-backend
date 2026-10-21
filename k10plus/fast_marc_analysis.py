@@ -26,6 +26,8 @@ from pathlib import Path
 from lxml import etree
 from tqdm import tqdm
 
+from record_sink import RecordSink
+
 SCRIPT_DIR = Path(__file__).resolve().parent
 
 TYPE_OF_RECORD_MAP = {
@@ -122,16 +124,26 @@ def find_chunks(file_path: str, num_chunks: int):
 
 
 def process_chunk(args):
-    file_path, start, end, tags = args
+    file_path, start, end, tags, *rest = args
+    # Optional plug-in: directory to stream matching full records into (see record_sink.py)
+    save_dir = rest[0] if rest else None
+    sink = (
+        RecordSink(save_dir, tag=f"{Path(file_path).name.split('.')[0]}_{start}")
+        if save_dir    
+        else None
+    )
 
     tag_counts = Counter()
     record_counts = Counter()
     role_counts = Counter()
     bibliographic_level_counts = Counter()
     type_of_record_counts = Counter()
+    encoding_level_counts = Counter()
     gnd_stats = Counter()
     date_counts = Counter()
     genre_form_counts = Counter()
+    cataloging_source = Counter()
+    filtered_records_total = 0
     records_with_genre_forms_count = 0
     complete_records_count = 0
     record_idx = 0
@@ -154,20 +166,22 @@ def process_chunk(args):
             has_tags = False
             all_tags_gnd = True
             has_genre_form = False
+            keep_record = False
 
             seen_tags_in_record = set()
             for child in elem:
                 c_tag = child.tag.rsplit("}", 1)[-1]
                 if c_tag == "controlfield":
                     c_attr_tag = child.get("tag")
-                    # if c_attr_tag == "001" and child.text:
-                    #     record_id = child.text.strip()
+                    if c_attr_tag == "001" and child.text:
+                        record_id = child.text.strip()
                     if c_attr_tag == "008" and child.text:
                         field_008_val = child.text
                 elif c_tag == "leader":
                     if child.text and len(child.text) >= 8:
                         type_of_record_counts[child.text[6]] += 1
                         bibliographic_level_counts[child.text[7]] += 1
+                        encoding_level_counts[child.text[17]] += 1
                 elif c_tag == "datafield":
                     d_attr_tag = child.get("tag")
 
@@ -221,6 +235,27 @@ def process_chunk(args):
                             ):
                                 genre_form_counts[sf.text] += 1
                                 has_genre_form = True
+                    
+                    # Track 040
+                    if d_attr_tag == "040":
+                        has_rda=False
+                        has_ger=False
+                        for sf in child:
+                            code=sf.get("code")
+                            value=sf.text
+                            if code == "e" and value == "rda":
+                                has_rda=True
+                            if code == "b" and value == "ger":
+                                has_ger=True
+                        if has_rda and has_ger:
+                            cataloging_source["rda"] += 1
+                            if len(field_008_val) > 17 and field_008_val[17] == " ":
+                                filtered_records_total += 1
+                                keep_record = True
+                            
+
+            if keep_record and sink is not None:
+                sink.write(elem)  # streamed to disk; must precede elem.clear()
 
             if has_tags and all_tags_gnd:
                 complete_records_count += 1
@@ -258,6 +293,8 @@ def process_chunk(args):
 
     finally:
         stream.close()
+        if sink is not None:
+            sink.close()
 
     return {
         "record_idx": record_idx,
@@ -267,9 +304,12 @@ def process_chunk(args):
         "role_counts": role_counts,
         "bibliographic_level_counts": bibliographic_level_counts,
         "type_of_record_counts": type_of_record_counts,
+        "encoding_level_counts": encoding_level_counts,
         "gnd_stats": gnd_stats,
         "date_counts": date_counts,
         "genre_form_counts": genre_form_counts,
+        "cataloging_source": cataloging_source,
+        "filtered_records_total": filtered_records_total,
         "records_with_genre_forms_count": records_with_genre_forms_count,
     }
 
@@ -279,6 +319,7 @@ def fast_marc_analyser(
     tags: list,
     output_path: str = None,
     num_workers: int = None,
+    save_dir: str | Path | None = None,
 ):
     start_time = time.time()
 
@@ -322,6 +363,9 @@ def fast_marc_analyser(
         for f in target:
             tasks.append((str(f), 0, os.path.getsize(f), tags))
 
+    if save_dir:
+        tasks = [t + (str(save_dir),) for t in tasks]
+
     if num_workers is None:
         num_workers = min(os.cpu_count() or 4, max(1, len(tasks)))
 
@@ -334,9 +378,12 @@ def fast_marc_analyser(
     role_counts = Counter()
     bibliographic_level_counts = Counter()
     type_of_record_counts = Counter()
+    encoding_level_counts = Counter()
     gnd_stats = Counter()
     date_counts = Counter()
     genre_form_counts = Counter()
+    cataloging_source = Counter()
+    filtered_records_total = 0
     # record_dates = {}
 
     total_records = 0
@@ -356,9 +403,12 @@ def fast_marc_analyser(
                 role_counts.update(res["role_counts"])
                 bibliographic_level_counts.update(res["bibliographic_level_counts"])
                 type_of_record_counts.update(res["type_of_record_counts"])
+                encoding_level_counts.update(res["encoding_level_counts"])
                 gnd_stats.update(res["gnd_stats"])
                 date_counts.update(res["date_counts"])
                 genre_form_counts.update(res["genre_form_counts"])
+                cataloging_source.update(res["cataloging_source"])
+                filtered_records_total += res["filtered_records_total"]
                 pbar.update(1)
 
     elapsed_time = time.time() - start_time
@@ -368,6 +418,9 @@ def fast_marc_analyser(
 
     aggregated_stats = {
         "total_records": total_records,
+        "filtered_records_total": filtered_records_total,
+        "filtered_records_percentage": (filtered_records_total / total_records * 100 if total_records > 0 else 0),
+        "cataloging_source": dict(sorted(cataloging_source.items())),
         "complete_records_total": complete_records_total,
         "records_with_genre_forms_total": records_with_genre_forms_total,
         "tag_counts": dict(sorted(tag_counts.items())),
@@ -375,6 +428,7 @@ def fast_marc_analyser(
         "role_counts": dict(sorted(role_counts.items())),
         "bibliographic_level_counts": dict(sorted(bibliographic_level_counts.items())),
         "type_of_record_counts": dict(sorted(type_of_record_counts.items())),
+        "encoding_level_counts": dict(sorted(encoding_level_counts.items())),
         "gnd_stats": dict(sorted(gnd_stats.items())),
         "date_counts": dict(sorted(date_counts.items())),
         "genre_form_counts": dict(sorted(genre_form_counts.items())),
@@ -391,5 +445,5 @@ def fast_marc_analyser(
 
 
 if __name__ == "__main__":
-    tags = ["100", "110", "111", "700", "710", "711"]
-    fast_marc_analyser("data/", tags)
+    tags = ["100", "110", "111", "700", "710", "711", "040"]
+    fast_marc_analyser("data/chunks/", tags, save_dir="data/filtered")
