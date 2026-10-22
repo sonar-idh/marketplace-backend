@@ -18,6 +18,7 @@ import gzip
 import json
 import os
 import re
+import sys
 import time
 from collections import Counter
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -317,8 +318,8 @@ def process_chunk(args):
 def fast_marc_analyser(
     target: str | list | Path,
     tags: list,
-    output_path: str = None,
-    num_workers: int = None,
+    output_path: str | Path | None = None,
+    num_workers: int | None = None,
     save_dir: str | Path | None = None,
 ):
     start_time = time.time()
@@ -446,4 +447,6 @@ def fast_marc_analyser(
 
 if __name__ == "__main__":
     tags = ["100", "110", "111", "700", "710", "711", "040"]
-    fast_marc_analyser("data/chunks/", tags, save_dir="data/filtered")
+    # Optional: input dir/file as first arg (default: data/chunks/)
+    target = sys.argv[1] if len(sys.argv) > 1 else "data/chunks/"
+    fast_marc_analyser(target, tags, save_dir="data/filtered")
