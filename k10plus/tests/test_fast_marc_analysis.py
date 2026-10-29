@@ -21,7 +21,7 @@ def generated_marc_stats():
     """
     output_file = DATA_DIR / "statistics.json"
     fast_marc_analyser(
-        str(DATA_DIR / "schumann.xml"),
+        str(DATA_DIR / "mvp_data.xml"),
         ["100", "110", "111", "700", "710", "711", "040"],
         output_path=str(output_file),
     )
