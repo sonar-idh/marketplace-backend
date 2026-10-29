@@ -233,7 +233,6 @@ def process_chunk(args):
                         function_of_entity_counts[child.get("ind2")] += 1
                         for sf in child:
                             if sf.get("code") == "c" and sf.text:
-                                print(sf.text.strip())
                                 specific_date_counts[sf.text.strip()] += 1
                     
                     # Track 041 $a
@@ -495,5 +494,5 @@ def fast_marc_analyser(
 if __name__ == "__main__":
     tags = ["100", "110", "111", "700", "710", "711", "040"]
     # Optional: input dir/file as first arg (default: data/chunks/)
-    target = sys.argv[1] if len(sys.argv) > 1 else "data/schumann.xml"
+    target = sys.argv[1] if len(sys.argv) > 1 else "data/mvp_data.xml"
     fast_marc_analyser(target, tags, save_dir="data/filtered")
