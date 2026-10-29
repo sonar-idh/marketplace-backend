@@ -22,7 +22,7 @@ def generated_marc_stats():
     output_file = DATA_DIR / "statistics.json"
     fast_marc_analyser(
         str(DATA_DIR / "schumann.xml"),
-        ["100", "700"],
+        ["100", "110", "111", "700", "710", "711", "040"],
         output_path=str(output_file),
     )
     return {
@@ -48,7 +48,7 @@ def test_marc_analyser_regression2(file_regression):
     output_file = DATA_DIR / "statistics_kxpmrcxml.json"
     fast_marc_analyser(
         str(DATA_DIR / "kxp.mrcxml"),
-        ["100", "700"],
+        ["100", "110", "111", "700", "710", "711", "040"],
         output_path=str(output_file),
     )
 

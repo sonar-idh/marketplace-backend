@@ -11,7 +11,7 @@ Input:
     - Pass the directory path or .gz file path as an argument to this script.
 
 Output:
-    - k10plus/data/statistics.txt - Detailed analysis report (tags, record types, levels, relators, and GND linking coverage).
+    - k10plus/data/statistics.md - Detailed analysis report (tags, record types, levels, relators, and GND linking coverage).
 """
 
 import gzip
@@ -142,12 +142,17 @@ def process_chunk(args):
     encoding_level_counts = Counter()
     gnd_stats = Counter()
     date_counts = Counter()
+    specific_date_counts = Counter()
     genre_form_counts = Counter()
     cataloging_source = Counter()
-    filtered_records_total = 0
+    total_records_rda_ger_encoding = 0
     records_with_genre_forms_count = 0
-    complete_records_count = 0
+    # complete_records_count = 0
     record_idx = 0
+    place_of_publication_count = Counter()
+    language_counts = Counter()
+    function_of_entity_counts = Counter()
+    
 
     if file_path.endswith(".gz"):
         stream = gzip.open(file_path, "rb")
@@ -168,6 +173,8 @@ def process_chunk(args):
             all_tags_gnd = True
             has_genre_form = False
             keep_record = False
+            encoding_level=""
+            record_id = None
 
             seen_tags_in_record = set()
             for child in elem:
@@ -179,10 +186,11 @@ def process_chunk(args):
                     if c_attr_tag == "008" and child.text:
                         field_008_val = child.text
                 elif c_tag == "leader":
-                    if child.text and len(child.text) >= 8:
+                    if child.text and len(child.text) >= 18:
                         type_of_record_counts[child.text[6]] += 1
                         bibliographic_level_counts[child.text[7]] += 1
                         encoding_level_counts[child.text[17]] += 1
+                        encoding_level=child.text[17]
                 elif c_tag == "datafield":
                     d_attr_tag = child.get("tag")
 
@@ -220,6 +228,20 @@ def process_chunk(args):
                                     gnd_stats[f"{d_attr_tag}_missing_gnd"] += 1
                             tag_counts[f"{d_attr_tag}_4"] += len(roles)
 
+                    # Track 264 $c
+                    if d_attr_tag == "264":
+                        function_of_entity_counts[child.get("ind2")] += 1
+                        for sf in child:
+                            if sf.get("code") == "c" and sf.text:
+                                print(sf.text.strip())
+                                specific_date_counts[sf.text.strip()] += 1
+                    
+                    # Track 041 $a
+                    if d_attr_tag == "041":
+                        for sf in child:
+                            if sf.get("code") == "a" and sf.text:
+                                language_counts[sf.text.strip()] += 1
+
                     # Track 534 $c
                     if d_attr_tag == "534":
                         for sf in child:
@@ -249,41 +271,51 @@ def process_chunk(args):
                             if code == "b" and value == "ger":
                                 has_ger=True
                         if has_rda and has_ger:
-                            cataloging_source["rda"] += 1
-                            if len(field_008_val) > 17 and field_008_val[17] == " ":
-                                filtered_records_total += 1
+                            cataloging_source["rda_ger"] += 1
+                            if encoding_level == " ":
+                            #if len(field_008_val) > 17 and field_008_val[17] == " ":
+                                total_records_rda_ger_encoding += 1
                                 keep_record = True
                             
 
             if keep_record and sink is not None:
                 sink.write(elem)  # streamed to disk; must precede elem.clear()
 
-            if has_tags and all_tags_gnd:
-                complete_records_count += 1
+            # if has_tags and all_tags_gnd:
+            #     complete_records_count += 1
 
-            # Date statistics
-            pub_date = None
-            if len(field_008_val) >= 15 and field_008_val[6] == "r":
-                d2 = field_008_val[11:15].strip()
-                if d2 and d2 != "uuuu":
-                    pub_date = d2.replace("u", "X")
+            # leader 008 statistics
+            # dates and place of publication
+            # Reference: https://www.loc.gov/marc/countries/countries_code.html
+            leader_date = None
+            field_008_place_of_publication = ""
+            if len(field_008_val) >= 18: # commenting this, check L273:and field_008_val[6] == "r":
+                leader_date = field_008_val[7:11].strip() + "/" + field_008_val[11:15].strip()
+                field_008_place_of_publication = field_008_val[15:18].strip()
+                # Commented this to propagate the original data without any replacement
+                # if d2 and d2 != "uuuu":
+                #     leader_date = d2.replace("u", "X")
 
-            if not pub_date and field_534_c:
-                years = re.findall(r"\b(1[5-9]\d{2}|20\d{2})\b", field_534_c)
-                if len(years) > 1:
-                    pub_date = f"{years[0]}/{years[1]}"
-                elif years:
-                    pub_date = years[0]
-                else:
-                    pub_date = field_534_c
+            # commented out as it needs a strategy on: how to combine many copies of the same work.
+            # if not leader_date and field_534_c:
+            #     years = re.findall(r"\b(1[5-9]\d{2}|20\d{2})\b", field_534_c)
+            #     if len(years) > 1:
+            #         leader_date = f"{years[0]}/{years[1]}"
+            #     elif years:
+            #         leader_date = years[0]
+            #     else:
+            #         leader_date = field_534_c
 
-            if not pub_date and len(field_008_val) >= 11:
-                d1 = field_008_val[7:11]
-                if d1.strip():
-                    pub_date = d1.replace("u", "X")
+            # if not leader_date and len(field_008_val) >= 11:
+            #     d1 = field_008_val[7:11]
+            #     if d1.strip():
+            #         leader_date = d1.replace("u", "X")
 
-            if pub_date:
-                date_counts[pub_date] += 1
+            if leader_date:
+                date_counts[leader_date] += 1
+
+            if field_008_place_of_publication:
+                place_of_publication_count[field_008_place_of_publication] += 1
 
             if has_genre_form:
                 records_with_genre_forms_count += 1
@@ -299,7 +331,6 @@ def process_chunk(args):
 
     return {
         "record_idx": record_idx,
-        "complete_records_count": complete_records_count,
         "tag_counts": tag_counts,
         "record_counts": record_counts,
         "role_counts": role_counts,
@@ -308,9 +339,13 @@ def process_chunk(args):
         "encoding_level_counts": encoding_level_counts,
         "gnd_stats": gnd_stats,
         "date_counts": date_counts,
+        "specific_date_counts": specific_date_counts,
+        "function_of_entity_counts": function_of_entity_counts,
+        "place_of_publication_count": place_of_publication_count,
+        "language_counts": language_counts,
         "genre_form_counts": genre_form_counts,
         "cataloging_source": cataloging_source,
-        "filtered_records_total": filtered_records_total,
+        "total_records_rda_ger_encoding": total_records_rda_ger_encoding,
         "records_with_genre_forms_count": records_with_genre_forms_count,
     }
 
@@ -382,14 +417,18 @@ def fast_marc_analyser(
     encoding_level_counts = Counter()
     gnd_stats = Counter()
     date_counts = Counter()
+    place_of_publication_count = Counter()
+    specific_date_counts = Counter()
+    function_of_entity_counts = Counter()
     genre_form_counts = Counter()
     cataloging_source = Counter()
-    filtered_records_total = 0
+    language_counts = Counter()
+    total_records_rda_ger_encoding = 0
     # record_dates = {}
 
     total_records = 0
-    complete_records_total = 0
     records_with_genre_forms_total = 0
+    complete_records_total = 0
 
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
         futures = [executor.submit(process_chunk, task) for task in tasks]
@@ -397,7 +436,7 @@ def fast_marc_analyser(
             for future in as_completed(futures):
                 res = future.result()
                 total_records += res["record_idx"]
-                complete_records_total += res["complete_records_count"]
+                #complete_records_total += res["complete_records_count"]
                 records_with_genre_forms_total += res["records_with_genre_forms_count"]
                 tag_counts.update(res["tag_counts"])
                 record_counts.update(res["record_counts"])
@@ -409,7 +448,11 @@ def fast_marc_analyser(
                 date_counts.update(res["date_counts"])
                 genre_form_counts.update(res["genre_form_counts"])
                 cataloging_source.update(res["cataloging_source"])
-                filtered_records_total += res["filtered_records_total"]
+                place_of_publication_count.update(res["place_of_publication_count"])
+                language_counts.update(res["language_counts"])
+                specific_date_counts.update(res["specific_date_counts"])
+                function_of_entity_counts.update(res["function_of_entity_counts"])
+                total_records_rda_ger_encoding += res["total_records_rda_ger_encoding"]
                 pbar.update(1)
 
     elapsed_time = time.time() - start_time
@@ -419,20 +462,24 @@ def fast_marc_analyser(
 
     aggregated_stats = {
         "total_records": total_records,
-        "filtered_records_total": filtered_records_total,
-        "filtered_records_percentage": (filtered_records_total / total_records * 100 if total_records > 0 else 0),
+        "total_records_rda_ger_encoding": total_records_rda_ger_encoding,
+        "total_records_rda_ger_encoding_percentage": (total_records_rda_ger_encoding / total_records * 100 if total_records > 0 else 0),
         "cataloging_source": dict(sorted(cataloging_source.items())),
-        "complete_records_total": complete_records_total,
+        "encoding_level_counts": dict(sorted(encoding_level_counts.items())),
+        "place_of_publication_count": dict(sorted(place_of_publication_count.items())),
+        "language_counts": dict(sorted(language_counts.items())),
+        "function_of_entity_counts": dict(sorted(function_of_entity_counts.items())),
+        "specific_date_counts": dict(sorted(specific_date_counts.items())),
         "records_with_genre_forms_total": records_with_genre_forms_total,
+        "complete_records_total": complete_records_total,
+        "genre_form_counts": dict(sorted(genre_form_counts.items())),
         "tag_counts": dict(sorted(tag_counts.items())),
         "record_counts": dict(sorted(record_counts.items())),
         "role_counts": dict(sorted(role_counts.items())),
         "bibliographic_level_counts": dict(sorted(bibliographic_level_counts.items())),
         "type_of_record_counts": dict(sorted(type_of_record_counts.items())),
-        "encoding_level_counts": dict(sorted(encoding_level_counts.items())),
         "gnd_stats": dict(sorted(gnd_stats.items())),
         "date_counts": dict(sorted(date_counts.items())),
-        "genre_form_counts": dict(sorted(genre_form_counts.items())),
     }
 
     if output_path is None:
@@ -448,5 +495,5 @@ def fast_marc_analyser(
 if __name__ == "__main__":
     tags = ["100", "110", "111", "700", "710", "711", "040"]
     # Optional: input dir/file as first arg (default: data/chunks/)
-    target = sys.argv[1] if len(sys.argv) > 1 else "data/chunks/"
+    target = sys.argv[1] if len(sys.argv) > 1 else "data/schumann.xml"
     fast_marc_analyser(target, tags, save_dir="data/filtered")
