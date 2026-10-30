@@ -1,0 +1,55 @@
+{
+  "total_records": 1,
+  "total_records_rda_ger_encoding": 0,
+  "total_records_rda_ger_encoding_percentage": 0.0,
+  "cataloging_source": {
+    "rda_ger": 1
+  },
+  "encoding_level_counts": {
+    "2": 1
+  },
+  "place_of_publication_count": {
+    "xx": 1
+  },
+  "language_counts": {
+    "fre": 1
+  },
+  "function_of_entity_counts": {
+    "1": 1
+  },
+  "specific_date_counts": {
+    "[1870?]": 1
+  },
+  "records_with_genre_forms_total": 0,
+  "complete_records_total": 0,
+  "genre_form_counts": {},
+  "tag_counts": {
+    "040": 1,
+    "100": 1,
+    "100_4": 1,
+    "700": 1,
+    "700_4": 1
+  },
+  "record_counts": {
+    "040": 1,
+    "100": 1,
+    "700": 1
+  },
+  "role_counts": {
+    "100_composer": 1,
+    "700_arranger": 1
+  },
+  "bibliographic_level_counts": {
+    "m": 1
+  },
+  "type_of_record_counts": {
+    "c": 1
+  },
+  "gnd_stats": {
+    "100_has_gnd": 1,
+    "700_missing_gnd": 1
+  },
+  "date_counts": {
+    "1870/": 1
+  }
+}
