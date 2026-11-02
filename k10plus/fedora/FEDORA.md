@@ -36,7 +36,7 @@ After running this command, fedora creates a container with some default metadat
 
 #### Checking whether the container exists
 ```bash
-curl "$fedora_sonar_base" -u "$cred"
+  curl "$fedora_sonar_base" -u "$cred"
 ```
 
 look for created container in one of the *ldp:contains*  output.
