@@ -6,39 +6,38 @@
 
 **Total records: 78 Million Titles**
 
+**Total records after filtering: ~10.47 Million Titles** (*Filter: RDA, GER, Full encoding level*)
+
 **Reference:** https://wiki.k10plus.de/spaces/K10PLUS/pages/358711298/Open+Data
 
 ## Data Transformation Pipeline
 
   ```mermaid
 flowchart LR
-    subgraph MARC2BIBFRAME[MARC2BIBFRAME Converter XSLT]
-        direction LR
-        m1[Preprocessing: format and split] --> m2[MARC to BIBFRAME]
-    end
-    subgraph RDF2CIDOC[BIBFRAME RDF to CIDOC Converter]
-        direction LR
-        f --> t2[/HNR Graph/]
-    end
-    subgraph BIBFRAME2[BIBFRAME Graph]
-        direction LR
-    m2 --> r[/RDF/]
-    r -->|rapper| t[/.ttl/]
+    s1[/K10Plus Data Source/] --> s2[Get data with bash script]
+    s2 --> s3[Filter RDA records and write shards with Python]
+    s3 --> s4[Upload shards to Fedora with bash script]
 
+    subgraph NIFI[NiFi Pipeline]
+        direction LR
+        subgraph MARC2BIBFRAME[MARC2BIBFRAME Converter XSLT]
+            direction LR
+            m1[Preprocessing: format and split] --> m2[MARC to BIBFRAME]
+        end
+        subgraph BIBFRAME2[BIBFRAME Graph]
+            direction LR
+            r[/RDF/] -->|rapper| t[/.ttl/]
+        end
+        m2 --> r
     end
 
-    s1[/K10Plus MARC XML/] --> m1
-    t --> f[Data Filter: SPARQL Construct]
+    s4 --> m1
   ```
-Presentation Flow:
-- MARC Data Dump Analysis
-- BIBFRAME to CIDOC-CRM: Data Modeling
-- Qlever Triple Store: Indexing and Examples
 
 ## MARC Data Analysis
 *Data Dump: schumann.xml*
 
-Detailed Analyis of this data dump is available [here](./data/statistics.txt).
+Detailed Analyis of this data dump is available [here](./data/statistics.md).
 
 ### Cataloging Issues
 - $e: describes human readable role description
@@ -119,8 +118,3 @@ Dates are associated with the creation event (`crm:E65_Creation`) via a time-spa
 
 ## Qlever Triple Store: Indexing and Examples
 The converted data is available [here](./data/schumann_cidoc.ttl) and it is indexed in Qlever triple store.
-
-## Next Steps
-- Differentiating primary (Tag 100) and secondary (Tag 700) contributions.
-- Place modeling.
-- Implementing Title Entry (Tag 700 $a $b $n) in SPARQL CONSTRUCT.
