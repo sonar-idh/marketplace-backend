@@ -28,6 +28,12 @@ filterwarnings = [
     "ignore:Dataset.default_context is deprecated, use Dataset.default_graph instead:DeprecationWarning",
 ]
 
+[tool.coverage.report]
+# Script entry points are thin wrappers around tested functions
+exclude_also = [
+    "if __name__ == .__main__.:",
+]
+
 [dependency-groups]
 dev = [
     "lxml-stubs>=0.5.1",

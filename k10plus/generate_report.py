@@ -5,10 +5,10 @@ Usage:
     uv run python k10plus/generate_report.py
 
 Input:
-    - data/statistics.json - Statistics collected from MARCXML data.
+    - data/statistics_marc.json - Statistics collected from MARCXML data.
 
 Output:
-    - data/statistics.md - Detailed analysis report (Markdown).
+    - data/statistics_marc.md - Detailed analysis report (Markdown).
 
 """
 
@@ -415,9 +415,9 @@ def generate_report_from_json(
     if tags is None:
         tags = ["100", "110", "111", "700", "710", "711"]
     if stats_json_path is None:
-        stats_json_path = SCRIPT_DIR / "data/statistics.json"
+        stats_json_path = SCRIPT_DIR / "data/statistics_marc.json"
     if output_path is None:
-        output_path = SCRIPT_DIR / "data/statistics.md"
+        output_path = SCRIPT_DIR / "data/statistics_marc.md"
 
     with open(stats_json_path, "r", encoding="utf-8") as f:
         data = json.load(f)

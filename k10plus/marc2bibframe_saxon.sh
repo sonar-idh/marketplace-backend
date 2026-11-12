@@ -8,7 +8,7 @@
 
 set -euo pipefail
 
-data_dir="${DATA_DIR:-./data/test}"
+data_dir="${DATA_DIR:-./data/marcxml}"
 out_dir="${OUT_DIR:-./data/bibframe}"
 log_dir="$out_dir/logs"
 work_dir="$out_dir/work"

@@ -18,11 +18,11 @@ TAGS = ["100", "110", "111", "700", "710", "711", "040"]
 # case id -> input file
 CASES = {
     # 040 is rda/ger and leader/17 is blank: counted in rda_ger_encoding
-    "included_blank_encoding": "mvp_test_record_pass.xml",
+    "included_blank_encoding": "mvp_test_quality_pass.xml",
     # 040 is rda/ger but leader/17 is '2': must NOT count in rda_ger_encoding
-    "excluded_encoding_level": "mvp_test_record_fail.xml",
+    "excluded_encoding_level": "mvp_test_quality_fail.xml",
     # small set of records for broad regression coverage
-    "mvp_set": "mvp_data.xml",
+    "mvp_set": "schumann.xml",
 }
 
 

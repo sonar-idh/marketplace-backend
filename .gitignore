@@ -12,8 +12,8 @@ k10plus/marc2bibframe2
 k10plus/data/bibframe
 k10plus/data/cidoc
 k10plus/data/SA-MARC-verbund-001.xml
-k10plus/SaxonHE12-9J
-
+k10plus/SaxonHE12-10J
+k10plus/marc2bibframe2-3.1.0
 # User-specific files
 *.rsuser
 *.suo

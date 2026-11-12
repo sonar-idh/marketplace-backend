@@ -177,6 +177,13 @@ def process_chunk(args):
             record_id = None
 
             seen_tags_in_record = set()
+            # Per-record sets: a record can repeat a value (e.g. several 264 fields, or the same
+            # language in 008 and 041$a). Collecting into a set keeps each distinct value once.
+            record_languages = set()  # distinct codes from 008/35-37 and 041$a
+            record_dates = set()  # distinct 264 $c strings
+            # distinct 264 ind2 codes (0 Production, 1 Publication, 2 Distribution,
+            # 3 Manufacture, 4 copyright): a record with two 264 ind2=1 fields adds "1" once
+            record_functions = set()
             for child in elem:
                 c_tag = child.tag.rsplit("}", 1)[-1]
                 if c_tag == "controlfield":
@@ -230,16 +237,16 @@ def process_chunk(args):
 
                     # Track 264 $c
                     if d_attr_tag == "264":
-                        function_of_entity_counts[child.get("ind2")] += 1
+                        record_functions.add(child.get("ind2"))
                         for sf in child:
                             if sf.get("code") == "c" and sf.text:
-                                specific_date_counts[sf.text.strip()] += 1
+                                record_dates.add(sf.text.strip())
                     
                     # Track 041 $a
                     if d_attr_tag == "041":
                         for sf in child:
                             if sf.get("code") == "a" and sf.text:
-                                language_counts[sf.text.strip()] += 1
+                                record_languages.add(sf.text.strip())
 
                     # Track 534 $c
                     if d_attr_tag == "534":
@@ -277,6 +284,13 @@ def process_chunk(args):
                                 keep_record = True
                             
 
+            # language: 008/35-37 is the primary code, 041$a adds further languages
+            if len(field_008_val) >= 38 and field_008_val[35:38].strip():
+                record_languages.add(field_008_val[35:38])
+            language_counts.update(record_languages)
+            specific_date_counts.update(record_dates)
+            function_of_entity_counts.update(record_functions)
+
             if keep_record and sink is not None:
                 sink.write(elem)  # streamed to disk; must precede elem.clear()
 
@@ -288,7 +302,7 @@ def process_chunk(args):
             # Reference: https://www.loc.gov/marc/countries/countries_code.html
             leader_date = None
             field_008_place_of_publication = ""
-            if len(field_008_val) >= 18: # commenting this, check L273:and field_008_val[6] == "r":
+            if len(field_008_val) >= 18:
                 leader_date = field_008_val[7:11].strip() + "/" + field_008_val[11:15].strip()
                 field_008_place_of_publication = field_008_val[15:18].strip()
                 # Commented this to propagate the original data without any replacement
@@ -482,7 +496,7 @@ def fast_marc_analyser(
     }
 
     if output_path is None:
-        output_path = SCRIPT_DIR / "data/statistics.json"
+        output_path = SCRIPT_DIR / "data/statistics_marc.json"
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(aggregated_stats, f, indent=2)
@@ -494,5 +508,5 @@ def fast_marc_analyser(
 if __name__ == "__main__":
     tags = ["100", "110", "111", "700", "710", "711", "040"]
     # Optional: input dir/file as first arg (default: data/chunks/)
-    target = sys.argv[1] if len(sys.argv) > 1 else "data/mvp_data.xml"
-    fast_marc_analyser(target, tags, save_dir="data/filtered")
+    target = sys.argv[1] if len(sys.argv) > 1 else "data/schumann.xml"
+    fast_marc_analyser(target, tags, save_dir="data/filtered_rda_ger_encoding")
