@@ -1,0 +1,940 @@
+{
+  "flowContents": {
+    "identifier": "d01266d9-01a1-1000-74f0-131040eeefee",
+    "instanceIdentifier": "58079504-c9d9-33a0-118b-6c7dfa09eb39",
+    "name": "SoNAR: JMS Test",
+    "comments": "",
+    "position": {
+      "x": 1064.0,
+      "y": 392.0
+    },
+    "processGroups": [],
+    "remoteProcessGroups": [],
+    "processors": [
+      {
+        "identifier": "fadeca5c-b82d-3e17-bc9d-11168315994d",
+        "instanceIdentifier": "d0130050-01a1-1000-565d-184204ae3db5",
+        "name": "ConsumeJMS",
+        "comments": "",
+        "position": {
+          "x": -9752.0,
+          "y": -3008.0
+        },
+        "type": "org.apache.nifi.jms.processors.ConsumeJMS",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-jms-processors-nar",
+          "version": "2.12.0"
+        },
+        "properties": {
+          "JNDI Initial Context Factory Class": null,
+          "Destination Name": "fedora",
+          "JMS Connection Factory Implementation Class": null,
+          "Record Reader": null,
+          "JMS Client Libraries": null,
+          "Connection Factory Service": "e9f2d05c-2e2a-3422-8f05-500b44e3f3e8",
+          "Subscription Name": "nifi-sonar-test-sub",
+          "Error Queue Name": null,
+          "Durable Subscription": "true",
+          "Record Writer": null,
+          "Destination Type": "TOPIC",
+          "JNDI Provider URL": null,
+          "Acknowledgement Mode": "2",
+          "Output Strategy": "USE_VALUE",
+          "JMS SSL Context Service": null,
+          "User Name": null,
+          "Timeout": "1 sec",
+          "mime.type": "application/json",
+          "Message Selector": null,
+          "Shared Subscription": "false",
+          "JNDI Name of the Connection Factory": null,
+          "Connection Client ID": "nifi-sonar-test",
+          "JNDI / JMS Client Libraries": null,
+          "JNDI Principal": null,
+          "JMS Broker URI": null,
+          "Character Set": "UTF-8",
+          "Maximum Batch Size": "1"
+        },
+        "propertyDescriptors": {
+          "JNDI Initial Context Factory Class": {
+            "name": "JNDI Initial Context Factory Class",
+            "displayName": "JNDI Initial Context Factory Class",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Destination Name": {
+            "name": "Destination Name",
+            "displayName": "Destination Name",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "JMS Connection Factory Implementation Class": {
+            "name": "JMS Connection Factory Implementation Class",
+            "displayName": "JMS Connection Factory Implementation Class",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Record Reader": {
+            "name": "Record Reader",
+            "displayName": "Record Reader",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "JMS Client Libraries": {
+            "name": "JMS Client Libraries",
+            "displayName": "JMS Client Libraries",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false,
+            "resourceDefinition": {
+              "cardinality": "MULTIPLE",
+              "resourceTypes": [
+                "URL",
+                "DIRECTORY",
+                "FILE"
+              ]
+            }
+          },
+          "Connection Factory Service": {
+            "name": "Connection Factory Service",
+            "displayName": "Connection Factory Service",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Subscription Name": {
+            "name": "Subscription Name",
+            "displayName": "Subscription Name",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Error Queue Name": {
+            "name": "Error Queue Name",
+            "displayName": "Error Queue Name",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Durable Subscription": {
+            "name": "Durable Subscription",
+            "displayName": "Durable Subscription",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Record Writer": {
+            "name": "Record Writer",
+            "displayName": "Record Writer",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Destination Type": {
+            "name": "Destination Type",
+            "displayName": "Destination Type",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "JNDI Provider URL": {
+            "name": "JNDI Provider URL",
+            "displayName": "JNDI Provider URL",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Acknowledgement Mode": {
+            "name": "Acknowledgement Mode",
+            "displayName": "Acknowledgement Mode",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Output Strategy": {
+            "name": "Output Strategy",
+            "displayName": "Output Strategy",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Password": {
+            "name": "Password",
+            "displayName": "Password",
+            "identifiesControllerService": false,
+            "sensitive": true,
+            "dynamic": false
+          },
+          "JMS SSL Context Service": {
+            "name": "JMS SSL Context Service",
+            "displayName": "JMS SSL Context Service",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "User Name": {
+            "name": "User Name",
+            "displayName": "User Name",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Timeout": {
+            "name": "Timeout",
+            "displayName": "Timeout",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "JNDI Credentials": {
+            "name": "JNDI Credentials",
+            "displayName": "JNDI Credentials",
+            "identifiesControllerService": false,
+            "sensitive": true,
+            "dynamic": false
+          },
+          "mime.type": {
+            "name": "mime.type",
+            "displayName": "mime.type",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": true
+          },
+          "Message Selector": {
+            "name": "Message Selector",
+            "displayName": "Message Selector",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Shared Subscription": {
+            "name": "Shared Subscription",
+            "displayName": "Shared Subscription",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "JNDI Name of the Connection Factory": {
+            "name": "JNDI Name of the Connection Factory",
+            "displayName": "JNDI Name of the Connection Factory",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Connection Client ID": {
+            "name": "Connection Client ID",
+            "displayName": "Connection Client ID",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "JNDI / JMS Client Libraries": {
+            "name": "JNDI / JMS Client Libraries",
+            "displayName": "JNDI / JMS Client Libraries",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false,
+            "resourceDefinition": {
+              "cardinality": "MULTIPLE",
+              "resourceTypes": [
+                "URL",
+                "DIRECTORY",
+                "FILE"
+              ]
+            }
+          },
+          "JNDI Principal": {
+            "name": "JNDI Principal",
+            "displayName": "JNDI Principal",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "JMS Broker URI": {
+            "name": "JMS Broker URI",
+            "displayName": "JMS Broker URI",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Character Set": {
+            "name": "Character Set",
+            "displayName": "Character Set",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Maximum Batch Size": {
+            "name": "Maximum Batch Size",
+            "displayName": "Maximum Batch Size",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          }
+        },
+        "style": {},
+        "schedulingPeriod": "0 sec",
+        "schedulingStrategy": "TIMER_DRIVEN",
+        "executionNode": "ALL",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "bulletinLevel": "WARN",
+        "runDurationMillis": 0,
+        "concurrentlySchedulableTaskCount": 1,
+        "autoTerminatedRelationships": [],
+        "scheduledState": "ENABLED",
+        "retryCount": 10,
+        "retriedRelationships": [],
+        "backoffMechanism": "PENALIZE_FLOWFILE",
+        "maxBackoffPeriod": "10 mins",
+        "componentType": "PROCESSOR",
+        "groupIdentifier": "d01266d9-01a1-1000-74f0-131040eeefee"
+      },
+      {
+        "identifier": "ac7c5427-7f41-37fb-880e-200c1f9e5e30",
+        "instanceIdentifier": "e4179f1e-01a1-1000-d18e-ac20e5043574",
+        "name": "LogAttribute",
+        "comments": "",
+        "position": {
+          "x": -9568.0,
+          "y": -2696.0
+        },
+        "type": "org.apache.nifi.processors.standard.LogAttribute",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-standard-nar",
+          "version": "2.12.0"
+        },
+        "properties": {
+          "Log FlowFile Properties": "true",
+          "Log Level": "info",
+          "Attributes to Ignore": null,
+          "Attributes to Log": null,
+          "Attributes to Ignore Regular Expression": null,
+          "Output Format": "Line per Attribute",
+          "Log Payload": "false",
+          "Log Prefix": null,
+          "Character Set": "UTF-8",
+          "Attributes to Log Regular Expression": ".*"
+        },
+        "propertyDescriptors": {
+          "Log FlowFile Properties": {
+            "name": "Log FlowFile Properties",
+            "displayName": "Log FlowFile Properties",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Log Level": {
+            "name": "Log Level",
+            "displayName": "Log Level",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Attributes to Ignore": {
+            "name": "Attributes to Ignore",
+            "displayName": "Attributes to Ignore",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Attributes to Log": {
+            "name": "Attributes to Log",
+            "displayName": "Attributes to Log",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Attributes to Ignore Regular Expression": {
+            "name": "Attributes to Ignore Regular Expression",
+            "displayName": "Attributes to Ignore Regular Expression",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Output Format": {
+            "name": "Output Format",
+            "displayName": "Output Format",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Log Payload": {
+            "name": "Log Payload",
+            "displayName": "Log Payload",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Log Prefix": {
+            "name": "Log Prefix",
+            "displayName": "Log Prefix",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Character Set": {
+            "name": "Character Set",
+            "displayName": "Character Set",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Attributes to Log Regular Expression": {
+            "name": "Attributes to Log Regular Expression",
+            "displayName": "Attributes to Log Regular Expression",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          }
+        },
+        "style": {},
+        "schedulingPeriod": "0 sec",
+        "schedulingStrategy": "TIMER_DRIVEN",
+        "executionNode": "ALL",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "bulletinLevel": "WARN",
+        "runDurationMillis": 25,
+        "concurrentlySchedulableTaskCount": 1,
+        "autoTerminatedRelationships": [
+          "success"
+        ],
+        "scheduledState": "ENABLED",
+        "retryCount": 10,
+        "retriedRelationships": [],
+        "backoffMechanism": "PENALIZE_FLOWFILE",
+        "maxBackoffPeriod": "10 mins",
+        "componentType": "PROCESSOR",
+        "groupIdentifier": "d01266d9-01a1-1000-74f0-131040eeefee"
+      }
+    ],
+    "inputPorts": [],
+    "outputPorts": [],
+    "connections": [
+      {
+        "identifier": "922a4b50-c4d5-3d46-84ea-2f8dfa1122b3",
+        "instanceIdentifier": "e417b42a-01a1-1000-0a09-615f5d30ece7",
+        "name": "",
+        "source": {
+          "id": "fadeca5c-b82d-3e17-bc9d-11168315994d",
+          "type": "PROCESSOR",
+          "groupId": "d01266d9-01a1-1000-74f0-131040eeefee",
+          "name": "ConsumeJMS",
+          "comments": "",
+          "instanceIdentifier": "d0130050-01a1-1000-565d-184204ae3db5"
+        },
+        "destination": {
+          "id": "ac7c5427-7f41-37fb-880e-200c1f9e5e30",
+          "type": "PROCESSOR",
+          "groupId": "d01266d9-01a1-1000-74f0-131040eeefee",
+          "name": "LogAttribute",
+          "comments": "",
+          "instanceIdentifier": "e4179f1e-01a1-1000-d18e-ac20e5043574"
+        },
+        "labelIndex": 0,
+        "zIndex": 38,
+        "selectedRelationships": [
+          "parse.failure",
+          "success"
+        ],
+        "backPressureObjectThreshold": 10000,
+        "backPressureDataSizeThreshold": "1 GB",
+        "flowFileExpiration": "0 sec",
+        "prioritizers": [],
+        "bends": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute": "",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "componentType": "CONNECTION",
+        "groupIdentifier": "d01266d9-01a1-1000-74f0-131040eeefee"
+      }
+    ],
+    "labels": [],
+    "funnels": [],
+    "controllerServices": [
+      {
+        "identifier": "d01266da-01a1-1000-da73-8c224ef7fdd0",
+        "instanceIdentifier": "a2c739e0-9c4b-326d-f3d3-9b5883f29bc8",
+        "name": "XMLRecordSetWriter",
+        "comments": "",
+        "type": "org.apache.nifi.xml.XMLRecordSetWriter",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-record-serialization-services-nar",
+          "version": "2.12.0"
+        },
+        "properties": {
+          "Schema Branch": null,
+          "Schema Reference Reader": null,
+          "Array Tag Name": null,
+          "Schema Text": "${avro.schema}",
+          "Name of Root Tag": "marc:collection xmlns:marc=\"http://www.loc.gov/MARC21/slim\"",
+          "Wrap Elements of Arrays": "no-wrapping",
+          "Schema Registry": null,
+          "Schema Access Strategy": "inherit-record-schema",
+          "Schema Name": "${schema.name}",
+          "Timestamp Format": null,
+          "Date Format": null,
+          "Suppress Null Values": "always-suppress",
+          "Schema Write Strategy": "no-schema",
+          "Pretty Print XML": "false",
+          "Name of Record Tag": "marc:record",
+          "Schema Cache": null,
+          "Schema Version": null,
+          "Time Format": null,
+          "Character Set": "UTF-8",
+          "Omit XML Declaration": "false",
+          "Schema Reference Writer": null
+        },
+        "propertyDescriptors": {
+          "Schema Branch": {
+            "name": "Schema Branch",
+            "displayName": "Schema Branch",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Reference Reader": {
+            "name": "Schema Reference Reader",
+            "displayName": "Schema Reference Reader",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Array Tag Name": {
+            "name": "Array Tag Name",
+            "displayName": "Array Tag Name",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Text": {
+            "name": "Schema Text",
+            "displayName": "Schema Text",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Name of Root Tag": {
+            "name": "Name of Root Tag",
+            "displayName": "Name of Root Tag",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Wrap Elements of Arrays": {
+            "name": "Wrap Elements of Arrays",
+            "displayName": "Wrap Elements of Arrays",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Registry": {
+            "name": "Schema Registry",
+            "displayName": "Schema Registry",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Access Strategy": {
+            "name": "Schema Access Strategy",
+            "displayName": "Schema Access Strategy",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Name": {
+            "name": "Schema Name",
+            "displayName": "Schema Name",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Timestamp Format": {
+            "name": "Timestamp Format",
+            "displayName": "Timestamp Format",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Date Format": {
+            "name": "Date Format",
+            "displayName": "Date Format",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Suppress Null Values": {
+            "name": "Suppress Null Values",
+            "displayName": "Suppress Null Values",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Write Strategy": {
+            "name": "Schema Write Strategy",
+            "displayName": "Schema Write Strategy",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Pretty Print XML": {
+            "name": "Pretty Print XML",
+            "displayName": "Pretty Print XML",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Name of Record Tag": {
+            "name": "Name of Record Tag",
+            "displayName": "Name of Record Tag",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Cache": {
+            "name": "Schema Cache",
+            "displayName": "Schema Cache",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Version": {
+            "name": "Schema Version",
+            "displayName": "Schema Version",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Time Format": {
+            "name": "Time Format",
+            "displayName": "Time Format",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Character Set": {
+            "name": "Character Set",
+            "displayName": "Character Set",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Omit XML Declaration": {
+            "name": "Omit XML Declaration",
+            "displayName": "Omit XML Declaration",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Reference Writer": {
+            "name": "Schema Reference Writer",
+            "displayName": "Schema Reference Writer",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          }
+        },
+        "controllerServiceApis": [
+          {
+            "type": "org.apache.nifi.serialization.RecordSetWriterFactory",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-services-api-nar",
+              "version": "2.12.0"
+            }
+          }
+        ],
+        "scheduledState": "DISABLED",
+        "bulletinLevel": "WARN",
+        "componentType": "CONTROLLER_SERVICE",
+        "groupIdentifier": "d01266d9-01a1-1000-74f0-131040eeefee"
+      },
+      {
+        "identifier": "d01266db-01a1-1000-a966-977df9efead9",
+        "instanceIdentifier": "68cb192f-2f5d-3e65-a7fe-818def398880",
+        "name": "XMLReader",
+        "comments": "",
+        "type": "org.apache.nifi.xml.XMLReader",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-record-serialization-services-nar",
+          "version": "2.12.0"
+        },
+        "properties": {
+          "Schema Branch": null,
+          "Schema Reference Reader": null,
+          "Field Name for Content": "value",
+          "Schema Text": "{\n  \"type\": \"record\",\n  \"name\": \"marc_record\",\n  \"fields\": [\n    {\"name\": \"leader\", \"type\": [\"null\", \"string\"]},\n    {\"name\": \"controlfield\", \"type\": [\"null\", {\"type\": \"array\", \"items\": {\n      \"type\": \"record\", \"name\": \"controlfield_t\", \"fields\": [\n        {\"name\": \"attr_tag\", \"type\": [\"null\", \"string\"]},\n        {\"name\": \"value\", \"type\": [\"null\", \"string\"]}\n      ]}}]},\n    {\"name\": \"datafield\", \"type\": [\"null\", {\"type\": \"array\", \"items\": {\n      \"type\": \"record\", \"name\": \"datafield_t\", \"fields\": [\n        {\"name\": \"attr_tag\",  \"type\": [\"null\", \"string\"]},\n        {\"name\": \"attr_ind1\", \"type\": [\"null\", \"string\"]},\n        {\"name\": \"attr_ind2\", \"type\": [\"null\", \"string\"]},\n        {\"name\": \"subfield\", \"type\": [\"null\", {\"type\": \"array\", \"items\": {\n          \"type\": \"record\", \"name\": \"subfield_t\", \"fields\": [\n            {\"name\": \"attr_code\", \"type\": [\"null\", \"string\"]},\n            {\"name\": \"value\", \"type\": [\"null\", \"string\"]}\n          ]}}]}\n      ]}}]}\n  ]\n}",
+          "Schema Inference Cache": null,
+          "Schema Registry": null,
+          "Schema Access Strategy": "schema-text-property",
+          "Schema Name": "${schema.name}",
+          "Timestamp Format": null,
+          "Date Format": null,
+          "Parse XML Attributes": "true",
+          "Attribute Prefix": "attr_",
+          "Schema Version": null,
+          "Time Format": null,
+          "Expect Records as Array": "true"
+        },
+        "propertyDescriptors": {
+          "Schema Branch": {
+            "name": "Schema Branch",
+            "displayName": "Schema Branch",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Reference Reader": {
+            "name": "Schema Reference Reader",
+            "displayName": "Schema Reference Reader",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Field Name for Content": {
+            "name": "Field Name for Content",
+            "displayName": "Field Name for Content",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Text": {
+            "name": "Schema Text",
+            "displayName": "Schema Text",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Inference Cache": {
+            "name": "Schema Inference Cache",
+            "displayName": "Schema Inference Cache",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Registry": {
+            "name": "Schema Registry",
+            "displayName": "Schema Registry",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Access Strategy": {
+            "name": "Schema Access Strategy",
+            "displayName": "Schema Access Strategy",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Name": {
+            "name": "Schema Name",
+            "displayName": "Schema Name",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Timestamp Format": {
+            "name": "Timestamp Format",
+            "displayName": "Timestamp Format",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Date Format": {
+            "name": "Date Format",
+            "displayName": "Date Format",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Parse XML Attributes": {
+            "name": "Parse XML Attributes",
+            "displayName": "Parse XML Attributes",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Attribute Prefix": {
+            "name": "Attribute Prefix",
+            "displayName": "Attribute Prefix",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Schema Version": {
+            "name": "Schema Version",
+            "displayName": "Schema Version",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Time Format": {
+            "name": "Time Format",
+            "displayName": "Time Format",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "Expect Records as Array": {
+            "name": "Expect Records as Array",
+            "displayName": "Expect Records as Array",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          }
+        },
+        "controllerServiceApis": [
+          {
+            "type": "org.apache.nifi.serialization.RecordReaderFactory",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-services-api-nar",
+              "version": "2.12.0"
+            }
+          }
+        ],
+        "scheduledState": "DISABLED",
+        "bulletinLevel": "WARN",
+        "componentType": "CONTROLLER_SERVICE",
+        "groupIdentifier": "d01266d9-01a1-1000-74f0-131040eeefee"
+      },
+      {
+        "identifier": "e9f2d05c-2e2a-3422-8f05-500b44e3f3e8",
+        "instanceIdentifier": "d01dd630-01a1-1000-eca9-2f435a85de12",
+        "name": "JMSConnectionFactoryProvider",
+        "comments": "",
+        "type": "org.apache.nifi.jms.cf.JMSConnectionFactoryProvider",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-jms-processors-nar",
+          "version": "2.12.0"
+        },
+        "properties": {
+          "JMS SSL Context Service": null,
+          "JMS Connection Factory Implementation Class": "org.apache.activemq.ActiveMQConnectionFactory",
+          "JMS Client Libraries": "/opt/nifi/jms-libs",
+          "JMS Broker URI": "#{fedora_jms_uri}"
+        },
+        "propertyDescriptors": {
+          "JMS SSL Context Service": {
+            "name": "JMS SSL Context Service",
+            "displayName": "JMS SSL Context Service",
+            "identifiesControllerService": true,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "JMS Connection Factory Implementation Class": {
+            "name": "JMS Connection Factory Implementation Class",
+            "displayName": "JMS Connection Factory Implementation Class",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          },
+          "JMS Client Libraries": {
+            "name": "JMS Client Libraries",
+            "displayName": "JMS Client Libraries",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false,
+            "resourceDefinition": {
+              "cardinality": "MULTIPLE",
+              "resourceTypes": [
+                "URL",
+                "DIRECTORY",
+                "FILE"
+              ]
+            }
+          },
+          "JMS Broker URI": {
+            "name": "JMS Broker URI",
+            "displayName": "JMS Broker URI",
+            "identifiesControllerService": false,
+            "sensitive": false,
+            "dynamic": false
+          }
+        },
+        "controllerServiceApis": [
+          {
+            "type": "org.apache.nifi.jms.cf.JMSConnectionFactoryProviderDefinition",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-jms-cf-service-nar",
+              "version": "2.12.0"
+            }
+          }
+        ],
+        "scheduledState": "DISABLED",
+        "bulletinLevel": "WARN",
+        "componentType": "CONTROLLER_SERVICE",
+        "groupIdentifier": "d01266d9-01a1-1000-74f0-131040eeefee"
+      }
+    ],
+    "parameterContextName": "Fedora Test Server",
+    "defaultFlowFileExpiration": "0 sec",
+    "defaultBackPressureObjectThreshold": 10000,
+    "defaultBackPressureDataSizeThreshold": "1 GB",
+    "scheduledState": "ENABLED",
+    "executionEngine": "INHERITED",
+    "maxConcurrentTasks": 1,
+    "statelessFlowTimeout": "1 min",
+    "flowFileConcurrency": "UNBOUNDED",
+    "flowFileOutboundPolicy": "STREAM_WHEN_AVAILABLE",
+    "componentType": "PROCESS_GROUP"
+  },
+  "externalControllerServices": {},
+  "parameterContexts": {
+    "Fedora Test Server": {
+      "name": "Fedora Test Server",
+      "parameters": [
+        {
+          "name": "fedora_url",
+          "description": "",
+          "sensitive": false,
+          "provided": false,
+          "value": "http://<fedora-host>:8080/<context>/rest"
+        },
+        {
+          "name": "fedora_jms_uri",
+          "description": "Fedora JMS ActiveMQ Port",
+          "sensitive": false,
+          "provided": false,
+          "value": "tcp://<fedora-host>:61616"
+        },
+        {
+          "name": "fedora_user",
+          "description": "",
+          "sensitive": false,
+          "provided": false,
+          "value": "<fedora-user>"
+        },
+        {
+          "name": "output_dir",
+          "description": "Directory for the .ttl output (large disk)",
+          "sensitive": false,
+          "provided": false,
+          "value": "/data/k10plus/ttl"
+        },
+        {
+          "name": "fedora_password",
+          "description": "",
+          "sensitive": true,
+          "provided": false
+        }
+      ],
+      "inheritedParameterContexts": [],
+      "description": "",
+      "componentType": "PARAMETER_CONTEXT"
+    }
+  },
+  "flowEncodingVersion": "1.0",
+  "parameterProviders": {},
+  "latest": false
+}
