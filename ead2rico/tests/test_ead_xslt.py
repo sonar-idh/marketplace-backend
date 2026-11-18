@@ -14,6 +14,7 @@ RICO = Namespace("https://www.ica.org/standards/RiC/ontology#")
 KPE = Namespace("https://kalliope-verbund.info/")
 GND = Namespace("https://d-nb.info/gnd/")
 ISIL = Namespace("https://isil.staatsbibliothek-berlin.de/isil/")
+ISO639 = Namespace("http://id.loc.gov/vocabulary/iso639-3/")
 
 TEST_BESTAND = KPE["DE-611-BF-5364"]
 tricky_title = 'Brief mit "Anführungszeichen" und \\Backslash\\'
@@ -143,7 +144,7 @@ def test_record_addressee_without_gnd_reference_is_omitted(graph):
 def test_record_langcode(graph):
     # ISO-Sprachcode wird korrekt erfasst
     record = KPE["DE-611-HS-3695945"]  # langcode="ger"
-    assert graph.value(record, RICO.hasOrHadLanguage) == Literal("ger")
+    assert graph.value(record, RICO.hasOrHadLanguage) == ISO639.ger
 
 
 def test_record_place_without_gnd_reference_is_omitted(graph):

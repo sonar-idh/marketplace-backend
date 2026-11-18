@@ -35,6 +35,8 @@
     <xsl:text>@prefix gnd: &lt;https://d-nb.info/gnd/&gt; .&#10;</xsl:text>
     <xsl:text>@prefix isil: &lt;https://isil.staatsbibliothek-berlin.de/isil/&gt; .&#10;</xsl:text>
     <xsl:text>@prefix kpe: &lt;https://kalliope-verbund.info/&gt; .&#10;&#10;</xsl:text>
+    <xsl:text>@prefix iso639: &lt;http://id.loc.gov/vocabulary/iso639-3/&gt; .&#10;&#10;</xsl:text>
+    
 
     <xsl:apply-templates
       select="//*:archdesc" />
@@ -151,7 +153,7 @@
       <xsl:for-each
         select="distinct-values(*:did/*:langmaterial/*:language[@langcode]/@langcode)">
         <xsl:value-of
-          select="' ;&#10;    rico:hasOrHadLanguage ' || f:lit(string(.))" />
+          select="' ;&#10;    rico:hasOrHadLanguage iso639:' || string(.)" />
       </xsl:for-each>
 
       <!-- GND-Referenz der Entstehungsorte extrahieren  -->

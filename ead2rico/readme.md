@@ -40,6 +40,7 @@ Die `@prefix`-Deklarationen werden fest im Stylesheet (`match="/"`) geschrieben:
 | `gnd`   | `https://d-nb.info/gnd/`                          | GND-Normdaten (Personen, Körperschaften, Genreformen)   |
 | `isil`  | `https://isil.staatsbibliothek-berlin.de/isil/`   | ISIL-referenzierte Aufbewahrungsorte                    |
 | `kpe`   | `https://kalliope-verbund.info/`       | Kalliope-eigene Ressourcen (Bestand, Verzeichnungseinheiten) |
+| `iso639`   | `http://id.loc.gov/vocabulary/iso639-3/`       | Sprachcodes nach ISO 639-2  |
 | `rdf`, `rdfs`, `sonar` | – | deklariert, aktuell aber im Mapping ungenutzt (siehe „Bekannte Einschränkungen") |
 
 # Verarbeitungsablauf
