@@ -11,7 +11,7 @@ SNIPPET_XML_PATH = HERE / "ead_test_snippet.xml"
 SAXON_HE_JAR = Path("/usr/share/java/Saxon-HE.jar")
 
 RICO = Namespace("https://www.ica.org/standards/RiC/ontology#")
-KPE = Namespace("https://kalliope-verbund.info/ead?ead.id=")
+KPE = Namespace("https://kalliope-verbund.info/")
 GND = Namespace("https://d-nb.info/gnd/")
 ISIL = Namespace("https://isil.staatsbibliothek-berlin.de/isil/")
 

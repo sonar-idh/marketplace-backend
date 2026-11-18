@@ -34,7 +34,7 @@
     <xsl:text>@prefix sonar: &lt;https://data.sbb.spk-berlin.de/sonar/id/&gt; .&#10;</xsl:text>
     <xsl:text>@prefix gnd: &lt;https://d-nb.info/gnd/&gt; .&#10;</xsl:text>
     <xsl:text>@prefix isil: &lt;https://isil.staatsbibliothek-berlin.de/isil/&gt; .&#10;</xsl:text>
-    <xsl:text>@prefix kpe: &lt;https://kalliope-verbund.info/ead?ead.id=&gt; .&#10;&#10;</xsl:text>
+    <xsl:text>@prefix kpe: &lt;https://kalliope-verbund.info/&gt; .&#10;&#10;</xsl:text>
 
     <xsl:apply-templates
       select="//*:archdesc" />

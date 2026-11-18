@@ -39,7 +39,7 @@ Die `@prefix`-Deklarationen werden fest im Stylesheet (`match="/"`) geschrieben:
 | `xs`    | `http://www.w3.org/2001/XMLSchema#`               | Datumstypisierung                                       |
 | `gnd`   | `https://d-nb.info/gnd/`                          | GND-Normdaten (Personen, Körperschaften, Genreformen)   |
 | `isil`  | `https://isil.staatsbibliothek-berlin.de/isil/`   | ISIL-referenzierte Aufbewahrungsorte                    |
-| `kpe`   | `https://kalliope-verbund.info/ead?ead.id=`       | Kalliope-eigene Ressourcen (Bestand, Verzeichnungseinheiten) |
+| `kpe`   | `https://kalliope-verbund.info/`       | Kalliope-eigene Ressourcen (Bestand, Verzeichnungseinheiten) |
 | `rdf`, `rdfs`, `sonar` | – | deklariert, aktuell aber im Mapping ungenutzt (siehe „Bekannte Einschränkungen") |
 
 # Verarbeitungsablauf
