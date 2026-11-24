@@ -34,7 +34,7 @@
     <xsl:text>@prefix sonar: &lt;https://data.sbb.spk-berlin.de/sonar/id/&gt; .&#10;</xsl:text>
     <xsl:text>@prefix gnd: &lt;https://d-nb.info/gnd/&gt; .&#10;</xsl:text>
     <xsl:text>@prefix isil: &lt;https://isil.staatsbibliothek-berlin.de/isil/&gt; .&#10;</xsl:text>
-    <xsl:text>@prefix kpe: &lt;https://kalliope-verbund.info/&gt; .&#10;&#10;</xsl:text>
+    <xsl:text>@prefix kpe: &lt;https://kalliope-verbund.info/&gt; .&#10;</xsl:text>
     <xsl:text>@prefix iso639: &lt;http://id.loc.gov/vocabulary/iso639-3/&gt; .&#10;&#10;</xsl:text>
     
 
@@ -179,9 +179,11 @@
 
       <!-- Entstehungsdatum wird behelfsmaeßig auf rico:beginningDate und rico:endDate statt auf
       rico:creationDate abgebildet. Alternativen müssten disutiert werden. Die Verarbeitung
-      verschiedener Input-Datumsformate erfolgt in ead2rico_dates.xsl -->
+      verschiedener Input-Datumsformate erfolgt in ead2rico_dates.xsl. Momentan wird nur das erste
+      angegebene
+      Entstehungsdatum erfasst, sollten mehrere Angaben vorliegen. -->
       <xsl:for-each
-        select="*:did/*:unitdate[@label='Entstehungsdatum' and @normal and f:parse-normal(@normal) instance of map(*)]">
+        select="*:did/*:unitdate[@label='Entstehungsdatum' and @normal and f:parse-normal(@normal) instance of map(*)][1]">
         <xsl:variable name="dm" select="f:parse-normal(@normal)" />
         <xsl:value-of
           select="' ;&#10;    rico:beginningDate ' || f:lit(string($dm?begin)) || '^^xs:date'" />

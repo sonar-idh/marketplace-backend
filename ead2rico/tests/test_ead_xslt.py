@@ -285,13 +285,12 @@ def test_language_missing_langcode_produces_no_language_triple(transform_snippet
 
 
 def test_only_main_title_is_extracted(transform_snippet):
-    # Trägt eine Ressource mehrere Titel, wird nur der Haupttitel extrahiert
+    # Traegt eine Ressource mehrere Titel, wird nur der Haupttitel extrahiert
     # Problem dieses Tests: Wenn er fehlschlaegt, passiert das auch bei anderen Tests, unabhaengig von ihrer eigenen Logik
     record = KPE["TEST-C-SINGLE-TITLE-EXTRACTED"]
-    assert transform_snippet.value(record, RICO.title) == Literal(
-        "Ausschließlich Extraktion des Haupttitels"
-    )
-    assert transform_snippet.value(record, RICO.title) != Literal("Weiterer Titel")
+    assert set(transform_snippet.objects(record, RICO.title)) == {
+        Literal("Ausschließlich Extraktion des Haupttitels")
+    }
 
 
 def test_malformed_gnd_numbers_are_reconstructed(transform_snippet):
@@ -299,3 +298,11 @@ def test_malformed_gnd_numbers_are_reconstructed(transform_snippet):
     record = KPE["TEST-C-MALFORMED-GND-NUMBER-REPAIRED"]
     assert (record, RICO.hasAuthor, GND["118610023"]) in transform_snippet
     assert (record, RICO.hasAuthor, GND["4021477-1"]) in transform_snippet
+
+
+def test_only_first_unitdate_is_extracted(transform_snippet):
+    # Traegt eine Ressource mehrere Entstehungsdaten, wird nur das erste angegebene Datum extrahiert
+    record = KPE["TEST-C-SINGLE-DATE-EXTRACTED"]
+    expected = {Literal("1930-08-09", datatype=XSD.date)}
+    assert set(transform_snippet.objects(record, RICO.beginningDate)) == expected
+    assert set(transform_snippet.objects(record, RICO.endDate)) == expected

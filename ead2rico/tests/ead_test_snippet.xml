@@ -144,6 +144,16 @@
                         https://d-nb.info/gnd/118610023</persname>
                 </controlaccess>
             </c>
+            <c id="TEST-C-SINGLE-DATE-EXTRACTED">
+                <did>
+                    <unittitle>Ausschließlich das erste angegebene Datum wird extrahiert</unittitle>
+                    <unitdate label="Entstehungsdatum" normal="19300809">09.08.1930</unitdate>
+                    <unitdate label="Entstehungsdatum" normal="19310809">09.08.1931</unitdate>
+                </did>
+                <controlaccess>
+                    <genreform>Brief</genreform>
+                </controlaccess>
+            </c>
         </dsc>
     </archdesc>
 </ead>
