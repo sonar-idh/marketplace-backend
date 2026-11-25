@@ -1,0 +1,19 @@
+[project]
+name = "test-autocomplete"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = []
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.146.0",
+    "httpx>=0.28.1",
+    "requests>=2.34.2",
+]
+
+[project.scripts]
+test-autocomplete = "test_autocomplete:main"
+
+[build-system]
+requires = ["uv_build>=0.12.21,<0.13.0"]
+build-backend = "uv_build"
