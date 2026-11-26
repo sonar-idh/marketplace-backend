@@ -1,0 +1,15 @@
+PREFIX gnd: <https://d-nb.info/standards/elementset/gnd#>
+INSERT {
+  ?source <info:occupationLabels> ?labels .
+} WHERE {
+  {
+    SELECT ?source (GROUP_CONCAT(DISTINCT ?l; SEPARATOR="|") AS ?labels)
+    WHERE {
+      ?source <info:hasCorrespondent> ?target .
+      ?source gnd:professionOrOccupation ?blank . # Berufs-Sachbegriffe haengen an Blank Node
+      ?blank ?p ?occ .
+      ?occ gnd:preferredNameForTheSubjectHeading ?l .
+    }
+    GROUP BY ?source
+  }
+} # Update successful (insert triples: 209610, delete triples: 0)

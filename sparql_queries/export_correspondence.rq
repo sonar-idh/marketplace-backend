@@ -1,0 +1,7 @@
+SELECT ?s ?p ?o ?g WHERE {
+  GRAPH ?g { ?s ?p ?o }
+  VALUES ?p {
+    <info:hasCorrespondent> <info:wroteLetterTo> <info:receivedLetterFrom>
+    <info:date> <info:referenceSource>
+  }
+}

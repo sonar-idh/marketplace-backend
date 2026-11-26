@@ -1,0 +1,12 @@
+INSERT DATA {
+    <info:hasCorrespondent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <info:SocialRelation> .
+    <info:hasCorrespondent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#direction> <info:undirected> .
+    <info:hasCoAuthor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <info:SocialRelation> .
+    <info:hasCoAuthor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#direction> <info:undirected> .
+    <info:hasCoEditor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <info:SocialRelation> .
+    <info:hasCoEditor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#direction> <info:undirected> .
+    <info:wroteLetterTo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <info:SocialRelation> .
+    <info:wroteLetterTo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#direction> <info:directed> .
+    <info:receivedLetterFrom> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <info:SocialRelation> .
+    <info:receivedLetterFrom> <http://www.w3.org/1999/02/22-rdf-syntax-ns#direction> <info:directed> .
+}

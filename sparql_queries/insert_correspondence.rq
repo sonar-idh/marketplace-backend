@@ -1,0 +1,15 @@
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+INSERT {
+  GRAPH ?reference {
+    ?source <info:hasCorrespondent> ?target .
+    ?target <info:hasCorrespondent> ?source .
+    ?source <info:wroteLetterTo> ?target .
+    ?target <info:receivedLetterFrom> ?source .
+    ?reference <info:date> ?referenceDate .
+    ?reference <info:referenceSource> "kalliope" .
+  }
+} WHERE {
+  ?reference rico:hasAuthor ?source .
+  ?reference rico:hasAddressee ?target .
+  ?reference rico:beginningDate ?referenceDate .
+}

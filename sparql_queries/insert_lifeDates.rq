@@ -1,0 +1,13 @@
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+INSERT {
+  ?source <info:lifeDates> ?lifeDates .
+} WHERE {
+  ?source <info:hasCorrespondent> ?target .
+  OPTIONAL { ?source gndo:dateOfBirth ?b }
+  OPTIONAL { ?source gndo:dateOfDeath ?d }
+  BIND(
+    IF(!BOUND(?b) && !BOUND(?d),
+       "unknown",
+       CONCAT(COALESCE(STR(?b), "unknown"), "/", COALESCE(STR(?d), "unknown")))
+    AS ?lifeDates)
+} # Update successful (insert triples: 476064, delete triples: 0)

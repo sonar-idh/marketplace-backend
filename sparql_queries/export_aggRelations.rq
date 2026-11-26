@@ -1,0 +1,5 @@
+CONSTRUCT { ?s ?p ?o }
+WHERE {
+  VALUES ?p { <info:occupationLabels> <info:lifeDates> }
+  ?s ?p ?o
+}
