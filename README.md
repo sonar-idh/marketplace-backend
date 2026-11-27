@@ -1,49 +1,73 @@
-# marketplace-backend
+# QLever Data Ingestion Workflow 
 
-# Alte Indexdaten vollständig löschen
-cd qlever
-find . -mindepth 1 -maxdepth 1 \
-  ! -name gnd_data ! -name kpe_data ! -name Qleverfile ! -name Qleverfile-ui.yml \
-  -exec rm -rf {} +
-  
-qlever index
+This routine describes the workflow of creating a new QLever index for SoNAR. 
 
-# Korrespondenzrelationen einfügen, danach analog insert_lifeDates.rq, insert_occupationLabels.rq, insert_relationTypes.rq
+## Donwload GND Data
+
+```bash
+cd input_data
+curl --output-dir ./gnd_data --create-dirs --remote-name-all -fL https://data.dnb.de/opendata/authorities-gnd-koerperschaft_lds.ttl.gz https://data.dnb.de/opendata/authorities-gnd-person_lds.ttl.gz https://data.dnb.de/opendata/authorities-gnd-sachbegriff_lds.ttl.gz
+# This step will probably not be necessary in the future as GND dumps will be archived with Fedora 
+```
+
+## Remove existing export index files and start export index build
+
+```bash
+cd export_index
+find . -mindepth 1 -maxdepth 1  ! -name Qleverfile ! -name Qleverfile-ui.yml -exec rm -rf {} +
+qlever index # currently running instances of qlever-server should be stopped before
+```
+
+## Insert correspondence relation quads via script (repeat for insert_lifeDates.rq, insert_occupationLabels.rq, insert_relationTypes.rq)
+
+```bash
 qlever start
-cd ..
-curl -s "http://localhost:7019"   --data-urlencode "update@insert_correspondence.rq"   --data-urlencode "timeout=3600s"   --data-urlencode "access-token=sonar_7643543846bXEoUzb4WU9t"
+cd ../sparql_queries
+curl -s "<host>:<port>"   --data-urlencode "update@insert_correspondence.rq"   --data-urlencode "timeout=3600s"   --data-urlencode "access-token=<token>"
+# insert_relationTypes.rq should be part of input data in the future 
+```
 
-# Korrespondenzdaten exportieren
-curl -s http://localhost:7019 -H "Accept: text/tab-separated-values" --data-urlencode query@export_correspondence.rq --data-urlencode timeout=3600s --data-urlencode access-token=sonar_7643543846bXEoUzb4WU9t | tail -n +2 | awk -F'\t' '{print $1" "$2" "$3" "$4" ."}' > corr.nq
+## Export inserted quads to .nq
 
-# Prüfen, ob alles ohne Fehler exportiert wurde:
-grep -c "An error has occurred" corr.nq  # muss 0 sein
+```bash
+curl -s http://<host>:<port> -H "Accept: text/tab-separated-values" --data-urlencode query@export_correspondence.rq --data-urlencode timeout=3600s --data-urlencode access-token=<token> | tail -n +2 | awk -F'\t' '{print $1" "$2" "$3" "$4" ."}' > corr.nq
+```
 
-# Aggregierte Attribute exportieren
-curl -s http://localhost:7019 -H "Accept: text/turtle" --data-urlencode query@export_aggRelations.rq > aggRel.ttl
- 
- # Quad-Datumsangaben ins richtige Format bringen
- sed -E 's#^(<[^>]*> <info:date> )(-?[0-9]{4}-[0-9]{2}-[0-9]{2})( <[^>]*> \.)$#\1"\2"^^<http://www.w3.org/2001/XMLSchema\#date>\3#' corr.nq > corr_fix.nq
- rm corr.nq
- mv corr_fix.nq corr.nq
- 
- # Prüfen, ob Format korrekt:
- grep -vE '^<[^>]*> <[^>]*> (<|")' corr.nq | head
- 
- # Export-Tripel verschieben
- mkdir qlever/export_data
- mv corr.nq aggRel.ttl qlever/export_data/
- 
-# QLverfile anpassen
-# { "cmd": "cat corr.nq", "format": "nq" }, { "cmd": "cat occ.ttl", "format": "ttl", "graph": "-" }
-# Textindex aktivieren
+## Check whether export ran without errors:
 
-# Indexdaten erneut vollständig löschen
-cd qlever
-find . -mindepth 1 -maxdepth 1 \
-  ! -name gnd_data ! -name kpe_data ! -name export_data ! -name Qleverfile ! -name Qleverfile-ui.yml \
-  -exec rm -rf {} +
-  
+```bash
+grep -c "An error has occurred" corr.nq  # hast to be 0
+```
+
+## Export aggregated attribute triples (lifeDates, occupationLabels) to .ttl
+
+```bash
+curl -s http://<host>:<port> -H "Accept: text/turtle" --data-urlencode query@export_aggRelations.rq > aggRel.ttl
+```
+
+## Format exported quad-datetypes to prevent ingestion error
+
+```bash
+sed -E 's#^(<[^>]*> <info:date> )(-?[0-9]{4}-[0-9]{2}-[0-9]{2})( <[^>]*> \.)$#\1"\2"^^<http://www.w3.org/2001/XMLSchema\#date>\3#' corr.nq > corr_fix.nq
+rm corr.nq
+mv corr_fix.nq corr.nq
+grep -vE '^<[^>]*> <[^>]*> (<|")' corr.nq | head # Check if format is correct
+```
+ 
+ 
+## Move exported relation data to full index input data dir
+
+```bash
+mkdir ../input data/exported_data
+mv corr.nq aggRel.ttl ../input data/exported_data/
+```
+ 
+## Build full index from all triples and quads
+
+```bash
+cd ../export_index
 qlever stop
+cd ../full_index
 qlever index
 ```
+

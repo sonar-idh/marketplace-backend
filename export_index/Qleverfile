@@ -1,0 +1,26 @@
+[data]
+NAME              = sonar
+DESCRIPTION       = SoNAR Knowledge Graph (GND, K10plus, KPE)
+
+[index]
+INPUT_FILES       = ../input_data/gnd_data/*.ttl.gz ../input_data/k10plus_data/*.ttl.gz ../input_data/kpe_data/kpe_testdata_ttl.tar.gz 
+MULTI_INPUT_JSON  = [{ "cmd": "find ../input_data/gnd_data -maxdepth 1 -name '*.ttl.gz' -print0 | xargs -0 zcat", "format": "ttl", "parallel": "true" },
+#                    { "cmd": "find ../input_data/k10plus_data -maxdepth 1 -name '*.ttl.gz' -print0 | xargs -0 zcat", "format": "ttl", "parallel": "false" },
+                    { "cmd": "tar -xzOf ../input_data/kpe_data/kpe_testdata_ttl.tar.gz", "format": "ttl", "parallel": "false" }]
+SETTINGS_JSON     = { "ascii-prefixes-only": false, "num-triples-per-batch": 1000000 }
+STXXL_MEMORY      = 10G
+
+[server]
+PORT               = 7019
+# ACCESS_TOKEN       = 
+MEMORY_FOR_QUERIES = 10G
+CACHE_MAX_SIZE     = 2G
+TIMEOUT            = 30s
+USE_TEXT_INDEX     = no
+PERSIST_UPDATES    = true
+
+[runtime]
+SYSTEM = native
+
+[ui]
+UI_CONFIG = sonar
